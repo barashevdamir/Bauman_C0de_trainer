@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <meta charset="UTF-8">
-  <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'home/css/style.css'%}">
+  <link rel="shortcut icon" href="{% static 'tasks/images/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'tasks/css/style.css'%}">
 </head>
 <body>
   <nav class="nav">
     <div class="container">
       <div class="nav__wrapper">
         <a  class="logo__link" href="/..">
-          <img class="logo__img" src="{% static 'home/images/Logo.svg' %}" alt="">
+          <img class="logo__img" src="{% static 'tasks/images/Logo.svg' %}" alt="">
         </a>
         
         <div class="nav__info">
           {% if auth %}
           <div class="nav__profile">
             <div class="nav__profile-pic">
-              <img class="nav__profile-img" src="{% static 'home/images/profile-icon.svg' %}" alt="">
+              <img class="nav__profile-img" src="{% static 'tasks/images/profile-icon.svg' %}" alt="">
             </div>
             <div class="nav__progress-bar">102/1202</div>
           </div>
@@ -189,6 +189,6 @@
 
     </div>
   </main>
-  <script src="{% static 'home/js/main.js' %}"></script>
+  <script src="{% static 'tasks/js/main.js' %}"></script>
 </body>
 </html>

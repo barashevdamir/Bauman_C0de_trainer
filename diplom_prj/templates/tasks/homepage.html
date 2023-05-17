@@ -7,13 +7,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
-  <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'home/css/fontello.css' %}">
-  <link rel="stylesheet" href="{% static 'home/css/hp_style.css' %}">
+  <link rel="shortcut icon" href="{% static 'tasks/images/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'tasks/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'tasks/css/fontello.css' %}">
+  <link rel="stylesheet" href="{% static 'tasks/css/hp_style.css' %}">
 </head>
 
-<body>
+<body> 
+    
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <div class="container raw">
+            <div class="container justify-content-end text-light btn-group btn-group-sm" role="group" aria-label="First group">
+                <a class="navbar-brand" href="#">Вход</a>
+                <a class="navbar-brand" href="#">Регистрация</a>
+            </div>
+        </div>
+    </nav>
+
     <header>
         <div class="container">
             <div class="raw">
@@ -24,7 +34,7 @@
             </div>
         </div>
     </header>
-
+       
     <section class="start_train">
         <div class="conteiner">
             <div class="row">
@@ -37,7 +47,7 @@
                     <a href="" class="btn btn-dark btn-bct-main">Тесты <i class="icon-check"></i></a>
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-12">
-                    <a href="/home" class="btn btn-dark btn-bct-main">Задачи <i class="icon-file-code"></i></a>
+                    <a href="/tasks" class="btn btn-dark btn-bct-main">Задачи <i class="icon-file-code"></i></a>
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-12">
                     <a href="" class="btn btn-dark btn-bct-main">Таблица лидеров <i class="icon-award"></i></a>
@@ -66,7 +76,7 @@
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-12">
                     <div class="bct-circle"><i class="icon-id-card-o"></i></div>
-                    <h5 class="text-center">Можно использовать без регистрации</h5>
+                    <h5 class="text-center">Можно опробовать без регистрации</h5>
                     <div class="bct-line"></div>              
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-12">
@@ -98,6 +108,6 @@
         </div>
     </footer>
     
-    <script src="{% static 'home/js/bootstrap.bundle.min.js' %}"></script>
- </body>
+    <script src="{% static 'tasks/js/bootstrap.bundle.min.js' %}"></script>
+</body>
 </html>
