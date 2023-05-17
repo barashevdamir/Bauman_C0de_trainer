@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/fontello.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/hp_style.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="raw">
+                <div class="col-12">
+                     <h1 class="text-center">Bauman C0de Trainer</h1>
+                     <h2 class="text-center">Онлайн тренажер навыков программирования</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="start_train">
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center text-uppercase mb-5">Сразу к делу</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <a href="" class="btn btn-dark btn-bct-main">Тесты <i class="icon-check"></i></a>
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <a href="/home" class="btn btn-dark btn-bct-main">Задачи <i class="icon-file-code"></i></a>
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <a href="" class="btn btn-dark btn-bct-main">Таблица лидеров <i class="icon-award"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about">
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center text-uppercase mb-5">Почему именно мы?</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-code"></i></div>
+                    <h5 class="text-center">Актуальные языки программирования</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-calendar"></i></div>
+                    <h5 class="text-center">Можно следить за своими успехами</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-id-card-o"></i></div>
+                    <h5 class="text-center">Можно использовать без регистрации</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-thumbs-up"></i></div>
+                    <h5 class="text-center">Отсутствует реклама</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-rouble"></i></div>
+                    <h5 class="text-center">Абсолютно бесплатно</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-globe"></i></div>
+                    <h5 class="text-center">Доступно на разных устройствах</h5>
+                    <div class="bct-line"></div>              
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-center mb-2">Powered by <a href="https://www.djangoproject.com/">Django 4</a> and <a href="https://getbootstrap.com/">Bootstrap 5</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="{% static 'home/js/bootstrap.bundle.min.js' %}"></script>
+ </body>
+</html>
