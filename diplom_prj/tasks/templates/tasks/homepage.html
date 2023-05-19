@@ -1,23 +1,20 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
-  <link rel="shortcut icon" href="{% static 'tasks/images/favicon.ico' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'tasks/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'tasks/css/fontello.css' %}">
-  <link rel="stylesheet" href="{% static 'tasks/css/hp_style.css' %}">
-</head>
+{% block title %}
+    Homepage
+{% endblock %}
 
-<body> 
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'tasks/css/hp_style.css' %}">
+{% endblock %}
+
+
+{% block content%}
     
     <nav class="navbar sticky-top navbar-dark bg-dark">
         <div class="container raw">
-            <div class="container justify-content-end text-light btn-group btn-group-sm" role="group" aria-label="First group">
+            <div class="container justify-content-end text-light btn-group btn-group-sm" role="group" aria-label="auth">
                 <a class="navbar-brand" href="#">Вход</a>
                 <a class="navbar-brand" href="#">Регистрация</a>
             </div>
@@ -44,13 +41,13 @@
             </div>
             <div class="row">
                 <div class="col-xl-4 col-md-6 col-sm-12">
-                    <a href="" class="btn btn-dark btn-bct-main">Тесты <i class="icon-check"></i></a>
+                    <a href="/tests" class="btn btn-dark btn-bct-main">Тесты <i class="icon-check"></i></a>
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-12">
                     <a href="/tasks" class="btn btn-dark btn-bct-main">Задачи <i class="icon-file-code"></i></a>
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-12">
-                    <a href="" class="btn btn-dark btn-bct-main">Таблица лидеров <i class="icon-award"></i></a>
+                    <a href="/leader_board" class="btn btn-dark btn-bct-main">Таблица лидеров <i class="icon-award"></i></a>
                 </div>
             </div>
         </div>
@@ -107,7 +104,9 @@
             </div>
         </div>
     </footer>
-    
-    <script src="{% static 'tasks/js/bootstrap.bundle.min.js' %}"></script>
-</body>
-</html>
+
+    {% endblock %} 
+
+{% block jscripts %}   
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}

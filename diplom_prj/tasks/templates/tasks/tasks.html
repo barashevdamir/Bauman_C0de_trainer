@@ -1,28 +1,29 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" href="{% static 'tasks/images/favicon.ico' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'tasks/css/style.css'%}">
-</head>
-<body>
+
+{% block title %}
+    Tasks
+{% endblock %}
+
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'tasks/css/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
   <nav class="nav">
     <div class="container">
       <div class="nav__wrapper">
-        <a  class="logo__link" href="/..">
-          <img class="logo__img" src="{% static 'tasks/images/Logo.svg' %}" alt="">
+        <a  class="logo__link" href="">
+          <img class="logo__img" src="{% static 'base/images/Logo.svg' %}" alt="">
         </a>
         
         <div class="nav__info">
           {% if auth %}
           <div class="nav__profile">
             <div class="nav__profile-pic">
-              <img class="nav__profile-img" src="{% static 'tasks/images/profile-icon.svg' %}" alt="">
+              <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
             </div>
             <div class="nav__progress-bar">102/1202</div>
           </div>
@@ -189,6 +190,10 @@
 
     </div>
   </main>
+  
+{% endblock %}
+
+{% block jscripts %}
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'tasks/js/main.js' %}"></script>
-</body>
-</html>
+{% endblock %}
