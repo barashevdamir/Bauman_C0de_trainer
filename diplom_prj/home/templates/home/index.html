@@ -1,4 +1,6 @@
 {% load static %}
+{% load home_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,9 +96,10 @@
                   <button class="filter__dropdown-btn" data-path="two">All</button>
                 </div>
                 <ul class="filter__dropdown-menu" data-target="two">
-                  <li class="filter__dropdown-item">All</li>
-                  <li class="filter__dropdown-item">Python</li>
-                  <li class="filter__dropdown-item">JavaScript</li>
+                  {% get_unique_languages as unique_languages %}
+                  {% for lang in unique_languages %}
+                  <li class="filter__dropdown-item">{{lang}}</li>
+                  {% endfor %}
                 </ul>
               </div>
             </div>
@@ -125,8 +128,10 @@
                   <button class="filter__dropdown-btn" data-path="four">Select tag</button>
                 </div>
                 <ul class="filter__dropdown-menu" data-target="four">
-                  <li class="filter__dropdown-item">Backend</li>
-                  <li class="filter__dropdown-item">Algorithm</li>
+                  {% get_unique_tags as unique_tags %}
+                  {% for tag in unique_tags %}
+                  <li class="filter__dropdown-item">{{tag}}</li>
+                  {% endfor %}
                 </ul>
               </div>
   
@@ -135,54 +140,42 @@
         </section>
   
         <section class="tasks">
+          {% get_unique_tags %}
+          {% for t in tasks %}
           <div class="task">
             <div class="task__main-info">
-              <label class="task__name" for="">Task name</label>
+              <label class="task__name" for="">{{t.name}}</label>
               <div class="task__description">
-                <span class="task__level">Lvl1</span>
+                <span class="task__level">Lvl{{t.level}}</span>
                 <div class="task__rate">
-                  <span class="task__rate-percent">90%</span><span class="task__rate-count">/121</span>
+                  {% if  t.rate_count == 0 %}
+                  <span class="task__rate-count">{{t.rate_count}}</span>
+                  {% else %}
+                  <span class="task__rate-percent">{% get_rate_procent t.positive_rate t.rate_count %}%/</span> 
+                  <span class="task__rate-count">{{t.rate_count}}</span>
+                  {% endif %}
                 </div>
-                <span class="task__solved">987</span>
+                <span class="task__solved">{{t.solved}}</span>
               </div>
               <div class="task__tags">
-                <span class="task__tag-item">Tagname1</span>
-                <span class="task__tag-item">Tagname2</span>
+                {% get_array t.tags as tag_arr %}
+                {% for tag in tag_arr %}
+                <span class="task__tag-item">{{tag}}</span>
+                {% endfor %}
               </div>
             </div>
             <div class="task__second-info">
               <div class="task__languages">
-                <span class="task__language-item">Python</span>
-                <span class="task__language-item">JavaScript</span>
+                {% get_array t.languages as lang_arr %}
+                {% for lang in lang_arr %}
+                <span class="task__language-item">{{lang}}</span>
+                {% endfor %}
               </div>
               <button class="task__button">TRAiN</button>
             </div>
           </div>
-
-          <div class="task">
-            <div class="task__main-info">
-              <label class="task__name" for="">Task name</label>
-              <div class="task__description">
-                <span class="task__level">Lvl1</span>
-                <div class="task__rate">
-                  <span class="task__rate-percent">90%</span><span class="task__rate-count">/121</span>
-                </div>
-                <span class="task__solved">987</span>
-              </div>
-              <div class="task__tags">
-                <span class="task__tag-item">Tagname1</span>
-                <span class="task__tag-item">Tagname2</span>
-              </div>
-            </div>
-            <div class="task__second-info">
-              <div class="task__languages">
-                <span class="task__language-item">Python</span>
-                <span class="task__language-item">JavaScript</span>
-              </div>
-              <button class="task__button">TRAiN</button>
-            </div>
-          </div>
-
+          {% endfor %}
+        </section>
 
       
 

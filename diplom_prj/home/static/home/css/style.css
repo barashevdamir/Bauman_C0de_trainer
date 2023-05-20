@@ -76,7 +76,7 @@ button::-moz-focus-inner {
   margin: 0 auto;
 }
 .main{
-  padding-top: 100px;
+  padding: 100px 0;
 }
 .main__wrapper{
   display: flex;
