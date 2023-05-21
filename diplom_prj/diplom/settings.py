@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.UsersConfig',
+    'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -133,6 +135,16 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
     'account.authentication.EmailAuthBackend',
+    'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
 ]
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '51647965'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'VF5XxdKsDkyeGc5TfMvb'
+
+SOCIAL_AUTH_DISCORD_OAUTH2_KEY = '1108158742379368559'
+SOCIAL_AUTH_DISCORD_OAUTH2_SECRET = 'CC5TxKJgCA2ZT3-9MkWzgytJxArKl2GZ'
+

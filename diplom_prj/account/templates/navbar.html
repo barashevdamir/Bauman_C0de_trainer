@@ -1,0 +1,35 @@
+
+
+
+<nav class="nav">
+    <div class="container">
+      <div class="nav__wrapper">
+        <a  class="logo__link" href="">
+          <img class="logo__img" src="images/Logo.svg" alt="">
+        </a>
+
+        <div class="nav__info">
+          <div class="nav__search-wrapper">
+            <input class="nav__search-line" type="text" placeholder="Search...">
+          </div>
+            {% if request.user.is_authenticated %}
+                <form action = "{% url 'user_profile' %}">
+                    <button class="nav__auth-btn">My Profile</button>
+                </form>
+            {% else %}
+                <form action = "{% url 'login' %}">
+                    <button class="nav__auth-btn">Sign in</button>
+                </form>
+            {% endif %}
+          <!--
+          <div class="nav__profile">
+            <div class="nav__profile-pic">
+              <img class="nav__profile-img" src="images/profile-icon.svg" alt="">
+            </div>
+            <div class="nav__progress-bar">102/1202</div>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </nav>

@@ -6,6 +6,11 @@ from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, \
                    UserEditForm, ProfileEditForm
 from .models import Profile
+from django.views.generic.detail import DetailView
+from django.shortcuts import get_object_or_404
+from django.views import generic
+from django.http import HttpResponseRedirect
+
 
 
 def user_login(request):
@@ -14,19 +19,19 @@ def user_login(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(request,
-                                username=cd['username'],
+                                email=cd['email'],
                                 password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    return HttpResponseRedirect('/account/')
                 else:
                     return HttpResponse('Disabled account')
             else:
-                return HttpResponse('Invalid login')
+                return render(request, 'account/login.html', {'form': form})
     else:
         form = LoginForm()
-    return render(request, 'account/login.html', {'form': form})
+    return render(request, 'account/login.html', {'form': form, 'sign_up': 0})
 
 
 @login_required
@@ -49,15 +54,23 @@ def register(request):
             new_user.save()
             # Create the user profile
             Profile.objects.create(user=new_user)
+            cd = user_form.cleaned_data
+            user = authenticate(request,
+                                email=cd['email'],
+                                password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                return HttpResponseRedirect('/account/')
+
             return render(request,
                           'account/register_done.html',
                           {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
     return render(request,
-                  'account/register.html',
-                  {'user_form': user_form})
-
+                  'account/dashboard.html',
+                  {'user_form': user_form, 'sign_up': 1})
 
 @login_required
 def edit(request):
@@ -83,3 +96,7 @@ def edit(request):
                   'account/edit.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})
+
+@login_required
+def profile(request):
+    return render(request, 'account/user_profile.html')
