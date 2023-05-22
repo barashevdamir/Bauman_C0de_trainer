@@ -69,7 +69,7 @@ button::-moz-focus-inner {
 	border: 0;
 }
 
-.container{
+.container_m{
   max-width: 1170px;
   width: 100%;
   padding: 0 15px;

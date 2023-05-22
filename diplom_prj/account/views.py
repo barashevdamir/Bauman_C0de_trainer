@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,6 +10,8 @@ from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.views import View
+
 
 
 
@@ -31,7 +33,8 @@ def user_login(request):
                 return render(request, 'account/login.html', {'form': form})
     else:
         form = LoginForm()
-    return render(request, 'account/login.html', {'form': form, 'sign_up': 0})
+    registration_form = UserRegistrationForm()
+    return render(request, 'account/login.html', {'form': form, 'sign_up': 0, 'reg_form': registration_form})
 
 
 @login_required
@@ -52,7 +55,6 @@ def register(request):
                 user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
-            # Create the user profile
             Profile.objects.create(user=new_user)
             cd = user_form.cleaned_data
             user = authenticate(request,
@@ -61,7 +63,7 @@ def register(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                return HttpResponseRedirect('/account/')
+                    return HttpResponseRedirect('/account/')
 
             return render(request,
                           'account/register_done.html',
@@ -69,8 +71,24 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
     return render(request,
-                  'account/dashboard.html',
-                  {'user_form': user_form, 'sign_up': 1})
+                        'account/dashboard.html',
+                        {'user_form': user_form, 'sign_up': 1})
+
+# def register(request):
+#     if request.method == 'GET':
+#         form = RegisterForm()
+#         return render(request, 'account/register.html', {'form': form})
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.username = user.username.lower()
+#             user.save()
+#             messages.success(request, 'You have singed up successfully.')
+#             login(request, user)
+#             return redirect('dashboard')
+#         else:
+#             return render(request, 'account/register.html', {'form': form})
 
 @login_required
 def edit(request):
@@ -99,4 +117,9 @@ def edit(request):
 
 @login_required
 def profile(request):
-    return render(request, 'account/user_profile.html')
+    # select * from User where request.user_id == User.user_id
+    # select * from User where request.user_id == User.user_id
+    return render(request, 'account/user_profile.html', {'user': request.user})
+
+
+

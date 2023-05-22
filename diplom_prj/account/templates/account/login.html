@@ -1,24 +1,30 @@
-
+{% extends "base.html" %}
 {% load static %}
-
+{% block content %}
 <link href="{% static "css/doubleSlyderSign.css" %}" rel="stylesheet">
 {% if sign_up %}<div class="container right-panel-active" id="container" >
 {% else %}<div class="container" id="container" >
 {% endif %}
 
 	<div class="form-container sign-up-container">
-		<form action="{% url 'login' %}" method="post" value="Register">
+		<form action="{% url 'register' %}" method="post" value="Register">
           {% csrf_token %}
 			<h1>Create Account</h1>
 			<div class="social-container">
-				<a href="https://github.com/login/oauth/access_token" class="social"><i class="fa-brands fa-github"></i></a>
-				<a href="/login/vk-oauth2" class="social"><i class="fa-brands fa-vk"></i></a>
-				<a href="https://discord.com/api/oauth2/token" class="social"><i class="fa-brands fa-discord"></i></a>
+				<a href="#" class="social"><i class="fa-brands fa-github"></i></a>
+				<a href="#" class="social"><i class="fa-brands fa-vk"></i></a>
+				<a href="#" class="social"><i class="fa-brands fa-discord"></i></a>
+{#                <a href="https://github.com/login/oauth/access_token" class="social"><i class="fa-brands fa-github"></i></a>#}
+{#				<a href="/login/vk-oauth2" class="social"><i class="fa-brands fa-vk"></i></a>#}
+{#				<a href="https://discord.com/api/oauth2/token" class="social"><i class="fa-brands fa-discord"></i></a>#}
 			</div>
 			<span>or use your email for registration</span>
-			<input name="{{ form.username.html_name }}" type="text" class="input" required ="required" placeholder="Name">
-			<input name="{{ form.email.html_name }}" type="email" class="input" required ="required" placeholder="Email" />
-			<input name="{{ form.password.html_name }}" type="password" class="input" required ="required" placeholder="Password" />
+            {% for field in reg_form %}
+                <input name="{{ field.html_name }}" type="{{ field.label }}" class="input" required ="required" placeholder="{{ field.label }}" />
+            {% endfor  %}
+{#			<input name="{{ reg_form.username.html_username }}" type="text" class="input" required ="required" placeholder="Username" />#}
+{#			<input name="{{ reg_form.email.html_email }}" type="email" class="input" required ="required" placeholder="Email" />#}
+{#			<input name="{{ reg_form.password.html_password }}" type="password" class="input" required ="required" placeholder="Password" />#}
 			<button type="submit" name="register">Sign Up</button>
 		</form>
 	</div>
@@ -27,9 +33,12 @@
           {% csrf_token %}
 			<h1>Sign in</h1>
 			<div class="social-container">
-				<a href="https://github.com/login/oauth/access_token" class="social"><i class="fa-brands fa-github"></i></a>
-				<a href="/login/vk-oauth2" class="social"><i class="fa-brands fa-vk"></i></a>
-				<a href="https://discord.com/api/oauth2/token" class="social"><i class="fa-brands fa-discord"></i></a>
+				<a href="#" class="social"><i class="fa-brands fa-github"></i></a>
+				<a href="#" class="social"><i class="fa-brands fa-vk"></i></a>
+				<a href="#" class="social"><i class="fa-brands fa-discord"></i></a>
+{#                <a href="https://github.com/login/oauth/access_token" class="social"><i class="fa-brands fa-github"></i></a>#}
+{#				<a href="/login/vk-oauth2" class="social"><i class="fa-brands fa-vk"></i></a>#}
+{#				<a href="https://discord.com/api/oauth2/token" class="social"><i class="fa-brands fa-discord"></i></a>#}
 			</div>
 			<span>or use your account</span>
 			<input name="{{ form.email.html_name }}" required ="required" type="email" placeholder="Email" />
@@ -57,4 +66,4 @@
 <script src="../../static/js/doubleSlyderSign.js"></script>
 <script src="https://kit.fontawesome.com/e322a820d8.js" crossorigin="anonymous"></script>
 
-
+{% endblock %}

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
+    # 'social_django',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
+                # 'social_django.context_processors.backends',
             ],
         },
     },
@@ -137,7 +137,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
     'account.authentication.EmailAuthBackend',
-    'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
+    # 'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
 ]
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
