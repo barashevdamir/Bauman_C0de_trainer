@@ -1,35 +1,41 @@
 
+{% load static %}
 
 
-<nav class="nav">
-    <div class="container">
-      <div class="nav__wrapper">
-        <a  class="logo__link" href="">
-          <img class="logo__img" src="images/Logo.svg" alt="">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/navbar_style.css' %}">
+
+<nav class="navbar navbar-expand-lg navbar-light bct-nav sticky-top">
+    <div class="container-md">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'base/images/Logo.svg' %}" alt="">
         </a>
-
-        <div class="nav__info">
-          <div class="nav__search-wrapper">
-            <input class="nav__search-line" type="text" placeholder="Search...">
-          </div>
-            {% if request.user.is_authenticated %}
-                <form action = "{% url 'user_profile' %}">
-                    <button class="nav__auth-btn">My Profile</button>
-                </form>
-            {% else %}
-                <form action = "{% url 'login' %}">
-                    <button class="nav__auth-btn">Sign in</button>
-                </form>
-            {% endif %}
-          <!--
-          <div class="nav__profile">
-            <div class="nav__profile-pic">
-              <img class="nav__profile-img" src="images/profile-icon.svg" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/tests">Tests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/tasks">Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/leader_board">Leaderboard</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if request.user.is_authenticated %}
+                    <form action = "{% url 'user_profile' %}">
+                        <button class="btn btn-lg btn-secondary w-100 fs-6">My Profile</button>
+                    </form>
+                {% else %}
+                    <form action = "{% url 'login' %}">
+                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign in</button>
+                    </form>
+                {% endif %}
             </div>
-            <div class="nav__progress-bar">102/1202</div>
-          </div>
-          -->
         </div>
-      </div>
     </div>
-  </nav>
+</nav>

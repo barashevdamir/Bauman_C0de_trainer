@@ -1,11 +1,101 @@
 {% extends "base.html" %}
-{% block title %}Create an account{% endblock %}
+
+{% load static %}
+
 {% block content %}
-    <h1>Create an account</h1>
-    <p>Please, sign up using the following form:</p>
-    <form method="post">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create my account"></p>
-    </form>
+    <link rel="stylesheet" href="{% static 'css/login_page.css' %}">
+{#    <h1>Create an account</h1>#}
+{#    <p>Please, sign up using the following form:</p>#}
+{#    <form method="post">#}
+{#        {{ user_form.as_p }}#}
+{#        {% csrf_token %}#}
+{#        <p><input type="submit" value="Create my account"></p>#}
+{#    </form>#}
+
+
+
+    <!----------------------- Main Container -------------------------->
+     <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <!----------------------- Login Container -------------------------->
+       <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <!--------------------------- Left Box ----------------------------->
+       <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #D9D9D9;">
+           <div class="featured-image mb-3">
+            <img src="{% static 'base/images/Logo.svg' %}" class="img-fluid" style="width: 250px;" >
+           </div>
+           <p class="text-black-50 fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be Verified</p>
+           <small class="text-black-50 text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join our programmer community on this platform.</small>
+       </div>
+    <!-------------------- ------ Right Box ---------------------------->
+
+       <div class="col-md-6 right-box">
+          <div class="row align-items-center">
+                <div class="header-text mb-4">
+                     <h2>It's nice to see you</h2>
+                     <p>Please, sign up using the following form:</p>
+                </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.username.html_name }}" required="required" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username">
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.email.html_name }}" required="required" type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.password.html_name }}" required="required" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.password2.html_name }}" required="required" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Repeat Password">
+
+                    </div>
+{#                    <div class="input-group mb-5 d-flex justify-content-between">#}
+{#                        <div class="form-check">#}
+{##}
+{#-----------------------------------NEED TO ADD REMEMBER ME CHECK BOX---------------------------------------------------#}
+{##}
+{#                            <input type="checkbox" class="form-check-input" id="formCheck">#}
+{#                            <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>#}
+{##}
+{#-----------------------------------NEED TO ADD REMEMBER ME CHECK BOX---------------------------------------------------#}
+{##}
+{#                                <label for="formCheck" class="form-check-label text-secondary"><small></small></label>#}
+{#                        </div>#}
+{#                    </div>#}
+                    <div class="input-group mb-3">
+                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign Up</button>
+                    </div>
+                </form>
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="input-group mb-3">
+                    <button class="btn btn-lg btn-light w-100 fs-6"><img src="{% static 'images/github-mark.svg' %}" style="width:20px" class="me-2"><small>Sign Up with GitHub</small></button>
+                </div>
+                <div class="row">
+                    <small>Have an account? <a href="{% url "login" %}">Sign In</a></small>
+                </div>
+          </div>
+       </div>
+      </div>
+    </div>
+
+
 {% endblock %}
+

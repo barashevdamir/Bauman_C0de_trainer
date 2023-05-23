@@ -1,0 +1,186 @@
+{% load static %}
+{% load home_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'home/css/style.css'%}">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__wrapper">
+        <a  class="logo__link" href="">
+          <img class="logo__img" src="{% static "home/images/Logo.svg" %}" alt="">
+        </a>
+        
+        <div class="nav__info">
+          {% if auth %}
+          <div class="nav__profile">
+            <div class="nav__profile-pic">
+              <img class="nav__profile-img" src="{% static "home/images/profile-icon.svg" %}" alt="">
+            </div>
+            <div class="nav__progress-bar">102/1202</div>
+          </div>
+          {% else %}
+          <div class="nav__search-wrapper">
+            <input class="nav__search-line" type="text" placeholder="Search...">
+          </div>
+          <button class="nav__auth-btn">Sign In</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+
+      <section class="suggest">
+        <div class="suggest__info">
+          Last Task
+        </div>
+        <div class="suggest__task task ">
+          <div class="task__main-info">
+            <label class="task__name" for="">Task name</label>
+            <div class="task__description">
+              <span class="task__level">Lvl1</span>
+              <div class="task__rate">
+                <span class="task__rate-percent">90%</span>
+                <span class="task__rate-count">/121</span>
+              </div>
+              <span class="task__solved">987</span>
+            </div>
+            <div class="task__tags">
+              <span class="task__tag-item">Tagname1</span>
+              <span class="task__tag-item">Tagname2</span>
+            </div>
+          </div>
+          <div class="task__second-info">
+            <div class="task__languages">
+              <span class="task__language-item">Python</span>
+              <span class="task__language-item">JavaScript</span>
+            </div>
+            <button class="task__button">continue</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="main__wrapper">
+        <section class="filter">
+          <div class="filter__wrapper">
+            <div class="filter__item">
+              <label class="filter__dropdown-title" for="">Sort By</label>
+              <div class="filter__dropdown">
+                <div class="filter__dropdown-border">
+                  <button class="filter__dropdown-btn" data-path="one">Newest</button>
+                </div>
+                <ul class="filter__dropdown-menu " data-target="one">
+                  <li class="filter__dropdown-item">Newest</li>
+                  <li class="filter__dropdown-item">Oldest</li>
+                  <li class="filter__dropdown-item">Most Completed</li>
+                  <li class="filter__dropdown-item">Hight Rate</li>
+                </ul>
+              </div>
+            </div>
+    
+            <div class="filter__item">
+              <label class="filter__dropdown-title" for="">Language</label>
+              <div class="filter__dropdown">
+                <div class="filter__dropdown-border">
+                  <button class="filter__dropdown-btn" data-path="two">All</button>
+                </div>
+                <ul class="filter__dropdown-menu" data-target="two">
+                  {% get_unique_languages as unique_languages %}
+                  {% for lang in unique_languages %}
+                  <li class="filter__dropdown-item">{{lang}}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+    
+            <div class="filter__item">
+              <label class="filter__dropdown-title" for="">Difficulty</label>
+              <div class="filter__dropdown">
+                <div class="filter__dropdown-border">
+                  <button class="filter__dropdown-btn" data-path="three">Select <span>lvl</span></button>
+                </div>
+                <ul class="filter__dropdown-menu" data-target="three">
+                  <li class="filter__dropdown-item"><span>lvl1</span></li>
+                  <li class="filter__dropdown-item"><span>lvl2</span></li>
+                  <li class="filter__dropdown-item"><span>lvl3</span></li>
+                  <li class="filter__dropdown-item"><span>lvl4</span></li>
+                  <li class="filter__dropdown-item"><span>lvl5</span></li>
+
+                </ul>
+              </div>
+            </div>
+    
+            <div class="filter__item">
+              <label class="filter__dropdown-title" for="">Tags</label>
+              <div class="filter__dropdown">
+                <div class="filter__dropdown-border">
+                  <button class="filter__dropdown-btn" data-path="four">Select tag</button>
+                </div>
+                <ul class="filter__dropdown-menu" data-target="four">
+                  {% get_unique_tags as unique_tags %}
+                  {% for tag in unique_tags %}
+                  <li class="filter__dropdown-item">{{tag}}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+  
+            </div>
+          </div>
+        </section>
+  
+        <section class="tasks">
+          {% get_unique_tags %}
+          {% for t in tasks %}
+          <div class="task">
+            <div class="task__main-info">
+              <label class="task__name" for="">{{t.name}}</label>
+              <div class="task__description">
+                <span class="task__level">Lvl{{t.level}}</span>
+                <div class="task__rate">
+                  {% if  t.rate_count == 0 %}
+                  <span class="task__rate-count">{{t.rate_count}}</span>
+                  {% else %}
+                  <span class="task__rate-percent">{% get_rate_procent t.positive_rate t.rate_count %}%/</span> 
+                  <span class="task__rate-count">{{t.rate_count}}</span>
+                  {% endif %}
+                </div>
+                <span class="task__solved">{{t.solved}}</span>
+              </div>
+              <div class="task__tags">
+                {% get_array t.tags as tag_arr %}
+                {% for tag in tag_arr %}
+                <span class="task__tag-item">{{tag}}</span>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="task__second-info">
+              <div class="task__languages">
+                {% get_array t.languages as lang_arr %}
+                {% for lang in lang_arr %}
+                <span class="task__language-item">{{lang}}</span>
+                {% endfor %}
+              </div>
+              <button class="task__button">TRAiN</button>
+            </div>
+          </div>
+          {% endfor %}
+        </section>
+
+      
+
+    </div>
+  </main>
+  <script src="{% static 'home/js/main.js' %}"></script>
+</body>
+</html>
