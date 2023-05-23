@@ -3,7 +3,9 @@
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
+{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
+{#<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
+<link rel="stylesheet" href="{% static "css/base.css" %}" />
 </head>
 <body>
     <nav class="nav">
@@ -40,7 +42,15 @@
   </nav>
 
 
-
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message|safe }}
+                        <a href="#" class="close">x</a> </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 
     <div id="content">
