@@ -1,11 +1,12 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, \
-                   UserEditForm, ProfileEditForm
+    UserEditForm, ProfileEditForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def user_login(request):
@@ -84,12 +85,31 @@ def edit(request):
                   {'user_form': user_form,
                    'profile_form': profile_form})
 
-
 @login_required
 def profile(request):
-    # select * from User where request.user_id == User.user_id
-    # select * from User where request.user_id == User.user_id
-    return render(request, 'account/user_profile.html', {'user': request.user})
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='users-profile')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'account/user_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+def sample_view(request):
+    current_user = request.user
+    return current_user.id
 
 
 

@@ -11,13 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
-
-load_dotenv()
+# from dotenv import load_dotenv
+# import environ
+#
+# env = environ.Env()
+# environ.Env.read_env()
+#
+# load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -151,6 +151,11 @@ AUTHENTICATION_BACKENDS = [
     'account.authentication.EmailAuthBackend',
     # 'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
 ]
+
+TIME_ZONE = 'Europe/Moscow'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 

@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+
     <link rel="stylesheet" href="{% static 'css/login_page.css' %}">
 {#    <h1>Create an account</h1>#}
 {#    <p>Please, sign up using the following form:</p>#}
@@ -34,6 +35,22 @@
                      <h2>It's nice to see you</h2>
                      <p>Please, sign up using the following form:</p>
                 </div>
+              {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
                     <div class="input-group mb-3">
 
                         <input name="{{ user_form.username.html_name }}" required="required" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username">
@@ -71,20 +88,7 @@
                         <button class="btn btn-lg btn-secondary w-100 fs-6">Sign Up</button>
                     </div>
                 </form>
-                {% if form.errors %}
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+
                 <div class="input-group mb-3">
                     <button class="btn btn-lg btn-light w-100 fs-6"><img src="{% static 'images/github-mark.svg' %}" style="width:20px" class="me-2"><small>Sign Up with GitHub</small></button>
                 </div>
