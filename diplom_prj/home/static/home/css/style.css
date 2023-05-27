@@ -266,8 +266,18 @@ button::-moz-focus-inner {
   font-family: 'Galindo', cursive;
 }
 
-
-
+.filter__clear-btn{
+  float: right;
+  color: #000;
+  border: 2px #858585 solid;
+  padding: 0 12px 2px;
+  margin-top: 20px;
+  border-radius: 4px;
+  transition: all .2s;
+}
+.filter__clear-btn:hover{
+  background-color: rgba(0, 0, 0, .1);
+}
 
 .tasks {
   display: flex;
@@ -420,6 +430,11 @@ button::-moz-focus-inner {
   background-image: url(../images/arrow-right-icon.svg);
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.tasks__warning{
+  font-size: 50px;
+  color: #A8A8A8;
 }
 
 .suggest {

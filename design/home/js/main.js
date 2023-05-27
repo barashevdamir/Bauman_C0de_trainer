@@ -1,6 +1,17 @@
+
+document.querySelectorAll('.task__name').forEach(e=>{
+  e.addEventListener('click', e=>{
+    console.log(e)
+  })
+})
+
+
+
+
 let intervalId;
 document.querySelectorAll('.filter__dropdown-btn').forEach(e=>{
   e.addEventListener('click', e =>{
+    console.log('hi')
     const menu = e.currentTarget.dataset.path;
     document.querySelectorAll('.filter__dropdown-menu').forEach(e=>{
 
@@ -28,3 +39,5 @@ document.querySelectorAll('.filter__dropdown-btn').forEach(e=>{
     })
   })
 })
+
+

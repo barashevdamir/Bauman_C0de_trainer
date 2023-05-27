@@ -81,10 +81,10 @@
                   <button class="filter__dropdown-btn" data-path="one">Newest</button>
                 </div>
                 <ul class="filter__dropdown-menu " data-target="one">
-                  <li class="filter__dropdown-item">Newest</li>
-                  <li class="filter__dropdown-item">Oldest</li>
-                  <li class="filter__dropdown-item">Most Completed</li>
-                  <li class="filter__dropdown-item">Hight Rate</li>
+                  <li class="filter__dropdown-item order_by" id="-create_datetime">Newest</li>
+                  <li class="filter__dropdown-item order_by" id="create_datetime">Oldest</li>
+                  <li class="filter__dropdown-item order_by" id="-solved">Most Completed</li>
+                  <li class="filter__dropdown-item order_by" id="-positive_rate">Hight Rate</li>
                 </ul>
               </div>
             </div>
@@ -98,7 +98,7 @@
                 <ul class="filter__dropdown-menu" data-target="two">
                   {% get_unique_languages as unique_languages %}
                   {% for lang in unique_languages %}
-                  <li class="filter__dropdown-item">{{lang}}</li>
+                  <li class="filter__dropdown-item language" id="{{lang}}">{{lang}}</li>
                   {% endfor %}
                 </ul>
               </div>
@@ -111,11 +111,11 @@
                   <button class="filter__dropdown-btn" data-path="three">Select <span>lvl</span></button>
                 </div>
                 <ul class="filter__dropdown-menu" data-target="three">
-                  <li class="filter__dropdown-item"><span>lvl1</span></li>
-                  <li class="filter__dropdown-item"><span>lvl2</span></li>
-                  <li class="filter__dropdown-item"><span>lvl3</span></li>
-                  <li class="filter__dropdown-item"><span>lvl4</span></li>
-                  <li class="filter__dropdown-item"><span>lvl5</span></li>
+                  <li class="filter__dropdown-item level" id="1"><span>lvl1</span></li>
+                  <li class="filter__dropdown-item level" id="2"><span>lvl2</span></li>
+                  <li class="filter__dropdown-item level" id="3"><span>lvl3</span></li>
+                  <li class="filter__dropdown-item level" id="4"><span>lvl4</span></li>
+                  <li class="filter__dropdown-item level" id="5"><span>lvl5</span></li>
 
                 </ul>
               </div>
@@ -130,17 +130,20 @@
                 <ul class="filter__dropdown-menu" data-target="four">
                   {% get_unique_tags as unique_tags %}
                   {% for tag in unique_tags %}
-                  <li class="filter__dropdown-item">{{tag}}</li>
+                  <li class="filter__dropdown-item tag" id="{{tag}}">{{tag}}</li>
                   {% endfor %}
                 </ul>
               </div>
   
             </div>
           </div>
+          <button class="filter__clear-btn">Reset</button>
         </section>
   
         <section class="tasks">
-          {% get_unique_tags %}
+          {% if tasks == '' %}
+          <p class="tasks__warning">Tasks not found</p>
+          {% endif %}
           {% for t in tasks %}
           <div class="task">
             <div class="task__main-info">
