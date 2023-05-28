@@ -6,7 +6,7 @@ python -m venv venv
 
 Запустить виртуальное окружение
 windows: venv\Scripts\activate.bat
-linux, mac: source venv/Scripts/activate
+linux, mac: source venv/bin/activate
 
 Установка джанго
 pip install django
