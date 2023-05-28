@@ -12,11 +12,11 @@
 
 {% block content%}
     
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-        <div class="container raw">
-            <div class="container justify-content-end text-light btn-group btn-group-sm" role="group" aria-label="auth">
-                <a class="navbar-brand" href="#">Вход</a>
-                <a class="navbar-brand" href="#">Регистрация</a>
+    <nav class="navbar navbar-expand sticky-top navbar-dark bg-dark">
+        <div class="container-fluid justify-content-sm-end mx-4">
+            <div class="navbar-nav">    
+                <a class="nav-link" href="#">Вход</a>
+                <a class="nav-link" href="#">Регистрация</a>
             </div>
         </div>
     </nav>
@@ -39,14 +39,14 @@
                     <h2 class="text-center text-uppercase mb-5">Сразу к делу</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-4 col-md-6 col-sm-12">
+            <div class="row gy-2">
+                <div class="col-lg-4 col-md-12">
                     <a href="/tests" class="btn btn-dark btn-bct-main">Тесты <i class="icon-check"></i></a>
                 </div>
-                <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-12">
                     <a href="/tasks" class="btn btn-dark btn-bct-main">Задачи <i class="icon-file-code"></i></a>
                 </div>
-                <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-12">
                     <a href="/leader_board" class="btn btn-dark btn-bct-main">Таблица лидеров <i class="icon-award"></i></a>
                 </div>
             </div>

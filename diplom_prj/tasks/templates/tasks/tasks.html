@@ -14,7 +14,7 @@
   <nav class="nav">
     <div class="container">
       <div class="nav__wrapper">
-        <a  class="logo__link" href="">
+        <a  class="logo__link" href="/">
           <img class="logo__img" src="{% static 'base/images/Logo.svg' %}" alt="">
         </a>
         
@@ -187,6 +187,6 @@
 {% endblock %}
 
 {% block jscripts %}
-  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'tasks/js/main.js' %}"></script>
+  <script src="{% static 'tasks/js/main.js' %}">
+  </script><script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}
