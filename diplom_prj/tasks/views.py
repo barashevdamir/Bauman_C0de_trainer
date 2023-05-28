@@ -23,7 +23,7 @@ def index(request):
             tasks_arr.append(task.name)
       tasks_str = '\', \''.join(tasks_arr)
       if get_turple['language'] != 'All':
-        tasks = Tasks.objects.raw('SELECT * FROM public.home_tasks WHERE name IN (\'' + tasks_str + '\') ORDER BY id ASC')
+        tasks = Tasks.objects.raw('SELECT * FROM public.tasks_tasks WHERE name IN (\'' + tasks_str + '\') ORDER BY id ASC')
 
     if request.GET.get('tag', False):
       tasks_arr = []
@@ -33,12 +33,12 @@ def index(request):
           if el == get_turple['tag']:
             tasks_arr.append(task.name)
       tasks_str = '\', \''.join(tasks_arr)
-      tasks = Tasks.objects.raw('SELECT * FROM public.home_tasks WHERE name IN (\'' + tasks_str + '\') ORDER BY id ASC')
+      tasks = Tasks.objects.raw('SELECT * FROM public.tasks_tasks WHERE name IN (\'' + tasks_str + '\') ORDER BY id ASC')
 
     print(tasks)
 
   
-  return render(request, 'home/index.html', {
+  return render(request, 'tasks/tasks.html', {
     'tasks': tasks,
     'auth':True,
   })
