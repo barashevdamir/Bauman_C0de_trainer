@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig'
+    'home.apps.HomeConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -88,12 +89,12 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "Diplom",
+        "USER": "baxrax",
+        "PASSWORD": "baxrax",
         "HOST": "localhost",
-        "PORT": "54324",
+        "PORT": "5432",
     }
 }
 

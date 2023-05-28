@@ -14,7 +14,7 @@ class LoginForm(forms.Form):
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password',
-                               widget=forms.PasswordInput)
+                                widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password',
                                 widget=forms.PasswordInput)
 
@@ -43,7 +43,7 @@ class UserEditForm(forms.ModelForm):
     def clean_email(self):
         data = self.cleaned_data['email']
         qs = User.objects.exclude(id=self.instance.id)\
-                         .filter(email=data)
+                        .filter(email=data)
         if qs.exists():
             raise forms.ValidationError('Email already in use.')
         return data
@@ -56,10 +56,10 @@ class ProfileEditForm(forms.ModelForm):
 
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100,
-                               required=True,
-                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+                              required=True,
+                              widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(required=True,
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+                            widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
