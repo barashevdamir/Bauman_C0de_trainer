@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "Diplom",
-        "USER": "baxrax",
-        "PASSWORD": "baxrax",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": "student_barashev_01",
+        "USER": "student_barashev_01",
+        "PASSWORD": "qwerty123",
+        "HOST": "dc-webdev.bmstu.ru",
+        "PORT": "8080",
     }
 }
 

@@ -31,7 +31,11 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                          {% if  user.profile.photo  %}
+                            <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                          {% else %}
+                            <img src="{% static 'base/images/Logo.svg' %}" alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                          {% endif %}
                         <div class="mt-3">
                           <h4>{{ user.username }}</h4>
 {#                          <p class="text-secondary mb-1"></p>#}
