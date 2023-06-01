@@ -19,10 +19,30 @@
         </a>
         
         <div class="nav__info">
-          {% if auth %}
+
+{#        {% if request.user.is_authenticated %}#}
+{#                    <form action = "{% url 'user_profile' %}">#}
+{#                        <button class="btn btn-lg btn-secondary w-100 fs-6">My Profile</button>#}
+{#                    </form>#}
+{#        {% else %}#}
+{#                    <form action = "{% url 'login' %}">#}
+{#                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign in</button>#}
+{#                    </form>#}
+{#        {% endif %}#}
+
+
+          {% if request.user.is_authenticated %}
           <div class="nav__profile">
             <div class="nav__profile-pic">
-              <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
+                <a href="{% url 'user_profile' %}">
+                    {% if  user.profile.photo  %}
+                            <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                          {% else %}
+                            <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
+                          {% endif %}
+
+                </a>
+
             </div>
             <div class="nav__progress-bar">102/1202</div>
           </div>
