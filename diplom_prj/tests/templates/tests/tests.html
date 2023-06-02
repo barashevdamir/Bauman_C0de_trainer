@@ -12,7 +12,7 @@
     {% include 'base/navbar.html' %}
 
     <main>
-        <div class="conteiner px-4 bct-bg-color">
+        <div class="conteiner-fluid px-4 bct-bg-color">
             <div class="row justify-content-center">
                 <div class="col-xxl-2 col-lg-3 col-md-8 col-10 my-4 px-3 pb-4 bct-border h-100">
                     <label class="pt-3" for="">Sort By</label>
@@ -45,13 +45,14 @@
                     </select>
                 </div>
                 <div class="col-xl-8 col-lg-7">
+                    {% for test in tests %}
                     <div class="conteiner bct-test mx-3 my-4 px-3 py-2 text-light">
                         <div class="row">
                             <div class="col-8">
-                                <h3 class="">Test name</h3>
+                                <h3 class="">{{ test.title }}</h3>
                             </div>
                             <div class="col-4 text-end">
-                                <span>Python</span>
+                                <span>{{ test.prog_language }}</span>
                             </div>
                         </div>
                         <div class="row">
@@ -70,7 +71,7 @@
                             </div>
                         </div>
                     </div> 
-                       
+                    {% endfor %}  
                 </div>
             </div>
             

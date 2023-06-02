@@ -19,3 +19,4 @@ pip        22.2.2
 setuptools 63.2.0
 sqlparse   0.4.4
 tzdata     2023.3
+Pillow     9.5.0
