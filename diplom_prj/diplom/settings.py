@@ -89,12 +89,8 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "student_barashev_01",
-        "USER": "student_barashev_01",
-        "PASSWORD": "qwerty123",
-        "HOST": "dc-webdev.bmstu.ru",
-        "PORT": "8080",
+         'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
