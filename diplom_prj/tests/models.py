@@ -3,11 +3,17 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Test(models.Model):
-
+	
+	class ProgLanguage(models.TextChoices):
+		PYTHON = 'PY', 'Python'
+		JAVASCRIPT = 'JS', 'JavaScript'
+		HTML = 'HTML', 'HTML'
+	
 	class Status(models.TextChoices):
 		DRAFT = 'DF', 'Draft'
 		PUBLISHED = 'PB', 'Published'
 
+	
 	author = models.ForeignKey(
 		User, 
 		on_delete=models.SET_DEFAULT, 
@@ -17,8 +23,10 @@ class Test(models.Model):
 	#slug? 
 	times_taken = models.IntegerField(default=0, editable=False)
 	experience = models.PositiveSmallIntegerField(default=0) #эквивалетнт lvl в задачках, нужно для таблицы лидеров, хотя может тесты и не достойны там учитываться
-	prog_language = models.CharField(max_length=32, default='') #может сделать список для выбора языка? есть вариант сделать этот список общим для проекта и тащить его сюда и в модель задачек
-	#может добавить описание?
+	prog_language = models.CharField(max_length=4,
+		choices=ProgLanguage.choices,
+		default=ProgLanguage.PYTHON, #может нужен пустой выбор?
+		blank=False)
 	#теги? нужно обновить пип лист
 	publish = models.DateTimeField(default=timezone.now)
 	created = models.DateTimeField(auto_now_add=True)
