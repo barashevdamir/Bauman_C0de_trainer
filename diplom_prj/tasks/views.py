@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 
 from .models import *
 
-def index(request):
+def taskspage(request):
   tasks = Tasks.objects.all()
 
   if request.GET:
@@ -39,9 +39,11 @@ def index(request):
 
   
   return render(request, 'tasks/tasks.html', {
+    'title' : 'Tasks',
     'tasks': tasks,
-    'auth':True,
   })
 
 def homepage(request):
-  return render(request, 'tasks/homepage.html')
+  return render(request, 'tasks/homepage.html', {
+    'title' : 'Homepage'
+  })
