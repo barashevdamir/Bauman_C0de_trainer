@@ -4,79 +4,42 @@
 
 
 {% block add_css%}
-    <link rel="stylesheet" href="{% static 'tasks/css/hp_style.css' %}">
+    <link rel="stylesheet" href="{% static 'tasks/css/homepage_style.css' %}">
 {% endblock %}
 
 
-{% block content%}
-    
-    <nav class="navbar navbar-expand sticky-top navbar-dark bg-dark">
-        <div class="container-fluid justify-content-sm-end mx-4">
-
-            <div class="navbar-nav">
-                {% if request.user.is_authenticated %}
-          <div class="nav__profile">
-            <div class="nav__profile-pic">
-                <a href="{% url 'user_profile' %}">
-                    {% if  user.profile.photo  %}
-                            <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
-                          {% else %}
-                            <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
-                          {% endif %}
-
-                </a>
-
-            </div>
-            <div class="nav__progress-bar">102/1202</div>
-          </div>
-    {% else %}
-
-                <a class="nav-link" href="{% url 'login' %}">Вход</a>
-                <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
-
-    {% endif %}
-            </div>
-
-        </div>
-    </nav>
 
 
-
-
+{% block content%}    
     <header>
-        <div class="container">
             <div class="raw">
                 <div class="col-12">
                      <h1 class="text-center">Bauman C0de Trainer</h1>
                      <h2 class="text-center">Онлайн тренажер навыков программирования</h2>
                 </div>
             </div>
-        </div>
     </header>
        
-    <section class="start_train">
-        <div class="conteiner">
+    <section class="startTrain">
+        <div class="container">
+
+            <h2 class="startTrain__title">Сразу к делу</h2>
             <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center text-uppercase mb-5">Сразу к делу</h2>
+                <div class="startTrain__btn">
+                    <a href="/tests" class="btn btn-dark btn-bct-main">Tests<i class="icon-check"></i></a>
                 </div>
-            </div>
-            <div class="row gy-2">
-                <div class="col-lg-4 col-md-12">
-                    <a href="/tests" class="btn btn-dark btn-bct-main">Тесты <i class="icon-check"></i></a>
+                <div class="startTrain__btn">
+                    <a href="/tasks" class="btn btn-dark btn-bct-main">Tasks<i class="icon-file-code"></i></a>
                 </div>
-                <div class="col-lg-4 col-md-12">
-                    <a href="/tasks" class="btn btn-dark btn-bct-main">Задачи <i class="icon-file-code"></i></a>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <a href="/leader_board" class="btn btn-dark btn-bct-main">Таблица лидеров <i class="icon-award"></i></a>
+                <div class="startTrain__btn">
+                    <a href="/leader_board" class="btn btn-dark btn-bct-main">Leaderboard<i class="icon-award"></i></a>
                 </div>
             </div>
         </div>
     </section>
     
     <section class="about">
-        <div class="conteiner">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h2 class="text-center text-uppercase mb-5">Почему именно мы?</h2>
@@ -126,8 +89,8 @@
             </div>
         </div>
     </footer>
+{% endblock %} 
 
-    {% endblock %} 
 
 {% block jscripts %}   
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>

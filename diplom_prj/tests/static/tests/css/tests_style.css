@@ -8,6 +8,10 @@ body {
     background-color: var(--color1);
 }
 
+.row {
+  justify-content: space-between;
+}
+
 .bct-bg-color {
     background-color: var(--color1);
 }

@@ -10,14 +10,28 @@
     <link rel="shortcut icon" href="{% static 'base/images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fontello/css/fontello.css' %}">
-    {% block add_css%}
-    {% endblock %}
+    <link rel="stylesheet" href="{% static 'base/css/base_style.css' %}">
+    {% block add_css%}{% endblock %}
 </head>
 
 <body>
-    {% block content %}
+  {% if navbar %}
+    {% include 'base/navbar.html' %}
+  {% endif %}
+  
+
+  <main class="main">
+    <div class="container">
+    {% block main_content %}
     
     {% endblock %}
+    </div>
+  </main>
+
+  {% block content %}
+    
+  {% endblock %}
+
     {% block jscripts %}{% endblock %}
 </body>
 </html>

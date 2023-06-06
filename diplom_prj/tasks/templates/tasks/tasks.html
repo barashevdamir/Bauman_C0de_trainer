@@ -4,57 +4,24 @@
 
 
 {% block add_css%}
-    <link rel="stylesheet" href="{% static 'tasks/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'tasks/css/tasks_style.css' %}">
 {% endblock %}
 
 
-{% block content %}
-  <nav class="nav">
-    <div class="container">
-      <div class="nav__wrapper">
-        <a  class="logo__link" href="/">
-          <img class="logo__img" src="{% static 'base/images/Logo.svg' %}" alt="">
-        </a>
-        
-        <div class="nav__info">
 
-{#        {% if request.user.is_authenticated %}#}
-{#                    <form action = "{% url 'user_profile' %}">#}
-{#                        <button class="btn btn-lg btn-secondary w-100 fs-6">My Profile</button>#}
-{#                    </form>#}
-{#        {% else %}#}
-{#                    <form action = "{% url 'login' %}">#}
-{#                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign in</button>#}
-{#                    </form>#}
-{#        {% endif %}#}
+{% block main_content %}
 
 
-          {% if request.user.is_authenticated %}
-          <div class="nav__profile">
-            <div class="nav__profile-pic">
-                <a href="{% url 'user_profile' %}">
-                    {% if  user.profile.photo  %}
-                        <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
-                    {% else %}
-                        <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
-                    {% endif %}
-                </a>
-            </div>
-            <div class="nav__progress-bar">102/1202</div>
-          </div>
-          {% else %}
-          <div class="nav__search-wrapper">
-            <input class="nav__search-line" type="text" placeholder="Search...">
-          </div>
-          <button class="nav__auth-btn">Sign In</button>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </nav>
+  {#        {% if request.user.is_authenticated %}#}
+  {#                    <form action = "{% url 'user_profile' %}">#}
+  {#                        <button class="btn btn-lg btn-secondary w-100 fs-6">My Profile</button>#}
+  {#                    </form>#}
+  {#        {% else %}#}
+  {#                    <form action = "{% url 'login' %}">#}
+  {#                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign in</button>#}
+  {#                    </form>#}
+  {#        {% endif %}#}
 
-  <main class="main">
-    <div class="container">
 
       <section class="suggest">
         <div class="suggest__info">
@@ -197,9 +164,7 @@
 
       
 
-    </div>
-  </main>
-  
+
 {% endblock %}
 
 {% block jscripts %}

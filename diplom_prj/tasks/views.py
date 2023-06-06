@@ -40,10 +40,12 @@ def taskspage(request):
   
   return render(request, 'tasks/tasks.html', {
     'title' : 'Tasks',
+    'navbar' : True,
     'tasks': tasks,
   })
 
 def homepage(request):
   return render(request, 'tasks/homepage.html', {
-    'title' : 'Homepage'
+    'title' : 'Homepage',
+    'navbar' : True,
   })
