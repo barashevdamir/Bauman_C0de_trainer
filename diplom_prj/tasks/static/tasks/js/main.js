@@ -1,5 +1,4 @@
 let intervalId;
-
 document.querySelectorAll('.filter__dropdown-btn').forEach(e=>{
   e.addEventListener('click', e =>{
     const menu = e.currentTarget.dataset.path;
@@ -56,45 +55,51 @@ function add_param(e, filter_name) {
   window.location.replace(url)
 }
 
+function changeName(){
+  let dropdownBtn = document.querySelectorAll('.filter__dropdown-btn')
+  let params = window
+  .location
+  .search
+  .replace('?','')
+  .split('&')
+  if (params != 0) {
+    params.forEach((item, i) => {
+      if (item.length >= 8) {
+        if (item.slice(0,8) == 'order_by') {
+          if (item.slice(9,) == '-create_datetime') {
+            dropdownBtn[0].innerHTML = 'Newest'
+          } 
+          else if (item.slice(9,) == 'create_datetime') {
+            dropdownBtn[0].innerHTML = 'Oldest'
+          }
+          else if (item.slice(9,) == '-solved') {
+            dropdownBtn[0].innerHTML = 'Most Completed'
+          }
+          else if (item.slice(9,) == '-positive_rate') {
+            dropdownBtn[0].innerHTML = 'Hight Rate'
+          }
+        }
+      }
+      if (item.length >= 8){
+        if (item.slice(0,8) == 'language') {
+          dropdownBtn[1].innerHTML = item.slice(9,)
+        }
+      }
+      if (item.length >= 5){
+        if (item.slice(0,5) == 'level') {
+          dropdownBtn[2].innerHTML = "<span>lvl" + item.slice(6,) + "</span>"
+        }
+      }
+      if (item.length >= 3){
+        if (item.slice(0,3) == 'tag') {
+          dropdownBtn[3].innerHTML = item.slice(4,)
+        }
+      }
+    })
+  }
+}
 
-
-/*
-document.querySelectorAll('.filter__dropdown-btn').forEach(e=>{
-
-
-    let id
-    let tmp
-    let params = window
-    .location
-    .search
-    .replace('?','')
-    .split('&')
-
-    if (params != 0) {
-      params.forEach(item => {
-        if (item.slice(0,9) == 'order_by=') {
-          id = item.slice(9,item.length)
-        } 
-      })
-    }
-
-    console.log('1'+tmp)
-    
-    console.log('4'+tmp)
-
-
-})
-
-*/
-
-
-document.querySelectorAll('.order_by').forEach(e=>{
-  e.addEventListener('click', e=>{
-    add_param(e, 'order_by')
-  })
-})
-
-
+changeName()
 
 
 document.querySelectorAll('.order_by').forEach(e=>{

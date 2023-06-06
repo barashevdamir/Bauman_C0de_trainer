@@ -72,7 +72,7 @@
             </div>
     
             <div class="filter__item">
-              <label class="filter__dropdown-title" for="">Language</label>
+              <label class="filter__dropdown-title" for="">Languages</label>
               <div class="filter__dropdown">
                 <div class="filter__dropdown-border">
                   <button class="filter__dropdown-btn" data-path="two">All</button>
@@ -123,9 +123,6 @@
         </section>
   
         <section class="tasks">
-          {% if tasks == '' %}
-          <p class="tasks__warning">Tasks not found</p>
-          {% endif %}
           {% for t in tasks %}
           <div class="task">
             <div class="task__main-info">
