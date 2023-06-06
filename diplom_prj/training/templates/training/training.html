@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Training{% endblock %}
+
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'training/css/training_style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+  {% include 'base/navbar.html' %}
+
+    <main>
+        <div class="code-editor">
+            <textarea id="code-input"></textarea>
+        </div>
+        <div class="output-window">
+            <pre id="output"></pre>
+        </div>
+        <div class="instruction"></div>
+        <button class="compile_button" onclick="compileCode()">Compile</button>
+        <button class="reset_button" onclick="Reset()">Reset</button>
+        <a href="#" class="solution_button">Solutions</a>
+
+
+
+        <script>
+            function compileCode() {
+              // Получить код из текстового поля
+              var code = document.getElementById("code-input").value;
+
+              // Отправить код на сервер для компиляции и выполнения
+
+              // Обработать результат компиляции и вывода на страницу
+              var output = "Результат выполнения:\n ..."; // Вместо "..." будет результат компиляции и выполнения
+
+              document.getElementById("output").textContent = output;
+            }
+            function Reset() {
+                location.reload(); //Перезагрузка страницы
+            }
+        </script>
+
+
+    </main>
+{% endblock %}
+
+{% block jscripts %}
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}

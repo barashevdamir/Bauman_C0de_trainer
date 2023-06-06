@@ -1,0 +1,93 @@
+:root {
+    --color1: #D9D9D9;
+    --color2: #BDBDBD;
+    --color3: #858585;
+}
+
+
+
+body {
+    background-color: var(--color1);
+}
+
+
+.code-editor {
+    position: absolute;
+    right: 20px;
+    top: 215px;
+    width: 807px;
+    height: 550px;
+    background-color: #BDBDBD;
+    border: 1px solid #ccc;
+}
+
+.output-window {
+    position: absolute;
+    right: 20px;
+    top: 785px;
+    width: 807px;
+    height: 290px;
+    border: 1px solid #BDBDBD;
+    background-color: #BDBDBD;
+}
+
+.output-window pre {
+  white-space: pre-wrap;
+}
+
+.instruction {
+    position: absolute;
+    top: 215px;
+    left: 20px;
+    width: 572px;
+    height: 920px;
+    background-color: #BDBDBD;
+}
+
+.compile_button {
+    position: absolute;
+    top: 1095px;
+    right: 20px;
+    width: 200px;
+    height: 40px;
+    background-color: #BDBDBD;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #858585;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.reset_button {
+    position: absolute;
+    top: 1095px;
+    right: 626px;
+    width: 200px;
+    height: 40px;
+    background-color: #BDBDBD;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #858585;
+    justify-content: center;
+    align-items: center;
+}
+
+.solution_button {
+    display: flex;
+    position: absolute;
+    top: 1095px;
+    right: 392px;
+    width: 200px;
+    height: 40px;
+    background-color: #BDBDBD;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid #858585;
+    justify-content: center;
+    align-items: center;
+
+}
