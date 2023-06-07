@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-
 from . import models
 
 # не работали поля поиска, нужно разобраться и восстановить их
@@ -12,6 +11,10 @@ from . import models
 class AnswerInLine(admin.TabularInline):
     extra = 1
     model = models.Answer
+
+class CodeInLine(admin.StackedInline):
+    extra = 0
+    model = models.Code    
     
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
@@ -19,7 +22,7 @@ class QuestionAdmin(admin.ModelAdmin):
         'answer_type',
         'test'
     ]
-    inlines = [AnswerInLine]
+    inlines = [CodeInLine, AnswerInLine]
 
 class QuestionInLine(admin.TabularInline):
     extra = 1

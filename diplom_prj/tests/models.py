@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from  django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator
+from taggit.managers import TaggableManager 
 
 class Test(models.Model):
 	
@@ -9,10 +10,12 @@ class Test(models.Model):
 		PYTHON = 'PY', 'Python'
 		JAVASCRIPT = 'JS', 'JavaScript'
 		HTML = 'HTML', 'HTML'
+		SQL = 'SQL', 'SQL'
 	
 	class Status(models.TextChoices):
 		DRAFT = 'DF', 'Draft'
 		PUBLISHED = 'PB', 'Published'
+		TESTING = 'TE', 'Testing'
 
 	author = models.ForeignKey(
 		User, 
@@ -34,7 +37,7 @@ class Test(models.Model):
 		default=ProgLanguage.PYTHON, #может нужен пустой выбор?
 		blank=False
 	)
-	#теги? нужно обновить пип лист
+	tags = TaggableManager()
 	publish = models.DateTimeField(default=timezone.now)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
@@ -80,6 +83,10 @@ class Question(models.Model):
         default=AnswerType.SINGLE,
 		blank=False
     )
+
+	@property
+	def answer_count(self):
+		return self.answers.count()
 	
 	class Meta:
 		verbose_name_plural = "Questions"
@@ -103,3 +110,18 @@ class Answer(models.Model):
 
 	def __str__(self):
 		return f'{self.text}, {self.correct}'
+	
+class Code(models.Model):
+	question = models.ForeignKey(
+		Question, 
+		related_name='codes', 
+		on_delete=models.CASCADE
+	)
+	text = models.TextField(help_text='can use markdown')
+
+	class Meta:
+		verbose_name_plural = "Codes"
+		ordering = ['question']
+
+	def __str__(self):
+		return self.text[:20]

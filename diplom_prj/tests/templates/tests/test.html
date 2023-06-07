@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+<!-- может стоит прогружать из модели? -->
+{% block title %}Test{% endblock %}
+    
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'tests/css/test_style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block jscripts %}
+<!-- проверить нужность -->
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script> 
+{% endblock %}

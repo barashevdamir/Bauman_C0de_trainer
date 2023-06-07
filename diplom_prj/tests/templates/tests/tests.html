@@ -62,7 +62,9 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span>Tag</span>
+                                {% for tag in test.tags.all %}
+                                <span>{{ tag }}</span>
+                                {% endfor %}
                             </div>
                             <div class="col-sm-2 offset-sm-4 col-4 offset-2 text-end">
                                 <button class="bct-btn-test rounded-pill px-3">
@@ -71,7 +73,8 @@
                             </div>
                         </div>
                     </div> 
-                    {% endfor %}  
+                    {% endfor %}
+                    {% include "base/paginator.html" with page=tests %}
                 </div>
             </div>
             
