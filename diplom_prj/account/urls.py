@@ -13,14 +13,17 @@ urlpatterns = [
     # path('', views.dashboard, name='dashboard'),
     #
     # # change password urls
-    path('password-change/',
-         auth_views.PasswordChangeView.as_view(),
-         name='password_change'),
-    path('password-change/done/',
-         auth_views.PasswordChangeDoneView.as_view(),
-         name='password_change_done'),
-    #
-    # # reset password urls
+    # path('password-change/',
+    #      auth_views.PasswordChangeView.as_view(),
+    #      name='password_change'),
+    # # path('password-change/',
+    # #      views.password_change,
+    # #      name='password_change'),
+    # path('password-change/done/',
+    #      auth_views.PasswordChangeDoneView.as_view(),
+    #      name='password_change_done'),
+    # #
+    # # # reset password urls
     # path('password-reset/',
     #      auth_views.PasswordResetView.as_view(),
     #      name='password_reset'),

@@ -1,9 +1,11 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 
 from .models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import SetPasswordForm
 
 
 class LoginForm(forms.Form):
@@ -72,3 +74,8 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['photo']
+
+# class SetPasswordForm(SetPasswordForm):
+#     class Meta:
+#         model = get_user_model()
+#         fields = ['new_password1', 'new_password2']
