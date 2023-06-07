@@ -7,6 +7,7 @@ from .forms import LoginForm, UserRegistrationForm, \
     UserEditForm, ProfileEditForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import SetPasswordForm
 
 
 def user_login(request):
@@ -92,6 +93,24 @@ def edit(request):
                       'user_form': user_form,
                       'profile_form': profile_form,
                   })
+
+# @login_required
+# def password_change(request):
+#     user = request.user
+#     if request.method == 'POST':
+#         form = SetPasswordForm(user, request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Your password has been changed")
+#             return redirect('login')
+#         else:
+#             for error in list(form.errors.values()):
+#                 messages.error(request, error)
+#
+#     form = SetPasswordForm(user)
+#     return render(request, 'password_reset_confirm.html', {'form': form})
+
+
 
 @login_required
 def profile(request):
