@@ -6,7 +6,9 @@ body{
     background: #ececec;
 }
 
-
+.main{
+    padding: 0;
+}
 
 /*------------ Login container ------------*/
 
