@@ -88,8 +88,9 @@
   padding: 9px 14px 10px;
   background-color: #000;
   border-radius: 25px;
-  font-size: 2rem;
-  line-height: 2.4rem;
+  color: white;
+  /*font-size: 2rem;*/
+  /*line-height: 2.4rem;*/
 }
 
 .nav__auth-btn{
@@ -97,8 +98,8 @@
   background-color: #000;
   color: #fff;
   border-radius: 25px;
-  font-size: 2rem;
-  line-height: 2.4rem;
+  /*font-size: 2rem;*/
+  /*line-height: 2.4rem;*/
   transition: all .25s;
 }
 .nav__auth-btn:hover{

@@ -13,6 +13,12 @@ body {
     padding-bottom: 1rem;
     text-align: center;
 }
+.btn-primary {
+    color: #0d6efd;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
 .account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
 }
