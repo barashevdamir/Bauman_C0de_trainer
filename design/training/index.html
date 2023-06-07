@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" 
+    integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js" 
+    integrity="sha512-Vs2GKxnxnTQBRW7o2xXZ9A28njjmu5RToS42efiKNEWmikov0inZY522EtGVK5CcVo0M/FQwmXsTfl9skgRnvw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js" 
+    integrity="sha512-sSWQXoxIkE0G4/xqLngx5C53oOZCgFRxWE79CvMX2X0IKx14W3j9Dpz/2MpRh58xb2W/h+Y4WAHJQA0qMMuxJg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js" 
+    integrity="sha512-x8RaqBHf5czJURmaGWqoI3DULFVYrC/GNPfk2iqL5wTCdEX8rlfQw2aHpuZhaEVuMJu1X654forBDVuahLivtQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css" 
+    integrity="sha512-gFMl3u9d0xt3WR8ZeW05MWm3yZ+ZfgsBVXLSOiFz2xeVrZ8Neg0+V1kkRIo9LikyA/T9HuS91kDfc2XWse0K0A==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closebrackets.min.js" 
+    integrity="sha512-tsjcYO5hFvViRssxiM7Jhd8601epWOx1He3Hl4yuI5dKKPxr43KxkOhc9GZeeqzlYJm9ABb7UPA9697NiqZZ7Q==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <title>Training</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bct-nav sticky-top">
+    <div class="container-md">
+        <a class="navbar-brand" href="/">
+            <img src="base/image/diplom_prj_static_base_images_Logo.svg" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/tests">Тесты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/tasks">Задачи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/leader_board">Таблица лидеров</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <a class="nav-link" href="#">
+                    <img src="base/image/diplom_prj_static_base_images_profile-icon.svg" alt="">
+                    Профиль
+                </a>
+            </div>
+        </div>
+    </div>
+    </nav>
+    <div class="cont">
+        <div class="row-editor">
+            <div class="col-editor-1">
+                <div class="task-liner">
+                    <p class="lvl-text">Lvl1</p>
+                    <p class="task-name">Task name</p>
+                </div>
+                <div class="instruction-editor">
+                    <div class="instrucrion-liner">
+                        <p class="instrucrion-text">Instructions</p>
+                    </div>
+                    <div class="instruction">
+                        <textarea type="text" class="area-instruction" readonly>Text</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-editor-2">
+                <div class="language-liner">
+                    <div class="dropdown-1">
+                        <button class="dropbtn-1">Language</button>
+                        <div class="dropdown-content">
+                          <a href="/">Python</a>
+                          <a href="/">SQL</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-2">
+                        <button class="dropbtn-2">Version</button>
+                        <div class="dropdown-content">
+                          <a href="/">№</a>
+                          <a href="/">№</a>
+                          <a href="/">№</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-editor">
+                    <div class="solution-liner">
+                        <p class="solution-text">Solution</p>
+                    </div>
+                    <textarea type="text" id="editor" aria-label="First name"></textarea>
+                </div>
+                <div class="sampletest-editor">
+                    <div class="sampletest-liner">
+                        <p class="sampletest-text">SampleTest</p>
+                    </div>
+                    <div class="sampletest">
+                        <textarea type="text" class="area-sampletest" readonly>Test</textarea>
+                    </div>
+                </div>
+                <div class="editor-button">
+                    <form action="/">
+                        <button class="button-1">Reset</button>
+                    </form>
+                    <form action="/">
+                        <button class="button-2">Solutions</button>
+                    </form>
+                    <form action="/">
+                        <button class="button-3">Test</button>
+                    </form>
+                </div>
+        
+                
+                
+                  
+                
+            </div>
+        </div>
+    </div>
+
+   
+    
+
+
+
+
+    
+    
+</body>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        theme: "dracula",
+        lineNumbers: true,
+        autoCloseBrackets: true,
+    })
+    
+    
+    
+    
+</script>
+</html>
