@@ -9,7 +9,7 @@ def test_list(request):
     {'tests': tests}
     )
 
-def test_start(request, pk):
+def test(request, pk):
   test = get_object_or_404(
     Test,
     id=pk,
@@ -17,5 +17,13 @@ def test_start(request, pk):
   )
   return render(
     request,
+    'tests/test.html',
     {'test': test}
   )
+
+def result(request):
+  return render(
+    request,
+   'tests/result.html',  
+  )
+
