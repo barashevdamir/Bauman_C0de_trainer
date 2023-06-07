@@ -21,9 +21,8 @@ def taskspage(request):
         for el in tmp_arr:
           if el == get_turple['language']:
             tasks_arr.append(task.name)
-      tasks_str = '\', \''.join(tasks_arr)
       if get_turple['language'] != 'All':
-        tasks = Tasks.objects.raw('SELECT * FROM diplom.tasks_tasks WHERE name IN (\'' + tasks_str + '\') ORDER BY id ASC')
+        tasks = tasks.filter(name__in=tasks_arr)
 
     if request.GET.get('tag', False):
       tasks_arr = []
@@ -32,15 +31,13 @@ def taskspage(request):
         for el in tmp_arr:
           if el == get_turple['tag']:
             tasks_arr.append(task.name)
-      tasks_str = '\', \''.join(tasks_arr)
-      tasks = Tasks.objects.raw('SELECT * FROM diplom.tasks_tasks WHERE name IN (\'' + tasks_str + '\') ORDER BY id ASC')
+      tasks = tasks.filter(name__in=tasks_arr)
 
-    print(tasks)
-
+  if not tasks:
+    tasks = False
   
   return render(request, 'tasks/tasks.html', {
     'title' : 'Tasks',
-    'navbar' : True,
     'tasks': tasks,
   })
 
