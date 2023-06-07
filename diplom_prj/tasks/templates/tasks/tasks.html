@@ -11,18 +11,6 @@
 
 {% block main_content %}
 
-
-  {#        {% if request.user.is_authenticated %}#}
-  {#                    <form action = "{% url 'user_profile' %}">#}
-  {#                        <button class="btn btn-lg btn-secondary w-100 fs-6">My Profile</button>#}
-  {#                    </form>#}
-  {#        {% else %}#}
-  {#                    <form action = "{% url 'login' %}">#}
-  {#                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign in</button>#}
-  {#                    </form>#}
-  {#        {% endif %}#}
-
-
       <section class="suggest">
         <div class="suggest__info">
           Last Task
@@ -123,6 +111,11 @@
         </section>
   
         <section class="tasks">
+          {% if tasks == False %}
+          <p class="tasks__error">Tasks not found</p>
+
+          {% else %}
+
           {% for t in tasks %}
           <div class="task">
             <div class="task__main-info">
@@ -157,6 +150,8 @@
             </div>
           </div>
           {% endfor %}
+          {% endif %}
+
         </section>
 
       
