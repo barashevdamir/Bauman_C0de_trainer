@@ -9,7 +9,15 @@
 {% endblock %}
 
 {% block content %}
+    {% for q in question %}
+        {% if q.answer_type='SC' %}
 
+        {% elif q.answer_type='MC' %}
+
+        {% elif q.answer_type='WR' %}
+
+        {% endif %}
+    {% endfor %}
 {% endblock %}
 
 {% block jscripts %}

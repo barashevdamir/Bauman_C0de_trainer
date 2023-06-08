@@ -7,6 +7,7 @@ from taggit.managers import TaggableManager
 class Test(models.Model):
 	
 	class ProgLanguage(models.TextChoices):
+		# GENERAL = 'GEN', 'General' для общих вопросов по программированию, нужно ли?
 		PYTHON = 'PY', 'Python'
 		JAVASCRIPT = 'JS', 'JavaScript'
 		HTML = 'HTML', 'HTML'
@@ -34,7 +35,7 @@ class Test(models.Model):
 		'Programming language',
 		max_length=4,
 		choices=ProgLanguage.choices,
-		default=ProgLanguage.PYTHON, #может нужен пустой выбор?
+		default=ProgLanguage.PYTHON,
 		blank=False
 	)
 	tags = TaggableManager()
