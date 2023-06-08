@@ -9,15 +9,32 @@
 {% endblock %}
 
 {% block content %}
-    {% for q in question %}
-        {% if q.answer_type='SC' %}
+<div class="conteiner">
+    <div class="row">
+        <div class="col-lg-8 border border-dark p-4 m-4">
+            {% for q in question %}
+            
+                {% if q.answer_type='SC' %}
+                    <form>
 
-        {% elif q.answer_type='MC' %}
+                    </form>
+                {% elif q.answer_type='MC' %}
+                    <form>
+                             
+                    </form>
+                {% elif q.answer_type='WR' %}
+                    <form>
+                        
+                    </form>
+                {% endif %}
+            {% endfor %}
+            <div class="button">
 
-        {% elif q.answer_type='WR' %}
-
-        {% endif %}
-    {% endfor %}
+            </div>   
+        </div>
+    </div>
+    
+</div>
 {% endblock %}
 
 {% block jscripts %}
