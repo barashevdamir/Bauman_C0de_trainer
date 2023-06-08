@@ -73,9 +73,15 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                <div class="input-group mb-3">
-                    <button class="btn btn-lg btn-light w-100 fs-6"><img src="{% static 'images/github-mark.svg' %}" style="width:20px" class="me-2"><small>Sign In with GitHub</small></button>
-                </div>
+{#                <div class="input-group mb-3">#}
+{#                    <button class="btn btn-lg btn-light w-100 fs-6"><img src="{% static 'images/github-mark.svg' %}" style="width:20px" class="me-2"><small>Sign In with GitHub</small></button>#}
+{#                </div>#}
+{#                  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="DiplomTelegramAuthBot" data-size="large" data-radius="6" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>#}
+{#                    <script type="text/javascript">#}
+{#                        function onTelegramAuth(user) {#}
+{#                                                        alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');#}
+{#                        }#}
+{#                    </script>#}
                 <div class="row">
                     <small class="text-dark">Don't have account? <a href="{% url "register" %}">Sign Up</a></small>
                 </div>

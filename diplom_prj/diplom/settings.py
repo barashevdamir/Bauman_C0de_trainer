@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig',
     'tests.apps.TestsConfig',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.vk',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +150,7 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -164,6 +167,13 @@ USE_L10N = True
 USE_TZ = True
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'telegram': {
+        'TOKEN': '6108393733:AAF-oaqDg3aCftMuQLQtan-IMlLGUdKahwA'
+    }
+}
+
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '51647965'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'VF5XxdKsDkyeGc5TfMvb'
