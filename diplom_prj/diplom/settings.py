@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'training.apps.TrainingConfig',
 ]
 
@@ -76,9 +77,16 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "student_chim20r077",
+        "USER": "student_chim20r077",
+        "PASSWORD": "qwerty123",
+        "HOST": "dc-webdev.bmstu.ru",
+        "PORT": "8080",
+        'OPTIONS': {
+            'options': '-c search_path=diplom',  # Указываем схему diplom
+        },
     }
 }
 

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="shortcut icon" href="{% static 'base/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'base/image/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fontello/css/fontello.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/base_style.css' %}">
@@ -18,6 +18,7 @@
   {% if navbar %}
     {% include 'base/navbar.html' %}
   {% endif %}
+
 
 
   <main class="main">
@@ -32,6 +33,6 @@
 
   {% endblock %}
 
-  {% block jscripts %}{% endblock %}
+    {% block jscripts %}{% endblock %}
 </body>
 </html>
