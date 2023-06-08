@@ -25,9 +25,12 @@ from .models import TaskSolution
 #     return JsonResponse({'error': 'Invalid request method'})
 
 @csrf_protect
-def index(request):
-    data = TaskSolution.objects.all()
-    return render(request, './training/training.html', {'data': data})
+def index(request, id):
+    try:
+        data = TaskSolution.objects.get(id=id)
+        return render(request, './training/training.html', {'data': data})
+    except TaskSolution.DoesNotExist:
+        return render(request, './training/training.html', {'error': 'Запись не найдена'})
 
 
 @csrf_protect

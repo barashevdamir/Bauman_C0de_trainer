@@ -28,9 +28,11 @@
                     </div>
                     <div class="instruction">
                         <textarea type="text" class="area-instruction" readonly>
-                                    {% for post in data %}
-                                        {{ post.description }}
-                                    {% endfor %}
+                            {% if data %}
+                                {{ data.description }}
+                            {% else %}
+                                {{ error }}
+                            {% endif %}
                         </textarea>
                     </div>
                 </div>
