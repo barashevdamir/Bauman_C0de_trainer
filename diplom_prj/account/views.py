@@ -6,9 +6,6 @@ from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, \
     UserEditForm, ProfileEditForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import SetPasswordForm
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -95,20 +92,21 @@ def edit(request):
                   })
 
 # @login_required
-# def password_change(request):
-#     user = request.user
+# def change_password(request):
 #     if request.method == 'POST':
-#         form = SetPasswordForm(user, request.POST)
+#         form = PasswordChangeForm(request.user, request.POST)
 #         if form.is_valid():
-#             form.save()
-#             messages.success(request, "Your password has been changed")
-#             return redirect('login')
+#             user = form.save()
+#             update_session_auth_hash(request, user)  # Important!
+#             messages.success(request, 'Your password was successfully updated!')
+#             return redirect('change_password')
 #         else:
-#             for error in list(form.errors.values()):
-#                 messages.error(request, error)
-#
-#     form = SetPasswordForm(user)
-#     return render(request, 'password_reset_confirm.html', {'form': form})
+#             messages.error(request, 'Please correct the error below.')
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'accounts/password_change.html', {
+#         'form': form
+#     })
 
 
 
