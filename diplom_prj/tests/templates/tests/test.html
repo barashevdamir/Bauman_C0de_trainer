@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load test_tags %}
 {% load static %}
 
 {% block title %} {{ test.title }} {% endblock %}
@@ -10,14 +11,50 @@
 {% block content %}
 <div class="conteiner">
     <div class="row justify-content-center">
-        <div class="col-lg-8 p-4 m-4">
+        <div class="col-lg-8 p-3 m-2 text-center">
             <h1>{{ test.title }}</h1>
+            <hr>
             <h3>Question 1 of 10</h3>
         </div>
-        <div class="col-lg-8 border border-dark p-4 m-4">
-            {% for i in test.questions.objects.all %}
-            {{ i }}
+        {% for question in questions %}
+        <div class="col-lg-8 border border-dark p-3 m-2">
+            <p>{{ question.prompt }}</p>
+            {% for code in question.codes %}
+                <p>{{ code|markdown }}</p>
             {% endfor %}
+            {% if question.answer_type == 'SC' %}
+                {% for answer in question.answers %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        {{ answer }}
+                    </label>
+                </div>
+                {% endfor %}
+            {% elif question.answer_type == 'MC' %}
+                {% for answer in question.answers %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{ answer }}
+                    </label>
+                </div>
+                {% endfor %}
+            {% else %}
+                {% for answer in question.answers %}
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <form>
+                            <input type="text" class="form-control" placeholder="Your answer" aria-label="First name">
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {{ question }}
+        </div>
+        {% endfor %}
+        <div class="col-lg-8 p-3 text-center">
             <div>
                 <a class="button btn-dark" href="#">Next</a>
             </div>   
