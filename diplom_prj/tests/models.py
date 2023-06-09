@@ -16,7 +16,6 @@ class Test(models.Model):
 	class Status(models.TextChoices):
 		DRAFT = 'DF', 'Draft'
 		PUBLISHED = 'PB', 'Published'
-		TESTING = 'TE', 'Testing'
 
 	author = models.ForeignKey(
 		User, 
@@ -54,6 +53,9 @@ class Test(models.Model):
 	def question_count(self):
 		return self.questions.count()
 	
+	def get_questions(self):
+		return self.questions.all()
+	
 	class Meta:
 		verbose_name_plural = "Tests"
 		ordering = ['-publish']
@@ -73,8 +75,8 @@ class Question(models.Model):
 	
 	test = models.ForeignKey(
 		Test, 
-		related_name='questions', 
-		on_delete=models.CASCADE
+		on_delete=models.CASCADE,
+		related_name='questions'
 	)
 	prompt = models.CharField(max_length=256, default='')
 	answer_type = models.CharField(
@@ -89,6 +91,12 @@ class Question(models.Model):
 	def answer_count(self):
 		return self.answers.count()
 	
+	def get_answers(self):
+		return self.answers.all()
+	
+	def get_codes(self):
+		return self.codes.all()
+
 	class Meta:
 		verbose_name_plural = "Questions"
 		ordering = ['id']
@@ -110,7 +118,7 @@ class Answer(models.Model):
 		ordering = ['question']
 
 	def __str__(self):
-		return f'{self.text}, {self.correct}'
+		return f'{self.text} Correct: {self.correct}'
 	
 class Code(models.Model):
 	question = models.ForeignKey(
@@ -126,3 +134,23 @@ class Code(models.Model):
 
 	def __str__(self):
 		return self.text[:20]
+	
+class Result(models.Model):
+	user = models.ForeignKey(
+		User, 
+		on_delete=models.CASCADE, 
+		related_name='test_result'
+	)
+	test = models.ForeignKey(
+		Test,  
+		on_delete=models.CASCADE
+	)
+	exp_gain = models.PositiveSmallIntegerField()
+	pass_date = models.DateTimeField(auto_now=True)
+
+	class Meta:
+		verbose_name_plural = "Results"
+		ordering = ['user']
+
+	def __str__(self):
+		return f'{self.user} gain {self.exp_gain} experience after passing {self.test}'

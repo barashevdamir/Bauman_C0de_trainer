@@ -49,4 +49,4 @@ class TestAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
     inlines = [QuestionInLine]
 
-
+admin.site.register(models.Result)

@@ -1,8 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-<!-- может стоит прогружать из модели? -->
-{% block title %}Test{% endblock %}
+{% block title %} {{ test.title }} {% endblock %}
     
 {% block add_css%}
     <link rel="stylesheet" href="{% static 'tests/css/test_style.css' %}">
@@ -10,26 +9,17 @@
 
 {% block content %}
 <div class="conteiner">
-    <div class="row">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 p-4 m-4">
+            <h1>{{ test.title }}</h1>
+            <h3>Question 1 of 10</h3>
+        </div>
         <div class="col-lg-8 border border-dark p-4 m-4">
-            {% for q in question %}
-            
-                {% if q.answer_type='SC' %}
-                    <form>
-
-                    </form>
-                {% elif q.answer_type='MC' %}
-                    <form>
-                             
-                    </form>
-                {% elif q.answer_type='WR' %}
-                    <form>
-                        
-                    </form>
-                {% endif %}
+            {% for i in test.questions.objects.all %}
+            {{ i }}
             {% endfor %}
-            <div class="button">
-
+            <div>
+                <a class="button btn-dark" href="#">Next</a>
             </div>   
         </div>
     </div>

@@ -19,26 +19,19 @@ def test_list(request):
     {'tests': tests}
     )
 
-def test(request, pk):
+def test(request, id):
   test = get_object_or_404(
     Test,
-    id=pk,
-    status=Test.Status.PUBLISHED
+    id=id,
+    status=Test.Status.DRAFT
   )
-  paginator = Paginator(test, 1)
-  page_number = request.GET.get('page')
-  try:
-    test = paginator.page(page_number)
-  except InvalidPage:
-    test = paginator.page(1)
-  try:
-    questions = paginator.page(page_number)
-  except InvalidPage:
-    questions = paginator.page(paginator.num_pages)
+  #questions = []
+  #for q in test.questions :
+
   return render(
     request,
     'tests/test.html',
-    {'test': test, 'questions': questions}
+    {'test': test}
   )
 
 def result(request):
