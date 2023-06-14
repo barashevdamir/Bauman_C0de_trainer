@@ -15,12 +15,19 @@
     <title>Training</title>
 {% block main_content %}
 
+
     <div class="cont">
         <div class="row-editor">
             <div class="col-editor-1">
                 <div class="task-liner">
                     <p class="lvl-text">Lvl1</p>
-                    <p class="task-name">Task name</p>
+                    <p class="task-name">
+                        {% if data %}
+                                {{ data.name }}
+                            {% else %}
+                                {{ error }}
+                            {% endif %}
+                    </p>
                 </div>
                 <div class="instruction-editor">
                     <div class="instrucrion-liner">
@@ -69,9 +76,7 @@
                         <p class="sampletest-text">SampleTest</p>
                     </div>
                     <div class="sampletest">
-                        <textarea type="text" class="area-sampletest" id="output" name="output" readonly>
-                            {{ output }}
-                        </textarea>
+                        <textarea type="text" class="area-sampletest" id="output" name="output" readonly></textarea>
                     </div>
                 </div>
                 <div class="editor-button">
@@ -81,9 +86,9 @@
                     <form action="/">
                         <button class="button-2">Solutions</button>
                     </form>
-                    <form action="runcode/" method="post">
-                         {% csrf_token %}
-                        <button class="button-3">Test</button>
+                    <form>  {# action="runcode/" method="post"> #}
+{#                         {% csrf_token %}#}
+                        <button class="button-3" id="test-button">Test</button>
                     </form>
                 </div>
             </div>
@@ -114,6 +119,25 @@
         {##}
         {#  document.getElementById("output").textContent = output;#}
         {##}
+
+        {#$(document).ready(function() {#}
+        {#    $('#test-button').click(function() {#}
+        {#        var code = $('#codearea').val();#}
+        {#        $.ajax({#}
+        {#            type: 'POST',#}
+        {#            url: 'runcode/',#}
+        {#            data: { 'code': code, 'id': id},#}
+        {#            success: function(response) {#}
+        {#                $('#output').val(response.result);#}
+        {#            },#}
+        {#            error: function(xhr, status, error) {#}
+        {#                $('#output').val('Error: ' + error);#}
+        {#            }#}
+        {#        });#}
+        {#    });#}
+        {#});#}
+
+
         function Reset() {
             location.reload(); //Перезагрузка страницы
         }
@@ -124,6 +148,8 @@
 
 {% block jscripts %}
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"

@@ -4,7 +4,7 @@ from django.db import models
 
 
 class TaskSolution(models.Model):
-    name = models.CharField(max_length=160)
+    name = models.CharField(max_length=15)
     description = models.TextField()
     # solution =
     # test  =
@@ -12,3 +12,5 @@ class TaskSolution(models.Model):
 
 def __str__(self):
     return self.name
+
+

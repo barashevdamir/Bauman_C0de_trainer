@@ -1,8 +1,10 @@
 import sys
 
+from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from .models import TaskSolution
+import subprocess
 
 # from django.http import JsonResponse
 # from django.views.decorators.csrf import csrf_exempt
@@ -33,26 +35,51 @@ def index(request, id):
         return render(request, './training/training.html', {'error': 'Запись не найдена'})
 
 
-@csrf_protect
-def runcode(request):
+# @csrf_protect
+# def runcode(request, id):
+#     data = TaskSolution.objects.get(id=id)
+#     if request.method == "POST":
+#         codeareadata = request.POST.get['codearea']
+#         try:
+#             # original_stdout = sys.stdout   #Запоминаем стандартный вывод
+#             # sys.stdout = open('file.txt', 'w')  #Заменяем стандартный вывод на только что созданный файл
+#             #
+#             # exec(codeareadata)  #Выполняем код
+#             #
+#             # sys.stdout.close()
+#             #
+#             # sys.stdout = original_stdout  #Возвращаем стандартный вывод на свое место
+#             #
+#             # output = open('file.txt', 'r').read()  #Считываем итог из файла
+#             result = subprocess.check_output(['python', '-c', codeareadata], universal_newlines=True, stderr=subprocess.STDOUT)
+#             return JsonResponse({'result': result})
+#
+#         except subprocess.CalledProcessError as e:
+#             return JsonResponse({'result': 'Error: ' + str(e.output)})
+#         # except Exception as e:
+#         #     sys.stdout = original_stdout
+#         #     output = e
+#
+#     #В конце концов возвращаем результат
+#     return render(request, './training/training.html', {'id': id})   #{'code': codeareadata, 'output': output})
 
-    if request.method == "POST":
-        codeareadata = request.POST['codearea']
 
+
+
+
+@csrf_exempt
+def compile_code(request):
+    if request.method == 'POST':
+        code = request.POST.get('code')
         try:
-            original_stdout = sys.stdout   #Запоминаем стандартный вывод
-            sys.stdout = open('file.txt', 'w')  #Заменяем стандартный вывод на только что созданный файл
+            # Компиляция кода
+            # Ваш код для компиляции
+            result = subprocess.check_output(
+                ['python', '-m', 'compileall', '-f', '-q', '-x', '__pycache__', '-o', '/dev/null', '-'],
+                input=code.encode(), universal_newlines=True, stderr=subprocess.STDOUT)
 
-            exec(codeareadata)  #Выполняем код
+            return JsonResponse({'result': result})
+        except subprocess.CalledProcessError as e:
+            return JsonResponse({'result': 'Error: ' + str(e.output)})
+    return render(request, './training/compile_code.html')
 
-            sys.stdout.close()
-
-            sys.stdout = original_stdout  #Возвращаем стандартный вывод на свое место
-
-            output = open('file.txt', 'r').read()  #Считываем итог из файла
-        except Exception as e:
-            sys.stdout = original_stdout
-            output = e
-
-    #В конце концов возвращаем результат
-    return render(request, './training/training.html', {'code': codeareadata, 'output': output})
