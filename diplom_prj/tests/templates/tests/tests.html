@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load tests_tags %}
 
 {% block title %}Tests{% endblock %}
     
@@ -12,41 +13,38 @@
     {% include 'base/navbar.html' %}
 
     <main>
-        <div class="conteiner-fluid px-4 bct-bg-color">
+        <section class="conteiner-fluid px-4 bct-bg-color">
             <div class="row justify-content-center">
-                <div class="col-xxl-2 col-lg-3 col-md-8 col-10 my-4 px-3 pb-4 bct-border h-100">
-                    <label class="pt-3" for="">Sort By</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                <div class="col-xxl-2 col-lg-3 col-md-8 col-10 my-4 px-3 pb-4 bct-border h-100" id="filter-menu">
+                    <label class="pt-3" for="Publication date">Sort By</label>
+                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Publication date">
+                        <option selected>Newest</option>
+                        <option value="1">Oldest</option>
                     </select>
-                    <label class="pt-3" for="">Sort By</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <label class="pt-3" for="Programming language">Language</label>
+                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Programming language">
+                        {% get_prog_langs as prog_langs %}
+                        {% for lang in prog_langs %}
+                            <option value="{{ lang }}">{{ lang }}</option>
+                        {% endfor %}
                     </select>
-                    <label class="pt-3" for="">Sort By</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <label class="pt-3" for="Difficulty">Difficulty</label>
+                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Difficulty">
+                        <option selected>Easy</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Hard</option>
                     </select>
-                    <label class="pt-3" for="">Sort By</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Default select example">
+                    <label class="pt-3" for="Tags">Tags</label>
+                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Tags">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
                 </div>
-                <div class="col-xl-8 col-lg-7">
+                <div class="col-xl-8 col-lg-7" id="tests-list-view">
                     {% for test in tests %}
-                    <div class="conteiner bct-test mx-3 my-4 px-3 py-2 text-light">
+                    <div class="conteiner bct-test mx-3 my-4 px-3 py-2 text-light" name="{{ test.title }}">
                         <div class="row">
                             <div class="col-8">
                                 <h3 class="">{{ test.title }}</h3>
@@ -76,9 +74,8 @@
                     {% endfor %}
                     {% include "base/paginator.html" with page=tests %}
                 </div>
-            </div>
-            
-        </div>
+            </div>  
+        </section>
     </main>
 
 {% endblock %}
