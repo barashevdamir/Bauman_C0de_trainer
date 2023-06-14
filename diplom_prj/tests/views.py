@@ -25,28 +25,26 @@ def test(request, id):
     id=id,
     status=Test.Status.DRAFT
   )
-  questions = []
-  for q in test.get_questions():
+  question_list = []
+  for quest in test.get_questions():
     answers = []
     codes =[]
-    for c in q.get_codes():
-      codes.append(c.text)
-    for a in q.get_answers():
-      answers.append(a.text)
-    questions.append({
-      'prompt': q.prompt,
-      'answer_type': q.answer_type,
+    for code in quest.get_codes():
+      codes.append(code.text)
+    for ans in quest.get_answers():
+      answers.append(ans.text)
+    question_list.append({
+      'prompt': quest.prompt,
+      'answer_type': quest.answer_type,
       'codes': codes, 
       'answers': answers
     })
-  # paginator = Paginator(questions, 1)
-  # page_number = request.GET.get('question')
-  # try:
-  #   questions = paginator.page(page_number)
-  # except PageNotAnInteger:
-  #   questions = paginator.page(1)
-  # except EmptyPage:
-  #   questions = paginator.page(paginator.num_pages)
+  paginator = Paginator(question_list, 1)
+  page_number = request.GET.get('question')
+  try:
+    questions = paginator.page(page_number)
+  except InvalidPage:
+    questions = paginator.page(1)
   return render(
     request,
     'tests/test.html',

@@ -14,10 +14,10 @@
         <div class="col-lg-8 p-3 m-2 text-center">
             <h1>{{ test.title }}</h1>
             <hr>
-            <h3>Question 1 of 10</h3>
+            <h3>Question {{ questions.number }} of {{ questions.paginator.num_pages }}</h3>
         </div>
         {% for question in questions %}
-        <div class="col-lg-8 border border-dark p-3 m-2">
+        <div class="col-lg-8 col-11 border border-dark p-3 m-2">
             <p>{{ question.prompt }}</p>
             {% for code in question.codes %}
                 <p>{{ code|markdown }}</p>
@@ -25,8 +25,8 @@
             {% if question.answer_type == 'SC' %}
                 {% for answer in question.answers %}
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    <label class="form-check-label" for="exampleRadios1">
+                    <input class="form-check-input" type="radio" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
+                    <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
                         {{ answer }}
                     </label>
                 </div>
@@ -34,8 +34,8 @@
             {% elif question.answer_type == 'MC' %}
                 {% for answer in question.answers %}
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox"  name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
+                    <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
                         {{ answer }}
                     </label>
                 </div>
@@ -43,22 +43,33 @@
             {% else %}
                 {% for answer in question.answers %}
                 <div class="row justify-content-center">
-                    <div class="col-4">
+                    <div class="col-6">
                         <form>
-                            <input type="text" class="form-control" placeholder="Your answer" aria-label="First name">
+                            <input type="text" class="form-control" placeholder="Your answer" aria-label="Your answer" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}">
                         </form>
                     </div>
                 </div>
                 {% endfor %}
             {% endif %}
-            {{ question }}
         </div>
         {% endfor %}
-        <div class="col-lg-8 p-3 text-center">
-            <div>
-                <a class="button btn-dark" href="#">Next</a>
-            </div>   
-        </div>
+        {% if questions.has_next %}
+            <div class="col-6 p-3 text-center">
+                <div>
+                    <a href="?question={{ questions.next_page_number }}">
+                        <button class="button btn-dark" id="save-and-next">Next</button>
+                    </a>
+                </div>   
+            </div>
+        {% else %}
+            <div class="col-lg-8 p-3 text-center">
+                <div>
+                    <a href="#">
+                        <button class="button btn-dark" id="save-and-submit">Submit</button>
+                    </a>
+                </div>   
+            </div>
+        {% endif %}
     </div>
     
 </div>
