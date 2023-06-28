@@ -15,45 +15,47 @@
             <h1>{{ test.title }}</h1>
             <hr>
             <h3>Question {{ questions.number }} of {{ questions.paginator.num_pages }}</h3>
-        </div>
-        {% for question in questions %}
+        </div>   
     </div>
+    {% for question in questions %}
     <div class="row justify-content-center">    
         <div class="col-lg-8 col-md-9 col-sm-10 col-11 bct-border px-4 py-3 m-2">
-            <h6>{{ question.prompt }}</h6>
+            <h6 id="prompt">{{ question.prompt }}</h6>
             {% for code in question.codes %}
                 <p>{{ code|markdown }}</p>
             {% endfor %}
-            {% if question.answer_type == 'SC' %}
-                {% for answer in question.answers %}
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
-                    <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
-                        {{ answer }}
-                    </label>
-                </div>
-                {% endfor %}
-            {% elif question.answer_type == 'MC' %}
-                {% for answer in question.answers %}
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox"  name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
-                    <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
-                        {{ answer }}
-                    </label>
-                </div>
-                {% endfor %}
-            {% else %}
-                <div class="row justify-content-center">
-                    <div class="col-6">
-                        <form>
-                            <input type="text" class="form-control" placeholder="Your answer" aria-label="Your answer" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}">
-                        </form>
+            <form name="Answer form">   
+                {% if question.answer_type == 'SC' %}
+                    {% for answer in question.answers %}
+                    <div class="form-check" name="Single choice">
+                        <input class="form-check-input" type="radio" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
+                        <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
+                            {{ answer }}
+                        </label>
                     </div>
-                </div>
-            {% endif %}
+                    {% endfor %}
+                {% elif question.answer_type == 'MC' %}
+                    {% for answer in question.answers %}
+                    <div class="form-check" name="Multiple choice">
+                        <input class="form-check-input" type="checkbox"  name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
+                        <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
+                            {{ answer }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="row justify-content-center">
+                        <div class="col-6" name="Write in">
+                            <form>
+                                <input class="form-control" type="text" placeholder="Your answer" aria-label="Your answer" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}">
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </form>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
     <div class="row justify-content-center">
         <div class="col-4 p-3 text-center">
             <div>
@@ -107,6 +109,6 @@
 {% endblock %}
 
 {% block jscripts %}
-<!-- проверить нужность -->
-<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script> 
+<script src="{% static 'jQuery/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'tests/js/test.js' %}"></script> 
 {% endblock %}

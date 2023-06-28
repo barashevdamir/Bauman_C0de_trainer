@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col-6">
                                 {% for tag in test.tags.all %}
-                                <span>{{ tag }}</span>
+                                <span class="">{{ tag }}</span>
                                 {% endfor %}
                             </div>
                             <div class="col-sm-2 offset-sm-4 col-4 offset-2 text-end">
@@ -81,5 +81,4 @@
 {% endblock %}
 
 {% block jscripts %}
-<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

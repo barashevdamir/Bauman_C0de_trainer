@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
-
+from django.http import JsonResponse
 from .models import Test
 
 def test_list(request):
@@ -26,6 +26,7 @@ def test(request, id):
     status=Test.Status.DRAFT
   )
   question_list = []
+  question_list_ajax =[]
   for quest in test.get_questions():
     answers = []
     codes =[]
@@ -39,17 +40,26 @@ def test(request, id):
       'codes': codes, 
       'answers': answers
     })
+    question_list_ajax.append({
+      'prompt': quest.prompt,
+      'answer_type': quest.answer_type,
+      'answers': answers
+    })
   paginator = Paginator(question_list, 1)
   page_number = request.GET.get('question')
   try:
     questions = paginator.page(page_number)
   except InvalidPage:
     questions = paginator.page(1)
-  return render(
-    request,
-    'tests/test.html',
-    {'test': test, 'questions': questions}
-  )
+  if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    data = {'questions': question_list_ajax}
+    return JsonResponse(data)
+  else:
+    return render(
+      request,
+      'tests/test.html',
+      {'test': test, 'questions': questions}
+    )
 
 def result(request):
   return render(

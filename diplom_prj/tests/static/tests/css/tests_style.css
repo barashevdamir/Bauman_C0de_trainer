@@ -16,6 +16,10 @@ body {
     background-color: var(--color2);
 }
 
+.bct-tag-bg {
+    background-color: var(--color3);
+}
+
 .bct-border, 
 .bct-border-mini {
     border: var(--color3) 2px solid;   
