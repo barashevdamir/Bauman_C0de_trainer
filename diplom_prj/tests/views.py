@@ -35,6 +35,7 @@ def test(request, id):
     for ans in quest.get_answers():
       answers.append(ans.text)
     question_list.append({
+      'id': quest.id,
       'prompt': quest.prompt,
       'answer_type': quest.answer_type,
       'codes': codes, 
@@ -61,7 +62,13 @@ def test(request, id):
       {'test': test, 'questions': questions}
     )
 
-def result(request):
+def save_result(request, id):
+  print(request.POST)
+  return JsonResponse({'text': 'works'})
+
+def result(request, id):
+  # print(request.POST)
+  # return JsonResponse({'text': 'works'})
   return render(
     request,
    'tests/result.html',  
