@@ -25,10 +25,16 @@ class Test(models.Model):
 	)
 	title = models.CharField(max_length=256, default='')
 	slug = models.CharField(max_length=256, default='')
-	times_taken = models.IntegerField(default=0, editable=False)
+	score_to_pass = models.PositiveSmallIntegerField(
+		'Required score to pass',
+		help_text='score in percentages',
+		default=80, 
+		validators=[MaxValueValidator(limit_value=100)]
+	)
+	# times_taken = models.PositiveIntegerField(default=0, editable=False)
 	experience = models.PositiveSmallIntegerField( #эквивалетнт lvl в задачках, нужно для таблицы лидеров, хотя может тесты и не достойны там учитываться
 		default=1, 
-		validators=[MaxValueValidator(limit_value=10)]
+		validators=[MaxValueValidator(limit_value=3)]
 	) 
 	prog_language = models.CharField(
 		'Programming language',
@@ -49,7 +55,6 @@ class Test(models.Model):
 		blank=False
 	)
 
-	@property
 	def question_count(self):
 		return self.questions.count()
 	
@@ -87,12 +92,14 @@ class Question(models.Model):
 		blank=False
     )
 
-	@property
 	def answer_count(self):
 		return self.answers.count()
 	
 	def get_answers(self):
 		return self.answers.all()
+	
+	def get_correct_answers(self):
+		return self.answers.filter(correct=True)
 	
 	def get_codes(self):
 		return self.codes.all()

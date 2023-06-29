@@ -95,19 +95,3 @@ function submit(){
 function clearStorage() {
     localStorage.removeItem('test_answers')
 }
-
-
-// $.ajax({
-//     type: 'GET',
-//     url: `${url}`,
-//     dataType: 'json',
-//     success: function(response){
-//         console.log(response)
-//         const data = response.data
-//     },
-//     error: function(error){
-//         console.log(error)
-//     }
-// })
-
-
