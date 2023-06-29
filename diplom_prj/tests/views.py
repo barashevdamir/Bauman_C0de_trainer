@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.http import JsonResponse
-from .models import Test, Question, Answer, Result
+from .models import Test, Question, Result
 from json import loads
 from collections import Counter
+from math import floor
 
 def test_list(request):
   test_list = Test.objects.all()
@@ -56,13 +57,10 @@ def test(request, id):
 
 def save_result(request, id):
   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    questions = {} # для проверки, потом удалить
     # не очень приятная обработка данных, проблема в их отправке в кривом виде
     data = dict(request.POST.lists())
     answers = loads(data['answers'][0]) #должно сразу приходить в почти таком виде
-    print(answers) # для проверки, потом удалить
-    user = request.user #AnonymousUser, если не авторизирован
-    print(user)
+    user = request.user
     test = Test.objects.get(id=id)
     correct_answers = 0
     incorrect_answers = 0
@@ -74,7 +72,6 @@ def save_result(request, id):
       answers_QuerySet = question.get_correct_answers()
       for ans in answers_QuerySet:
         answers_list.append(ans.text)
-      questions[str(question.id)] = answers_list # для проверки, потом удалить
       if question.answer_type == 'SC' or question.answer_type == 'MC':
         if  Counter(answers[key]) == Counter(answers_list):
           correct_answers += 1
@@ -89,24 +86,36 @@ def save_result(request, id):
           unanswered += 1
         else:
           incorrect_answers += 1 
-    score = correct_answers*multiplier
+    score = floor(correct_answers*multiplier)
+    passed = None
+    exp_gain = 0
+    if score >= test.score_to_pass:
+      passed = True
+      exp_gain = test.experience 
+    else:
+      passed = False
+    if user != 'AnonymousUser':
+      Result.objects.create(
+        user = user,
+        test = test,
+        passed = passed,
+        score = score,
+        exp_gain = exp_gain
+      )
+    result = {
+      'test': test.title,
+      'passed': passed,
+      'score': score,
+      'exp_gain': exp_gain,
+      'correct': correct_answers,
+      'incorrect': incorrect_answers,
+      'unanswered': unanswered
+    }
+    return JsonResponse(result)
     
-    # для проверки, потом удалить
-    print(questions)
-    print('correct: ', correct_answers)
-    print('incorrect: ', incorrect_answers)
-    print('unanswered: ', unanswered)
-    print(score, '%')
-    # 
-
-
-  return JsonResponse({'text': 'works'})
-
 def result(request, id):
-  # print(request.POST)
-  # return JsonResponse({'text': 'works'})
   return render(
     request,
-   'tests/result.html',  
+    'tests/result.html', 
   )
 

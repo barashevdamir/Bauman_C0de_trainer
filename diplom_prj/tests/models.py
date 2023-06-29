@@ -152,7 +152,9 @@ class Result(models.Model):
 		Test,  
 		on_delete=models.CASCADE
 	)
-	exp_gain = models.PositiveSmallIntegerField()
+	passed = models.BooleanField(default=False)
+	score = models.PositiveSmallIntegerField(default=0)
+	exp_gain = models.PositiveSmallIntegerField(default=0)
 	pass_date = models.DateTimeField(auto_now=True)
 
 	class Meta:

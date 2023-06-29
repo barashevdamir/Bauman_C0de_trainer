@@ -10,7 +10,7 @@ let radios = document.querySelectorAll('input[type="radio"]')
 let checkboxes = document.querySelectorAll('input[type="checkbox"]')
 let text = document.querySelector('input[type="text"]')
 
-function initall(){
+function initall() {
     saveAnswerButton = document.getElementById('save-and-next')
     submitButton = document.getElementById('save-and-submit')
     goBackButton = document.getElementById('confidently-go-back')
@@ -22,8 +22,6 @@ function initall(){
         submitButton.onclick = submit
     }
     goBackButton.onclick = clearStorage
-    console.log({'data': 'answers'})
-    console.log(JSON.parse(localStorage.getItem('test_answers')))
 }
 
 function getCookie(name) {
@@ -52,7 +50,7 @@ function grabValues(inputs, checkedValues) {
     }
 }
 
-function saveans(){
+function saveans() {
     var answers = []
     if (radios.length != 0) {   
         grabValues(radios, answers)
@@ -71,7 +69,7 @@ function saveans(){
     }
 }
 
-function submit(){
+function submit() {
     saveans()
     const csrftoken = getCookie('csrftoken')
     const url = window.location.href
@@ -84,12 +82,15 @@ function submit(){
         data: {answers: localStorage.getItem('test_answers')}, // отвратительно передает данные
         success: function(response){
             console.log(response)
+            localStorage.setItem('test_result', JSON.stringify(response))
+            localStorage.removeItem('test_answers')
+            window.location.href = `${url.slice(0, url.lastIndexOf('/') + 1)}result/`
         },
         error: function(error){
             console.log(error)
         }
     })
-    localStorage.removeItem('test_answers')
+    
 }
 
 function clearStorage() {

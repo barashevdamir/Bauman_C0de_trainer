@@ -1,19 +1,48 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}  {% endblock %}
+{% block title %} Your result {% endblock %}
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'tests/css/test_style.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="conteiner">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-9 col-sm-10 col-11 p-3 m-2 text-center">
-            <h1>Test</h1>
+        <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-8 col-sm-9 col-10 p-3 m-2 text-center">
+            <h1 id="TestTitle">Test</h1>
             <hr>
             <h3>Your result</h3>
-            <a href="http://127.0.0.1:8000/tests/">Tests</a> 
         </div>   
     </div>
-   
+    <div class="row justify-content-center">    
+        <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9 bct-border px-4 py-3 m-2">
+            <h5 class="py-2">Passed: <samp id="passed"></samp></h5>
+            <h5 class="py-2">Score: <samp id="score"></samp>%</h5>
+            <h5 class="py-2">Experience gain: <samp id="exp"></samp></h5>
+            <h5 class="py-2">Answers statistic: </h6>
+            <ul>
+                <li>correct: <samp id="correct"></samp></li>
+                <li>incorrect: <samp id="incorrect"></samp></li>
+                <li>unanswered: <samp id="unanswered"></samp></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col p-3 text-center">
+            <div>
+                <a href="{% url 'tests_list' %}">
+                    <button class="button btn-dark rounded-pill px-3" id="back-to-tests" name="Back to tests">
+                        Back to tests
+                    </button>
+                </a>    
+            </div>   
+        </div>
+    </div> 
 </div>
 
+{% endblock %}
+
+{% block jscripts %}
+<script src="{% static 'tests/js/result.js' %}"></script> 
 {% endblock %}
