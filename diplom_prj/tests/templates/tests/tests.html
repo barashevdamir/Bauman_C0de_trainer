@@ -15,34 +15,40 @@
     <main>
         <section class="conteiner-fluid px-4 bct-bg-color">
             <div class="row justify-content-center">
-                <div class="col-xxl-2 col-lg-3 col-md-8 col-10 my-4 px-3 pb-4 bct-border h-100" id="filter-menu">
+                <div class="col-xxl-2 col-lg-3 col-md-6 col-sm-8 col-9 my-4 px-3 pb-4 bct-border h-100" id="filter-menu">
                     <label class="pt-3" for="Publication date">Sort By</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Publication date">
-                        <option selected>Newest</option>
-                        <option value="1">Oldest</option>
+                    <select class="form-select bct-border-mini bct-bg-color" id="sort" aria-label="Publication date">
+                        <option id="Newest" value="-publish" selected>Newest</option>
+                        <option id="Oldest" value="publish">Oldest</option>
                     </select>
                     <label class="pt-3" for="Programming language">Language</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Programming language">
-                        <option selected>All</option>
+                    <select class="form-select bct-border-mini bct-bg-color" id="lang" aria-label="Programming language">
+                        <option value="all" selected>All</option>
                         {% get_prog_langs as prog_langs %}
                         {% for lang in prog_langs %}
-                            <option value="{{ lang }}">{{ lang }}</option>
+                            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
                         {% endfor %}
                     </select>
                     <label class="pt-3" for="Difficulty">Difficulty</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Difficulty">
-                        <option selected>All</option>
-                        <option value="1">Easy</option>
-                        <option value="2">Medium</option>
-                        <option value="3">Hard</option>
+                    <select class="form-select bct-border-mini bct-bg-color" id="diff" aria-label="Difficulty">
+                        <option value="all" selected>All</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
                     </select>
                     <label class="pt-3" for="Tags">Tags</label>
-                    <select class="form-select bct-border-mini bct-bg-color" aria-label="Tags">
-                        <option selected>All</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select bct-border-mini bct-bg-color" id="tags" aria-label="Tags">
+                        <option value="all" selected>All</option>
+                        {% get_tests_tags as tags %}
+                        {% for tag in tags %}
+                            <option value="{{ tag.id }}">{{ tag }}</option>
+                        {% endfor %}
                     </select>
+                    <div class="d-flex justify-content-md-end">
+                        <button class="btn bct-btn-filter rounded-pill px-3 mt-4">
+                            Reset
+                        </button>
+                    </div>
                 </div>
                 <div class="col-xl-8 col-lg-7" id="tests-list-view">
                     {% for test in tests %}
