@@ -45,42 +45,13 @@
                         {% endfor %}
                     </select>
                     <div class="d-flex justify-content-md-end">
-                        <button class="btn bct-btn-filter rounded-pill px-3 mt-4">
+                        <button class="btn bct-btn-filter rounded-pill px-3 mt-4" id="reset">
                             Reset
                         </button>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7" id="tests-list-view">
-                    {% for test in tests %}
-                    <div class="conteiner bct-test mx-3 my-4 px-3 py-2 text-light" name="{{ test.title }}">
-                        <div class="row">
-                            <div class="col-8">
-                                <h3 class="">{{ test.title }}</h3>
-                            </div>
-                            <div class="col-4 text-end">
-                                <span>{{ test.prog_language }}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col px-3">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ea voluptatibus eaque fugit, ad mollitia sapiente necessitatibus natus perspiciatis, hic debitis modi beatae? Sit fugit temporibus hic sequi inventore soluta dolore, fuga provident sed atque, reprehenderit fugiat libero officiis! Similique non labore modi magnam fugit repellat harum reiciendis facilis quibusdam!</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                {% for tag in test.tags.all %}
-                                <span class="">{{ tag }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="col-sm-2 offset-sm-4 col-4 offset-2 text-end">
-                                <a class="btn btn-sm bct-btn-test rounded-pill px-3" href="{% url 'test' test.id %}">
-                                    Start
-                                </a>
-                            </div>
-                        </div>
-                    </div> 
-                    {% endfor %}
-                    {% include "base/paginator.html" with page=tests %}
+                    {% include "tests/tests_list.html"%}
                 </div>
             </div>  
         </section>

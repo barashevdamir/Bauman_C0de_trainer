@@ -2,11 +2,13 @@ const start_page = '?page=1'
 var current_page
 current_page = start_page
 var parametrs
+var start_params
 
 var sortSelector
 var langSelector
 var diffSelector
 var tagsSelector
+var resetButton
 
 $(document).ready(function() {
     ajaxPagination()
@@ -14,21 +16,33 @@ $(document).ready(function() {
     langSelector = document.getElementById('lang')
     diffSelector = document.getElementById('diff')
     tagsSelector = document.getElementById('tags')
-    const start_params = createParametrs()
-    parametrs = start_params
+    resetButton = document.getElementById('reset')
+    start_params = createParametrs()
+    parametrs = createParametrs()
     sortSelector.onchange = changeValue
     langSelector.onchange = changeValue
     diffSelector.onchange = changeValue
     tagsSelector.onchange = changeValue
-    console.log(current_page+parametrs)
-    console.log('----------')
+    resetButton.onclick = resetSelectors
 })
 
 $(document).ajaxStop(function() {
     ajaxPagination()
-    console.log(current_page+parametrs)
-    console.log('----------')
 })
+
+function ajaxRequest(url, page) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        cache: false,
+        dataType: 'html',
+        success: (data) => {
+            $('#tests-list-view').empty()
+            $('#tests-list-view').html(data)
+            current_page = page
+            }
+        })
+}
 
 function ajaxPagination() {
     $('#pagination a.bct-btn-page').each((index, el) => {
@@ -36,16 +50,7 @@ function ajaxPagination() {
         e.preventDefault()
         let page_url = $(el).attr('href')
         let url = page_url + parametrs
-        $.ajax({
-            url: url,
-            type: 'GET',
-            success: (data) => {
-                $('#tests-list-view').empty()
-                $('#pagination').empty()
-                $('#tests-list-view').append($(data).find('#tests-list-view').html())
-                current_page = page_url
-                }
-            })
+        ajaxRequest(url, page_url)
         })
     })
 }
@@ -66,15 +71,21 @@ function createParametrs() {
 function changeValue() {
     parametrs = createParametrs()
     let url = start_page + parametrs
-    $.ajax({
-        url: url,
-        type: 'GET',
-        success: (data) => {
-            $('#tests-list-view').empty()
-            $('#pagination').empty()
-            $('#tests-list-view').append($(data).find('#tests-list-view').html())
-            current_page = start_page
-            }
-        })
-    
+    ajaxRequest(url, start_page)
+}
+
+function resetSelector(options) {
+    for (var i = 0, l = options.length; i < l; i++) {
+        options[i].selected = options[i].defaultSelected;
+    }
+}
+
+function resetSelectors() {
+    resetSelector(sortSelector)
+    resetSelector(langSelector)
+    resetSelector(diffSelector)
+    resetSelector(tagsSelector)
+    let url = start_page + start_params
+    parametrs = start_params
+    ajaxRequest(url, start_page)
 }

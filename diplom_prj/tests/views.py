@@ -36,11 +36,19 @@ def test_list(request):
     tests = paginator.page(1)
   except EmptyPage:
     tests = paginator.page(paginator.num_pages)
-  return render(
+  
+  if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    return render(
     request, 
-    'tests/tests.html',
+    'tests/tests_list.html',
     {'tests': tests}
     )
+  else:
+    return render(
+      request, 
+      'tests/tests.html',
+      {'tests': tests}
+      )
 
 def test(request, id):
   test = get_object_or_404(
