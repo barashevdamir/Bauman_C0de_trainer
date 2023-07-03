@@ -1,4 +1,6 @@
 import sys
+import epicbox
+
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -82,4 +84,45 @@ def compile_code(request):
         except subprocess.CalledProcessError as e:
             return JsonResponse({'result': 'Error: ' + str(e.output)})
     return render(request, './training/compile_code.html')
+
+
+def compilator(request, id):
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        datas = dict(request.POST.lists())
+
+        language = str.lower(datas['language'][0])
+
+        code = datas['code'][0]
+        if language =='python':
+            file_path = "media/temp/" + str(id) + ".py"
+            program_file = open(file_path, "w")
+            program_file.write(code)
+            program_file.close()
+
+    if language == "php":
+        pass
+
+    elif language == "python":
+
+
+        epicbox.configure(
+            profiles=[
+                epicbox.Profile('python', 'python')
+            ]
+        )
+
+        files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}]
+        limits = {'cputime': 1, 'memory': 64}
+        result = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
+        print(result)
+        return render(request, './training/compile_code.html')
+
+    elif language == "node":
+        pass
+
+    elif language == "c":
+        pass
+
+    elif language == "cpp":
+        pass
 

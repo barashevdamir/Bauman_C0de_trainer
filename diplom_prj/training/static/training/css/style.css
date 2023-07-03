@@ -1,0 +1,23 @@
+
+
+#editor {
+    height: 250px;
+    margin-top: 16px;
+
+}
+
+.button-container {
+    text-align: right;
+    padding: 4px;
+}
+
+
+.output {
+        padding: 4px;
+        background: #232323;
+        border: 2px solid gray;
+        min-height: 100px;
+        width: 99%;
+        resize: none;
+
+}

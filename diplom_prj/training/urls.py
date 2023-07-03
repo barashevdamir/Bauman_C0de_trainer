@@ -8,4 +8,5 @@ urlpatterns = [
 
 
     path('compile/', compile_code, name='compile-code'),
+    path('<int:id>/compilator/', compilator, name='compilator'),
 ]
