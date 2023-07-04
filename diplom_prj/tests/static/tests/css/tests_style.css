@@ -20,6 +20,10 @@ body {
     background-color: var(--color2);
 }
 
+.bct-tag-bg {
+    background-color: var(--color3);
+}
+
 .bct-border, 
 .bct-border-mini {
     border: var(--color3) 2px solid;   
@@ -42,4 +46,16 @@ body {
 
 .bct-btn-test:hover {
     background-color: var(--color3);
+    color: white;
+}
+
+.bct-btn-filter {
+    border: var(--color3) 2px solid;
+    background-color: var(--color1);
+    color: black;
+}
+
+.bct-btn-filter:hover {
+    background-color: var(--color3);
+    color: white;
 }

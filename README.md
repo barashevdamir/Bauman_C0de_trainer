@@ -12,10 +12,13 @@ linux, mac: source venv/bin/activate
 pip install django
 
 pip list
------------------
-asgiref    3.6.0
-Django     4.2.1
-pip        22.2.2
-setuptools 63.2.0
-sqlparse   0.4.4
-tzdata     2023.3
+-----------------------
+asgiref         3.6.0
+Django          4.2.1
+pip             22.2.2
+setuptools      63.2.0
+sqlparse        0.4.4
+tzdata          2023.3
+Pillow          9.5.0
+django-taggit   4.0.0
+markdown        3.4.3

@@ -50,8 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig',
     'tests.apps.TestsConfig',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.vk',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +128,9 @@ TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
+
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -145,11 +147,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'user_profile'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 MEDIA_URL = 'media/'
@@ -181,3 +184,11 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = 'VF5XxdKsDkyeGc5TfMvb'
 SOCIAL_AUTH_DISCORD_OAUTH2_KEY = '1108158742379368559'
 SOCIAL_AUTH_DISCORD_OAUTH2_SECRET = 'CC5TxKJgCA2ZT3-9MkWzgytJxArKl2GZ'
 
+SOCIALACCOUNT_PROVIDERS = {
+    'telegram': {
+        'TOKEN': '6108393733:AAF-oaqDg3aCftMuQLQtan-IMlLGUdKahwA'
+    }
+}
+
+# when set to True, tag lookups will be case insensitive
+TAGGIT_CASE_INSENSITIVE = True

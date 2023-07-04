@@ -1,4 +1,5 @@
 from django.db import models
+from taggit.managers import TaggableManager 
 
 # Create your models here.
 class Tasks(models.Model):
@@ -10,6 +11,7 @@ class Tasks(models.Model):
   level=models.PositiveSmallIntegerField(null=True)
   tags=models.TextField(null=True)
   languages=models.TextField(null=True)
+  task_tag = TaggableManager()
 
   def __str__(self):
     return self.name

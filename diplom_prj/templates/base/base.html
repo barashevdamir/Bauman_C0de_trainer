@@ -1,38 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    
+    <title>{% block title %}{% endblock %}</title>
+   
+    <!-- favicon -->
     <link rel="shortcut icon" href="{% static 'base/images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- CSS for fontello icons -->
     <link rel="stylesheet" href="{% static 'fontello/css/fontello.css' %}">
-    <link rel="stylesheet" href="{% static 'base/css/base_style.css' %}">
-    {% block add_css%}{% endblock %}
+    
+    <!-- custom CSS -->
+    {% block add_css%}
+    {% endblock %}
 </head>
 
 <body>
-{#  {% if navbar %}#}
-{#    {% include 'base/navbar.html' %}#}
-{#  {% endif %}#}
-{% include 'base/navbar.html' %}
-  
-
-  <main class="main">
-    <div class="container">
-    {% block main_content %}
+    {% block content %}
     
     {% endblock %}
-    </div>
-  </main>
-
-  {% block content %}
     
-  {% endblock %}
-
+    <!-- additional JS -->
     {% block jscripts %}{% endblock %}
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

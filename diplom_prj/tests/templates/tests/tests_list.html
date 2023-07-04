@@ -1,0 +1,43 @@
+{% load static %}
+{% load tests_tags %}
+{% for test in tests %}
+<div class="conteiner bct-test mx-3 my-4 px-3 py-2 text-light" name="{{ test.title }}">
+    <div class="row my-2">
+        <div class="col-sm-8 col-6">
+            <h3 class="">{{ test.title }}</h3>
+        </div>
+        <div class="col-sm-3 col-5 offset-1 text-end">
+            {% get_prog_langs as prog_langs %}
+            {% for lang in prog_langs %}
+                {% if  lang.0 == test.prog_language %}
+                    <h5><span class="badge bct-tag-bg text-light">{{ lang.1 }}</span></h5>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col px-3">
+        <p>Difficulty: 
+            {% if test.experience == 1 or test.experience == 0 %} easy
+            {% elif test.experience == 2 %} medium
+            {% else %} hard {% endif %}
+        </p>
+        <p>Required score to pass: {{ test.score_to_pass }}%</p>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6">
+            <i class="icon-tags mx-1"></i>
+            {% for tag in test.tags.all %}
+            <span class="badge bct-tag-bg text-light">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        <div class="col-sm-2 offset-sm-4 col-5 offset-sm-2 offset-1 text-end">
+            <a class="btn btn-sm bct-btn-test rounded-pill px-3" href="{% url 'test' test.id %}">
+                Start
+            </a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% include "base/paginator.html" with page=tests %}
