@@ -1,1 +1,1 @@
-print('pycharm')
+print('python')

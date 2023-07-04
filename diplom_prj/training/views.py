@@ -1,4 +1,5 @@
 import sys
+import os
 import epicbox
 import tempfile
 import shutil
@@ -94,22 +95,26 @@ def compilator(request, id):
         """
 
         epicbox.configure(profiles=[
-            epicbox.Profile('python', 'python')
+            epicbox.Profile('python', 'python:latest')
         ])
+
         files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
         limits = {'cputime': 1, 'memory': 128}
 
-        container = epicbox.run('python', 'pytest test_code.py',
+        container = epicbox.run('python', 'python3 -m test_code.py',
                                 files=files,
                                 limits=limits)
-        print(container)
-        shutil.copy2(container['files']['test_code.py'], temp_dir)
-        shutil.copy2(container['files']['stdout'], temp_dir)
-        shutil.copy2(container['files']['stderr'], temp_dir)
-        epicbox.remove(container['id'])
-        pytest_result = pytest.main(['-s', str(temp_dir)])
 
-        if pytest_result == 0:
+        stdout_path = os.path.join(temp_dir, 'stdout')
+        stderr_path = os.path.join(temp_dir, 'stderr')
+
+        with open(stdout_path, 'wb') as stdout_file:
+            stdout_file.write(container['stdout'])
+
+        with open(stderr_path, 'wb') as stderr_file:
+            stderr_file.write(container['stderr'])
+
+        if container['exit_code'] == 0:
             print("Тесты пройдены успешно.")
         else:
             print("Тесты провалены.")
