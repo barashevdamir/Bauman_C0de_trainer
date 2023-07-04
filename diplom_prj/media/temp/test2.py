@@ -1,5 +1,5 @@
 import pytest
-from main.py import factorial
+# from main.py import factorial
 def test_factorial():
     # Testing factorial of positive numbers
     assert factorial(0) == 1
