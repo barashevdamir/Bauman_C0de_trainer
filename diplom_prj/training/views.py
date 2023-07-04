@@ -111,7 +111,7 @@ def compilator(request, id):
             epicbox.Profile('python', 'my_python_image')
         ])
 
-        files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
+        files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}, {'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
         limits = {'cputime': 1, 'memory': 128}
 
         # Создание контейнера
