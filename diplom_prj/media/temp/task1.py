@@ -1,2 +1,2 @@
-def my_ add(a, b):
-    return a + b
+def myadd(x,y):
+    return x+y
