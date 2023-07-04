@@ -63,8 +63,10 @@ def compilator(request, id):
         language = str.lower(datas['language'][0])
 
         code = datas['code'][0]
+        print(code)
+        print(datas)
         if language =='python':
-            file_path = "media/temp/" + str(id) + ".py"
+            file_path = "media/temp/task" + str(id) + ".py"
             program_file = open(file_path, "w")
             program_file.write(code)
             program_file.close()
@@ -85,9 +87,25 @@ def compilator(request, id):
         output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
         print(output)
 
+        # Создаем временную директорию для работы с файлами
         temp_dir = tempfile.mkdtemp()
 
+        # Подготовка кода тестов
+
+        pytest_code_path = "media/temp/test" + str(id) + ".py"
+        pytest_code = ''
+
+        with open(pytest_code_path) as file:
+            pytest_code_list = file.readlines()
+            print(pytest_code_list)
+            for item in pytest_code_list:
+                pytest_code = pytest_code + item
+
+        print(pytest_code)
+
         test_code = code
+
+        # Настройка Epicbox
 
         epicbox.configure(profiles=[
             epicbox.Profile('python', 'my_python_image')
@@ -96,10 +114,14 @@ def compilator(request, id):
         files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
         limits = {'cputime': 1, 'memory': 128}
 
+        # Создание контейнера
+
         container = epicbox.run('python', 'python3 test_code.py',
                                 files=files,
                                 limits=limits)
         print(container)
+
+        # Копируем результаты из контейнера во временную директорию
 
         stdout_path = os.path.join(temp_dir, 'stdout')
         stderr_path = os.path.join(temp_dir, 'stderr')
@@ -110,10 +132,14 @@ def compilator(request, id):
         with open(stderr_path, 'wb') as stderr_file:
             stderr_file.write(container['stderr'])
 
+        # Оценка результата pytest
+
         if container['exit_code'] == 0:
             print("Тесты пройдены успешно.")
         else:
             print("Тесты провалены.")
+
+        # Удаляем временную директорию
 
         shutil.rmtree(temp_dir)
 
