@@ -76,7 +76,7 @@ def compilator(request, id):
 
         epicbox.configure(
             profiles=[
-                epicbox.Profile('python', 'python')
+                epicbox.Profile('python', 'my_python_image')
             ]
         )
 
@@ -87,23 +87,19 @@ def compilator(request, id):
 
         temp_dir = tempfile.mkdtemp()
 
-        test_code = """
-        import pytest
-
-        def test_example():
-            assert 2 + 2 == 4
-        """
+        test_code = code
 
         epicbox.configure(profiles=[
-            epicbox.Profile('python', 'python:latest')
+            epicbox.Profile('python', 'my_python_image')
         ])
 
         files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
         limits = {'cputime': 1, 'memory': 128}
 
-        container = epicbox.run('python', 'python3 -m test_code.py',
+        container = epicbox.run('python', 'python3 test_code.py',
                                 files=files,
                                 limits=limits)
+        print(container)
 
         stdout_path = os.path.join(temp_dir, 'stdout')
         stderr_path = os.path.join(temp_dir, 'stderr')
