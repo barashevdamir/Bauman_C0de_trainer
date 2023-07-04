@@ -1,6 +1,8 @@
 import sys
 import epicbox
-
+import tempfile
+import shutil
+import pytest
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -35,39 +37,6 @@ def index(request, id):
         return render(request, './training/training.html', {'data': data})
     except TaskSolution.DoesNotExist:
         return render(request, './training/training.html', {'error': 'Запись не найдена'})
-
-
-# @csrf_protect
-# def runcode(request, id):
-#     data = TaskSolution.objects.get(id=id)
-#     if request.method == "POST":
-#         codeareadata = request.POST.get['codearea']
-#         try:
-#             # original_stdout = sys.stdout   #Запоминаем стандартный вывод
-#             # sys.stdout = open('file.txt', 'w')  #Заменяем стандартный вывод на только что созданный файл
-#             #
-#             # exec(codeareadata)  #Выполняем код
-#             #
-#             # sys.stdout.close()
-#             #
-#             # sys.stdout = original_stdout  #Возвращаем стандартный вывод на свое место
-#             #
-#             # output = open('file.txt', 'r').read()  #Считываем итог из файла
-#             result = subprocess.check_output(['python', '-c', codeareadata], universal_newlines=True, stderr=subprocess.STDOUT)
-#             return JsonResponse({'result': result})
-#
-#         except subprocess.CalledProcessError as e:
-#             return JsonResponse({'result': 'Error: ' + str(e.output)})
-#         # except Exception as e:
-#         #     sys.stdout = original_stdout
-#         #     output = e
-#
-#     #В конце концов возвращаем результат
-#     return render(request, './training/training.html', {'id': id})   #{'code': codeareadata, 'output': output})
-
-
-
-
 
 @csrf_exempt
 def compile_code(request):
@@ -104,7 +73,6 @@ def compilator(request, id):
 
     elif language == "python":
 
-
         epicbox.configure(
             profiles=[
                 epicbox.Profile('python', 'python')
@@ -113,9 +81,42 @@ def compilator(request, id):
 
         files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}]
         limits = {'cputime': 1, 'memory': 64}
-        result = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
-        print(result)
-        return render(request, './training/training.html', {'id': id})
+        output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
+        print(output)
+
+        temp_dir = tempfile.mkdtemp()
+
+        test_code = """
+        import pytest
+
+        def test_example():
+            assert 2 + 2 == 4
+        """
+
+        epicbox.configure(profiles=[
+            epicbox.Profile('python', 'python')
+        ])
+        files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
+        limits = {'cputime': 1, 'memory': 128}
+
+        container = epicbox.run('python', 'pytest test_code.py',
+                                files=files,
+                                limits=limits)
+        print(container)
+        shutil.copy2(container['files']['test_code.py'], temp_dir)
+        shutil.copy2(container['files']['stdout'], temp_dir)
+        shutil.copy2(container['files']['stderr'], temp_dir)
+        epicbox.remove(container['id'])
+        pytest_result = pytest.main(['-s', str(temp_dir)])
+
+        if pytest_result == 0:
+            print("Тесты пройдены успешно.")
+        else:
+            print("Тесты провалены.")
+
+        shutil.rmtree(temp_dir)
+
+        return render(request, './training/training.html', {'id': id, 'code': code, 'output': output})
 
     elif language == "node":
         pass
