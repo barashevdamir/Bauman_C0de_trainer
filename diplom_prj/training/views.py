@@ -115,7 +115,7 @@ def compilator(request, id):
         limits = {'cputime': 1, 'memory': 64}
         result = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
         print(result)
-        return render(request, './training/compile_code.html')
+        return render(request, './training/training.html', {'id': id})
 
     elif language == "node":
         pass

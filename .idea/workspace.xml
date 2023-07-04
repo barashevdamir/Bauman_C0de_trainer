@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9d2b6da-ce16-4382-a855-f07d58a7329b" name="Changes" comment="changed redirect in sign in buttton in navbar and deleted auth by github button">
-      <change beforePath="$PROJECT_DIR$/diplom_prj/diplom/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/diplom/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/training/templates/training/training.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/training/templates/training/training.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/training/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/training/urls.py" afterDir="false" />
+    <list default="true" id="f9d2b6da-ce16-4382-a855-f07d58a7329b" name="Changes" comment="added compiler with epicbox">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/training/static/training/js/ide.js" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/training/static/training/js/ide.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/diplom_prj/training/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/training/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,6 +119,9 @@
       <workItem from="1688373273578" duration="4188000" />
       <workItem from="1688378585404" duration="2211000" />
       <workItem from="1688381393132" duration="10939000" />
+      <workItem from="1688398350909" duration="3072000" />
+      <workItem from="1688415013856" duration="1716000" />
+      <workItem from="1688455588665" duration="975000" />
     </task>
     <task id="LOCAL-00001" summary="commited .gitignore">
       <created>1684270812497</created>
@@ -268,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686233719345</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added compiler with epicbox">
+      <created>1688401061794</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1688401061794</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,9 +310,11 @@
     <MESSAGE value="changed padding in page css" />
     <MESSAGE value="added alert messages to change_password_form" />
     <MESSAGE value="changed redirect in sign in buttton in navbar and deleted auth by github button" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed redirect in sign in buttton in navbar and deleted auth by github button" />
+    <MESSAGE value="added compiler with epicbox" />
+    <option name="LAST_COMMIT_MESSAGE" value="added compiler with epicbox" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/diplom$views.coverage" NAME="views Coverage Results" MODIFIED="1688398401980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/diplom_prj/training" />
     <SUITE FILE_PATH="coverage/diplom$main.coverage" NAME="main Coverage Results" MODIFIED="1687596820331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Bessel" />
   </component>
 </project>
