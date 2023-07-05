@@ -1,8 +1,6 @@
-
-
 body {
     margin: 0;
-    text-align: left;
+    padding-top: 40px;
     color: #2e323c;
     background: #f5f6fa;
     position: relative;
@@ -13,14 +11,9 @@ body {
     padding-bottom: 1rem;
     text-align: center;
 }
-.btn-primary {
-    color: #0d6efd;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
-
 .account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
+
 }
 .account-settings .user-profile .user-avatar img {
     width: 90px;
@@ -66,4 +59,9 @@ body {
     border-radius: 5px;
     border: 0;
     margin-bottom: 1rem;
+
+}
+
+p {
+    margin-top: 1rem
 }
