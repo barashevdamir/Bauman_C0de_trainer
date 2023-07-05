@@ -16,19 +16,15 @@ def get_array(list):
 @register.simple_tag()
 def get_unique_languages():
   tasks = Tasks.objects.all()
-  lang_arr = ['All', ]
+  lang_arr = []
   for task in tasks:
     lang_arr += task.languages.split()
     lang_arr = list(set(lang_arr))
   return sorted(lang_arr)
 
-@register.simple_tag()
-def get_unique_tags():
-  tasks = Tasks.objects.all()
-  tag_arr = []
-  for task in tasks:
-    tag_arr += task.tags.split()
-    tag_arr = list(set(tag_arr))
-  return sorted(tag_arr)
+@register.simple_tag
+def get_tasks_tags():
+  tags_list = Tasks.tags.order_by('name')
+  return tags_list
 
 

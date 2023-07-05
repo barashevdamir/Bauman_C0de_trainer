@@ -11,9 +11,7 @@ def test_list(request):
   
   if request.GET:
     test_list = test_list.order_by(request.GET.get('order_by'))
-    if request.GET.get('language') == 'all':
-      pass
-    else:
+    if request.GET.get('language') != 'all':
       test_list = test_list.filter(prog_language=request.GET.get('language'))
     if request.GET.get('difficulty') == 'all':
       pass
@@ -23,9 +21,7 @@ def test_list(request):
       test_list = test_list.filter(experience = 2)
     elif request.GET.get('difficulty') == 'hard':
       test_list = test_list.filter(experience = 3)
-    if request.GET.get('tag') == 'all':
-      pass
-    else:
+    if request.GET.get('tag') != 'all':
       test_list = test_list.filter(tags = request.GET.get('tag'))
   
   paginator = Paginator(test_list, 10)

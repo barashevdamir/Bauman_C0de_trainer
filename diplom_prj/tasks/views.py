@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 import epicbox
 import tempfile
@@ -10,39 +11,43 @@ def taskspage(request):
 
   if request.GET:
     get_turple = request.GET
-
-    if request.GET.get('order_by', False):
-      tasks = tasks.order_by(get_turple['order_by'])
-
-    if request.GET.get('level', False):
-      tasks = tasks.filter(level=get_turple['level'])
-
+    tasks = tasks.order_by(request.GET.get('order_by'))
+    # if request.GET.get('language') != 'all':
+    #   tasks = test_list.filter(prog_language=request.GET.get('language'))
+    if request.GET.get('lvl') != 'all':
+      tasks = tasks.filter(level = request.GET.get('lvl'))
+    if request.GET.get('tag') != 'all':
+      tasks = tasks.filter(tags = request.GET.get('tag'))
     if request.GET.get('language', False):
       tasks_arr = []
       for task in tasks:
         tmp_arr = task.languages.split()
         for el in tmp_arr:
           if el == get_turple['language']:
-            tasks_arr.append(task.name)
-      if get_turple['language'] != 'All':
-        tasks = tasks.filter(name__in=tasks_arr)
-
-    if request.GET.get('tag', False):
-      tasks_arr = []
-      for task in tasks:
-        tmp_arr = task.tags.split()
-        for el in tmp_arr:
-          if el == get_turple['tag']:
-            tasks_arr.append(task.name)
-      tasks = tasks.filter(name__in=tasks_arr)
-
-  if not tasks:
-    tasks = False
+            tasks_arr.append(task.title)
+      if get_turple['language'] != 'all':
+        tasks = tasks.filter(title__in=tasks_arr)
   
-  return render(request, 'tasks/tasks.html', {
-    'title' : 'Tasks',
-    'tasks': tasks,
-  })
+  paginator = Paginator(tasks, 10)
+  page_number = request.GET.get('page')
+  try:
+    tasks = paginator.page(page_number)
+  except PageNotAnInteger:
+    tasks = paginator.page(1)
+  except EmptyPage:
+    tasks = paginator.page(paginator.num_pages)
+  
+  if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    return render(
+    request, 
+    'tasks/tasks_list.html',
+    {'tasks': tasks}
+    )
+  return render(
+    request, 
+    'tasks/tasks2.html', 
+    {'tasks': tasks}
+  )
 
 def task(request, id):
   task = get_object_or_404(
