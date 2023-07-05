@@ -8,102 +8,104 @@
     <link rel="stylesheet" href="{% static 'tests/css/test_style.css' %}">
 {% endblock %}
 
-{% block content %}
-<div class="conteiner">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-9 col-sm-10 col-11 p-3 m-2 text-center">
-            <h1>{{ test.title }}</h1>
-            <hr>
-            <h3>Question {{ questions.number }} of {{ questions.paginator.num_pages }}</h3>
-        </div>   
-    </div>
-    {% for question in questions %}
-    <div class="row justify-content-center">    
-        <div class="col-lg-8 col-md-9 col-sm-10 col-11 bct-border px-4 py-3 m-2">
-            <h6 class="prompt" id="{{ question.id }}">{{ question.prompt }}</h6>
-            {% for code in question.codes %}
-                <p>{{ code|markdown }}</p>
-            {% endfor %}
-            <form name="Answer form">   
-                {% if question.answer_type == 'SC' %}
-                    {% for answer in question.answers %}
-                    <div class="form-check" name="Single choice">
-                        <input class="form-check-input" type="radio" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
-                        <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
-                            {{ answer }}
-                        </label>
-                    </div>
-                    {% endfor %}
-                {% elif question.answer_type == 'MC' %}
-                    {% for answer in question.answers %}
-                    <div class="form-check" name="Multiple choice">
-                        <input class="form-check-input" type="checkbox"  name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
-                        <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
-                            {{ answer }}
-                        </label>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="row justify-content-center">
-                        <div class="col-6" name="Write in">
-                            <form>
-                                <input class="form-control" type="text" placeholder="Your answer" aria-label="Your answer" name="{{ question.prompt }}">
-                            </form>
-                        </div>
-                    </div>
-                {% endif %}
-            </form>
-        </div>
-    </div>
-    {% endfor %}
-    <div class="row justify-content-center">
-        <div class="col-4 p-3 text-center">
-            <div>
-                <button class="button btn-dark rounded-pill px-3" id="go-back" name="Go back" data-bs-toggle="modal" data-bs-target="#warningModal">
-                    Go back
-                </button>
+{% block main_content %}
+<main>
+    <div class="conteiner">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-9 col-sm-10 col-11 p-3 m-2 text-center">
+                <h1>{{ test.title }}</h1>
+                <hr>
+                <h3>Question {{ questions.number }} of {{ questions.paginator.num_pages }}</h3>
             </div>   
         </div>
-        <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="warningModalLabel">Are you sure?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    If you leave this page, you will lose all your progress.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue test">
-                        Continue test
-                    </button>
-                    <a href="{% url 'tests_list' %}">
-                        <button type="button" class="btn btn-dark rounded-pill px-3" name="Go back" id="confidently-go-back">
-                            Go back
-                        </button>
-                    </a>
-                </div>
-              </div>
+        {% for question in questions %}
+        <div class="row justify-content-center">    
+            <div class="col-lg-8 col-md-9 col-sm-10 col-11 bct-border px-4 py-3 m-2">
+                <h6 class="prompt" id="{{ question.id }}">{{ question.prompt }}</h6>
+                {% for code in question.codes %}
+                    <p>{{ code|markdown }}</p>
+                {% endfor %}
+                <form name="Answer form">   
+                    {% if question.answer_type == 'SC' %}
+                        {% for answer in question.answers %}
+                        <div class="form-check" name="Single choice">
+                            <input class="form-check-input" type="radio" name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
+                            <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
+                                {{ answer }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    {% elif question.answer_type == 'MC' %}
+                        {% for answer in question.answers %}
+                        <div class="form-check" name="Multiple choice">
+                            <input class="form-check-input" type="checkbox"  name="{{ question.prompt }}" id="{{ question.prompt }}-{{ answer }}" value="{{ answer }}">
+                            <label class="form-check-label" for="{{ question.prompt }}-{{ answer }}">
+                                {{ answer }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="row justify-content-center">
+                            <div class="col-6" name="Write in">
+                                <form>
+                                    <input class="form-control" type="text" placeholder="Your answer" aria-label="Your answer" name="{{ question.prompt }}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                </form>
             </div>
         </div>
-        <div class="col-4 p-3 text-center">
-            <div>
-            {% if questions.has_next %}
-                <a href="?question={{ questions.next_page_number }}">
-                    <button class="button btn-dark rounded-pill px-4" id="save-and-next" name="Next">
-                        Next
+        {% endfor %}
+        <div class="row justify-content-center">
+            <div class="col-4 p-3 text-center">
+                <div>
+                    <button class="button btn-dark rounded-pill px-3" id="go-back" name="Go back" data-bs-toggle="modal" data-bs-target="#warningModal">
+                        Go back
                     </button>
-                </a>
-            {% else %}
-                    <button class="button btn-dark rounded-pill px-3" id="save-and-submit" name="Submit">
-                        Submit
-                    </button>
-            {% endif %}
-            </div>   
-        </div>
-    </div>  
-</div>
+                </div>   
+            </div>
+            <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="warningModalLabel">Are you sure?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        If you leave this page, you will lose all your progress.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue test">
+                            Continue test
+                        </button>
+                        <a href="{% url 'tests_list' %}">
+                            <button type="button" class="btn btn-dark rounded-pill px-3" name="Go back" id="confidently-go-back">
+                                Go back
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-4 p-3 text-center">
+                <div>
+                {% if questions.has_next %}
+                    <a href="?question={{ questions.next_page_number }}">
+                        <button class="button btn-dark rounded-pill px-4" id="save-and-next" name="Next">
+                            Next
+                        </button>
+                    </a>
+                {% else %}
+                        <button class="button btn-dark rounded-pill px-3" id="save-and-submit" name="Submit">
+                            Submit
+                        </button>
+                {% endif %}
+                </div>   
+            </div>
+        </div>  
+    </div>
+</main>
 {% endblock %}
 
 {% block jscripts %}

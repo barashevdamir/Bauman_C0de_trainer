@@ -28,7 +28,7 @@ def test_list(request):
     else:
       test_list = test_list.filter(tags = request.GET.get('tag'))
   
-  paginator = Paginator(test_list, 1)
+  paginator = Paginator(test_list, 10)
   page_number = request.GET.get('page')
   try:
     tests = paginator.page(page_number)
@@ -122,7 +122,7 @@ def save_result(request, id):
       exp_gain = test.experience 
     else:
       passed = False
-    if user != 'AnonymousUser':
+    try:
       Result.objects.create(
         user = user,
         test = test,
@@ -130,6 +130,8 @@ def save_result(request, id):
         score = score,
         exp_gain = exp_gain
       )
+    except ValueError:
+      pass
     result = {
       'test': test.title,
       'passed': passed,

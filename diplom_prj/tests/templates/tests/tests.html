@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="{% static 'tests/css/tests_style.css' %}">
 {% endblock %}
 
-{% block content %}
-    
-    {% include 'base/navbar.html' %}
-
+{% block main_content %}
+<div class="conteiner-fluid px-4 sticky-top bct-nav">
+    <div class="row justify-content-center">
+        <div class="col-xxl-10 col-xl-11 col-lg-10 col-12 px-lg-0 pe-lg-2">
+            {% include 'base/navbar.html' %}
+        </div>
+    </div>
+</div>
     <main>
         <section class="conteiner-fluid px-4 bct-bg-color">
             <div class="row justify-content-center">
@@ -50,7 +54,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-xl-8 col-lg-7" id="tests-list-view">
+                <div class="col-xl-8 col-lg-7 pe-0" id="tests-list-view">
                     {% include "tests/tests_list.html"%}
                 </div>
             </div>  

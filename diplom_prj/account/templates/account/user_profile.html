@@ -1,15 +1,23 @@
 {% extends 'base/base.html' %}
-
 {% load static %}
 
+{% block title %} Profile {% endblock %}
+
+{% block add_css%}
+  <link href="{% static 'account/css/user_profile.css' %}" rel="stylesheet">
+  <link href="{% static 'account/css/progress_bar.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block main_content %}
-
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link href="{% static "css/user_profile.css" %}" rel="stylesheet">
-        <link href="{% static "css/progress_bar.css" %}" rel="stylesheet">
-
-
-
+<div class="conteiner-fluid px-4 sticky-top bct-nav">
+  <div class="row justify-content-center">
+      <div class="col-xxl-10 col-xl-11 col-lg-10 col-12 px-lg-0 pe-lg-2">
+          {% include 'base/navbar.html' %}
+      </div>
+  </div>
+</div>
+<main class = 'main'>
+  <div class = 'container'>
     {% if user_form.errors %}
         <div class="alert alert-danger alert-dismissible" role="alert">
             <div id="form_errors">
@@ -180,6 +188,7 @@
             </div>
         </div>
     </div>
-
+  </div>
+</main>
 {% endblock %}
 

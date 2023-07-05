@@ -1,0 +1,134 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'home/css/homepage_style.css' %}">
+{% endblock %}
+
+
+{% block main_content%}
+    
+    <nav class="navbar navbar-expand sticky-top navbar-dark bg-dark">
+        <div class="container-fluid justify-content-sm-end mx-4">
+            <div class="navbar-nav">
+                <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if request.user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'user_profile' %}">
+                        {% if  user.profile.photo  %}
+                            <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                        {% else %}
+                            <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
+                        {% endif %}
+                        Profile
+                    </a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">Sing in</a>
+                    <a class="nav-link" href="{% url 'register' %}">Sing up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <header>
+        <div class="container">
+            <div class="raw">
+                <div class="col-12">
+                     <h1 class="text-center">Bauman C0de Trainer</h1>
+                     <h2 class="text-center mt-2">Online programming skills trainer</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+       
+    <section class="start_train">
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center text-uppercase mb-5">let's start right now</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center gy-2">
+                <div class="col-lg-4 col-md-12">
+                    <div class="row justify-content-center">
+                        <a href="{% url 'tests_list' %}" class="btn btn-dark btn-bct-main">Tests <i class="icon-check"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="row justify-content-center">
+                        <a href="{% url 'tasks' %}" class="btn btn-dark btn-bct-main">Tasks <i class="icon-file-code"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="row justify-content-center">
+                        <a href="/leader_board" class="btn btn-dark btn-bct-main">Leaderboard <i class="icon-award"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about">
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center text-uppercase mb-5">Why do you need us?</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-code"></i></div>
+                    <h5 class="text-center">Actual programming languages</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-calendar"></i></div>
+                    <h5 class="text-center">You can track your progress</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-id-card-o"></i></div>
+                    <h5 class="text-center">You can try without registration</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-thumbs-up"></i></div>
+                    <h5 class="text-center">Without ads</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-dollar"></i></div>
+                    <h5 class="text-center">It's free</h5>
+                    <div class="bct-line"></div>              
+                </div>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="bct-circle"><i class="icon-globe"></i></div>
+                    <h5 class="text-center">Available on different devices</h5>
+                    <div class="bct-line"></div>              
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-center mb-2">Powered by <a href="https://www.djangoproject.com/">Django 4</a> and <a href="https://getbootstrap.com/">Bootstrap 5</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% endblock %} 
+
+{% block jscripts %}   
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home.apps.HomeConfig',
     'tasks.apps.TasksConfig',
     'tests.apps.TestsConfig',
     'taggit',
@@ -88,16 +89,24 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+if DEBUG:
+    DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "student_barashev_01",
-        "USER": "student_barashev_01",
-        "PASSWORD": "qwerty123",
-        "HOST": "dc-webdev.bmstu.ru",
-        "PORT": "8080",
+         'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "student_barashev_01",
+            "USER": "student_barashev_01",
+            "PASSWORD": "qwerty123",
+            "HOST": "dc-webdev.bmstu.ru",
+            "PORT": "8080",
+        }
+    }
 
 
 # Password validation
@@ -137,6 +146,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
@@ -147,7 +160,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'user_profile'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
