@@ -6,6 +6,9 @@ from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, \
     UserEditForm, ProfileEditForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 def user_login(request):
     if request.method == 'POST':
@@ -31,26 +34,52 @@ def user_login(request):
                                                     'form': form,
                                                   })
 
+
+# def validate_registration(request):
+#     username = request.POST.get('username')
+#     password = request.POST.get('password')
+#
+#     # Placeholder for actual validation logic
+#     if len(username) < 4 or len(password) < 6:
+#         return JsonResponse({'valid': False,
+#                              'error': 'Username must be at least 4 characters and password at least 6 characters long.'})
+#     else:
+#         # Check if user exists
+#         if User.objects.filter(username=username).exists():
+#             return JsonResponse({'valid': False, 'error': 'Username already exists.'})
+#
+#         # Perform necessary actions after validation, e.g. store user in database
+#         User.objects.create_user(username=username, password=password)
+#         return JsonResponse({'valid': True})
+
 def register(request):
-    if request.method == 'POST':
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        print(request.POST)
+
+            # Placeholder for actual validation logic
+        if len(username) < 4 or len(password) < 6:
+            return JsonResponse({'valid': False,
+                                     'error': 'Username must be at least 4 characters and password at least 6 characters long.'})
+        else:
+                # Check if user exists
+            if User.objects.filter(username=username).exists():
+                return JsonResponse({'valid': False, 'error': 'Username already exists.'})
+
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
+                # Create a new user object but avoid saving it yet
             new_user = user_form.save(commit=False)
-            # Set the chosen password
+                # Set the chosen password
             new_user.set_password(
                 user_form.cleaned_data['password'])
-            # Save the User object
+                # Save the User object
             new_user.save()
-            # Create the user profile
+                # Create the user profile
             Profile.objects.create(user=new_user)
-            return render(request,
-                          'account/register_done.html',
-                          {
-                              'title': 'registerDone',
-                              'navbar': True,
-                              'new_user': new_user
-                          })
+            return JsonResponse({'valid': True})
     else:
         user_form = UserRegistrationForm()
     return render(request,
@@ -91,25 +120,6 @@ def edit(request):
                       'profile_form': profile_form,
                   })
 
-# @login_required
-# def change_password(request):
-#     if request.method == 'POST':
-#         form = PasswordChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             update_session_auth_hash(request, user)  # Important!
-#             messages.success(request, 'Your password was successfully updated!')
-#             return redirect('change_password')
-#         else:
-#             messages.error(request, 'Please correct the error below.')
-#     else:
-#         form = PasswordChangeForm(request.user)
-#     return render(request, 'accounts/password_change.html', {
-#         'form': form
-#     })
-
-
-
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -141,5 +151,15 @@ def sample_view(request):
     current_user = request.user
     return current_user.id
 
+def validate_registration():
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    # Placeholder for actual validation logic
+    if len(username) < 4 or len(password) < 6:
+        return jsonify({'valid': False, 'error': 'Username must be at least 4 characters, password at least 6 characters long, check Email ID'})
+    else:
+        # Perform necessary actions after validation, e.g. store user in database
+        return jsonify({'valid': True})
 
 

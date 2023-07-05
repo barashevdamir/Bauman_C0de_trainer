@@ -4,326 +4,73 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9d2b6da-ce16-4382-a855-f07d58a7329b" name="Changes" comment="added reset button functional">
+    <list default="true" id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="upgraded user_profile page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/media/temp/2.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/media/temp/2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/training/templates/training/training.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/training/templates/training/training.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/training/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/training/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/account/templates/account/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/templates/account/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/media/temp/task1.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/media/temp/task1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
-    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
-        <option value="CSS File" />
       </list>
     </option>
   </component>
-  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
-    <envs>
-      <env key="FLASK_APP" value="app" />
-    </envs>
-    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
-    <option name="myEnvs">
-      <map>
-        <entry key="FLASK_APP" value="app" />
-      </map>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="training_page" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2PtK7cSqHF2TXOetV4uFCJsy64e" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/images&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/account/js",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/diplom_prj/account/static/images" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/diplom_prj/training" />
-      <recent name="$PROJECT_DIR$/diplom_prj/training/static/training" />
+      <recent name="$PROJECT_DIR$/diplom_prj/account/static/account/js" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="f9d2b6da-ce16-4382-a855-f07d58a7329b" name="Changes" comment="" />
-      <created>1684270771924</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1684270771924</updated>
-      <workItem from="1684270773371" duration="9781000" />
-      <workItem from="1684571185943" duration="572000" />
-      <workItem from="1684571837933" duration="8398000" />
-      <workItem from="1684664456624" duration="19101000" />
-      <workItem from="1684747487436" duration="9353000" />
-      <workItem from="1684783866806" duration="7341000" />
-      <workItem from="1684842639995" duration="1753000" />
-      <workItem from="1684858530716" duration="34907000" />
-      <workItem from="1684938389370" duration="315000" />
-      <workItem from="1684951297876" duration="4137000" />
-      <workItem from="1685028518003" duration="4395000" />
-      <workItem from="1685077735872" duration="2198000" />
-      <workItem from="1685200618386" duration="1520000" />
-      <workItem from="1685207996455" duration="631000" />
-      <workItem from="1685268576492" duration="21000" />
-      <workItem from="1685269044612" duration="109000" />
-      <workItem from="1685287900210" duration="397000" />
-      <workItem from="1685543362444" duration="8190000" />
-      <workItem from="1685637096317" duration="683000" />
-      <workItem from="1686070787671" duration="14328000" />
-      <workItem from="1686144933742" duration="6906000" />
-      <workItem from="1686221547798" duration="1668000" />
-      <workItem from="1686223583178" duration="6368000" />
-      <workItem from="1686306005315" duration="611000" />
-      <workItem from="1687596729279" duration="109000" />
-      <workItem from="1687702339974" duration="394000" />
-      <workItem from="1688299988615" duration="109000" />
-      <workItem from="1688300101005" duration="173000" />
-      <workItem from="1688372909937" duration="359000" />
-      <workItem from="1688373273578" duration="4188000" />
-      <workItem from="1688378585404" duration="2211000" />
-      <workItem from="1688381393132" duration="10939000" />
-      <workItem from="1688398350909" duration="3072000" />
-      <workItem from="1688415013856" duration="1716000" />
-      <workItem from="1688455588665" duration="4370000" />
-    </task>
-    <task id="LOCAL-00001" summary="commited .gitignore">
-      <created>1684270812497</created>
+    <task id="LOCAL-00001" summary="added go back button on training_page&#10;deleted training directory">
+      <created>1688572261098</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1684270812497</updated>
+      <updated>1688572261098</updated>
     </task>
-    <task id="LOCAL-00002" summary="added authorization">
-      <created>1684270896548</created>
+    <task id="LOCAL-00002" summary="upgraded account/edit page ande account/profile page">
+      <created>1688575745740</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1684270896548</updated>
+      <updated>1688575745740</updated>
     </task>
-    <task id="LOCAL-00003" summary="added login and register front and back, added front userprofile">
-      <created>1684702759733</created>
+    <task id="LOCAL-00003" summary="upgraded user_profile page">
+      <created>1688590419177</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1684702759733</updated>
+      <updated>1688590419177</updated>
     </task>
-    <task id="LOCAL-00004" summary="added login and register front and back, added front userprofile">
-      <created>1684702803859</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1684702803859</updated>
-    </task>
-    <task id="LOCAL-00005" summary="added front and back userprofile">
-      <created>1684760115117</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1684760115117</updated>
-    </task>
-    <task id="LOCAL-00006" summary="redesign templates, swap SQLite to PostgraSQL, added .env file">
-      <created>1684858607227</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1684858607227</updated>
-    </task>
-    <task id="LOCAL-00007" summary="redesign templates, swap SQLite to PostgraSQL, added .env file">
-      <created>1684858613249</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1684858613249</updated>
-    </task>
-    <task id="LOCAL-00008" summary="added bootstrap front for login and registration templates, navbar">
-      <created>1684878988761</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1684878988761</updated>
-    </task>
-    <task id="LOCAL-00009" summary="added bootstrap front for login and registration templates, navbar">
-      <created>1684934675161</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1684934675161</updated>
-    </task>
-    <task id="LOCAL-00010" summary="added bootstrap front for login and registration templates, navbar">
-      <created>1684934681048</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1684934681048</updated>
-    </task>
-    <task id="LOCAL-00011" summary="connected to bauman db">
-      <created>1685601895580</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1685601895580</updated>
-    </task>
-    <task id="LOCAL-00012" summary="edited urls on homepage and tasks">
-      <created>1685603006502</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1685603006502</updated>
-    </task>
-    <task id="LOCAL-00013" summary="edited urls on homepage">
-      <created>1685612784778</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1685612784778</updated>
-    </task>
-    <task id="LOCAL-00014" summary="changed base and navbar in account">
-      <created>1686148821098</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1686148821098</updated>
-    </task>
-    <task id="LOCAL-00015" summary="changed base and navbar in account">
-      <created>1686148828242</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1686148828242</updated>
-    </task>
-    <task id="LOCAL-00016" summary="commit to git pull">
-      <created>1686149163753</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1686149163753</updated>
-    </task>
-    <task id="LOCAL-00017" summary="added new language progress bar">
-      <created>1686155011743</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1686155011743</updated>
-    </task>
-    <task id="LOCAL-00018" summary="changed padding in page css">
-      <created>1686156017673</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1686156017673</updated>
-    </task>
-    <task id="LOCAL-00019" summary="changed padding in page css">
-      <created>1686156082948</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1686156082948</updated>
-    </task>
-    <task id="LOCAL-00020" summary="added alert messages to change_password_form">
-      <created>1686228030915</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1686228030915</updated>
-    </task>
-    <task id="LOCAL-00021" summary="changed redirect in sign in buttton in navbar and deleted auth by github button">
-      <created>1686233719345</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1686233719345</updated>
-    </task>
-    <task id="LOCAL-00022" summary="added compiler with epicbox">
-      <created>1688401061794</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1688401061794</updated>
-    </task>
-    <task id="LOCAL-00023" summary="added reset button functional">
-      <created>1688456848918</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1688456848918</updated>
-    </task>
-    <option name="localTasksCounter" value="24" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commited .gitignore" />
-    <MESSAGE value="added authorization" />
-    <MESSAGE value="added login and register front and back, added front userprofile" />
-    <MESSAGE value="added front and back userprofile" />
-    <MESSAGE value="redesign templates, swap SQLite to PostgraSQL, added .env file" />
-    <MESSAGE value="added bootstrap front for login and registration templates, navbar" />
-    <MESSAGE value="connected to bauman db" />
-    <MESSAGE value="edited urls on homepage and tasks" />
-    <MESSAGE value="edited urls on homepage" />
-    <MESSAGE value="changed base and navbar in account" />
-    <MESSAGE value="commit to git pull" />
-    <MESSAGE value="added new language progress bar" />
-    <MESSAGE value="changed padding in page css" />
-    <MESSAGE value="added alert messages to change_password_form" />
-    <MESSAGE value="changed redirect in sign in buttton in navbar and deleted auth by github button" />
-    <MESSAGE value="added compiler with epicbox" />
-    <MESSAGE value="added reset button functional" />
-    <option name="LAST_COMMIT_MESSAGE" value="added reset button functional" />
+    <MESSAGE value="added go back button on training_page&#10;deleted training directory" />
+    <MESSAGE value="upgraded account/edit page ande account/profile page" />
+    <MESSAGE value="upgraded user_profile page" />
+    <option name="LAST_COMMIT_MESSAGE" value="upgraded user_profile page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/diplom$views.coverage" NAME="views Coverage Results" MODIFIED="1688398401980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/diplom_prj/training" />
+    <SUITE FILE_PATH="coverage/diplom$views.coverage" NAME="views Coverage Results" MODIFIED="1688585078105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/diplom_prj/tasks" />
     <SUITE FILE_PATH="coverage/diplom$main.coverage" NAME="main Coverage Results" MODIFIED="1687596820331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Bessel" />
   </component>
 </project>

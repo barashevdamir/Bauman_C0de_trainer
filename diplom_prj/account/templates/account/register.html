@@ -41,7 +41,7 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                <form method="post">
+                <form id="register-form" method="post">
                     {% csrf_token %}
                     <div class="input-group mb-3">
 
@@ -63,33 +63,14 @@
                         <input name="{{ user_form.password2.html_name }}" required="required" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Repeat Password">
 
                     </div>
-{#                    <div class="input-group mb-5 d-flex justify-content-between">#}
-{#                        <div class="form-check">#}
-{##}
-{#-----------------------------------NEED TO ADD REMEMBER ME CHECK BOX---------------------------------------------------#}
-{##}
-{#                            <input type="checkbox" class="form-check-input" id="formCheck">#}
-{#                            <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>#}
-{##}
-{#-----------------------------------NEED TO ADD REMEMBER ME CHECK BOX---------------------------------------------------#}
-{##}
-{#                                <label for="formCheck" class="form-check-label text-secondary"><small></small></label>#}
-{#                        </div>#}
-{#                    </div>#}
+
                     <div class="input-group mb-3">
-                        <button class="btn btn-lg btn-secondary w-100 fs-6">Sign Up</button>
+                        <button class="btn btn-lg btn-secondary w-100 fs-6" type="submit">Sign Up</button>
                     </div>
+                    <div id="error-message"></div>
                 </form>
 
-<!-- {#                <div class="input-group mb-3">#}
-{#                    <button class="btn btn-lg btn-light w-100 fs-6"><img src="{% static 'images/github-mark.svg' %}" style="width:20px" class="me-2"><small>Sign Up with GitHub</small></button> #}
-{#                                  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="DiplomTelegramAuthBot" data-size="large" data-radius="6" data-onauth="onTelegramAuth(user)" data-request-access="write"></script> #}
-{#                    <script type="text/javascript"> #}
-{#                        function onTelegramAuth(user) #}
-{#                                                        alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')'); #}
-{#                        #}
-{#                    </script> #}
-{#                </div> #} -->
+
                 <div class="row">
                     <small class="text-dark" >Have an account? <a href="{% url 'login' %}">Sign In</a></small>
                 </div>
@@ -98,4 +79,9 @@
       </div>
     </div>
 
+{% endblock %}
+
+{% block jscripts %}
+    <script src="{% static 'jQuery/jquery-3.7.0.min.js' %}"></script>
+    <script src="{% static 'account/js/register.js' %}"></script>
 {% endblock %}
