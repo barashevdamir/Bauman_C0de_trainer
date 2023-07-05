@@ -4,13 +4,22 @@
 
 
 {% block add_css%}
-    <link rel="stylesheet" href="{% static 'tasks/css/tasks_style.css' %}">
+  <link rel="stylesheet" href="{% static 'base/css/base_style.css' %}"> 
+  <link rel="stylesheet" href="{% static 'tasks/css/tasks_style.css' %}">
 {% endblock %}
 
 
 
-{% block main_content %}
-
+{% block main_content%}
+<div class="conteiner-fluid px-4 sticky-top bct-nav">
+  <div class="row justify-content-center">
+      <div class="col-xxl-10 col-xl-11 col-lg-10 col-12 px-lg-0 pe-lg-2">
+          {% include 'base/navbar.html' %}
+      </div>
+  </div>
+</div>
+  <main class = 'main'>
+    <div class = 'container'>   
       <section class="suggest">
         <div class="suggest__info">
           Last Task
@@ -146,14 +155,15 @@
                 <span class="task__language-item">{{lang}}</span>
                 {% endfor %}
               </div>
-              <button class="task__button">TRAiN</button>
+              <a href="{% url 'task' t.id %}"><button class="task__button">TRAiN</button></a>
             </div>
           </div>
           {% endfor %}
           {% endif %}
 
         </section>
-
+    </div>
+  </main>
       
 
 
