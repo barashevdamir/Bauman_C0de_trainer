@@ -84,7 +84,32 @@
                 </div>
                 <div class="editor-button">
                         <div class="button-container">
-                            <button class="button-2"> Reset </button>
+                            <button class="button-2" id="go-back" name="Go back" data-bs-toggle="modal" data-bs-target="#warningModal">
+                                Go back
+                            </button>
+                        </div>
+                        <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="warningModalLabel">Are you sure?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    If you leave this page, you will lose all your progress.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue task">
+                                        Continue test
+                                    </button>
+                                    <a href="{% url 'tasks' %}">
+                                        <button type="button" class="btn btn-dark rounded-pill px-3" name="Go back" id="confidently-go-back">
+                                            Go back
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                         <div class="button-container">
                             <form action="#">
