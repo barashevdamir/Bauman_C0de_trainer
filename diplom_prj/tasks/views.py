@@ -19,15 +19,9 @@ def taskspage(request):
       tasks_list = tasks_list.filter(level = request.GET.get('lvl'))
     if request.GET.get('tag') != 'all':
       tasks_list = tasks_list.filter(tags = request.GET.get('tag'))
-    if request.GET.get('language', False):
-      tasks_arr = []
-      for task in tasks_list:
-        tmp_arr = task.languages.split()
-        for el in tmp_arr:
-          if el == get_turple['language']:
-            tasks_arr.append(task.title)
-      if get_turple['language'] != 'all':
-        tasks_list = tasks_list.filter(title__in=tasks_arr)
+    if request.GET.get('language') != 'all':
+      lang = TaskLanguage.objects.filter(prog_language = request.GET.get('language'))
+      tasks_list = tasks_list.filter(languages__in = lang)
   
   paginator = Paginator(tasks_list, 10)
   page_number = request.GET.get('page')
@@ -37,7 +31,7 @@ def taskspage(request):
     tasks = paginator.page(1)
   except EmptyPage:
     tasks = paginator.page(paginator.num_pages)
-  
+
   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
     if list(tasks_list) != []:
       return render(
@@ -53,7 +47,7 @@ def taskspage(request):
       )
   return render(
     request, 
-    'tasks/tasks2.html', 
+    'tasks/tasks.html', 
     {'tasks': tasks}
   )
 

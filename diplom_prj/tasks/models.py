@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 from taggit.managers import TaggableManager 
 from diplom.choices_classes import Status, ProgLanguage 
+from diplom.directory_path import tasks_tests_directory_path
 
 class Tasks(models.Model):
   title = models.CharField(max_length=256, default='')
@@ -25,9 +26,15 @@ class Tasks(models.Model):
       MaxValueValidator(limit_value=5)
     ],
   )
-  languages = models.TextField(null=True) #плохой вариант, заменить
+  # languages = models.TextField(null=True) #плохой вариант, заменить
   tags = TaggableManager()
-  test_file = models.FileField(null=True, blank=True, default=None) #ДОДЕЛАТЬ!!!!, нужна возможность грузить несколько фалов для разных языков
+  # test_file = models.FileField(
+  #   null=True, 
+  #   blank=True, 
+  #   default=None,
+  #   upload_to=tasks_tests_directory_path
+  #   ) # ВНИМАНИЕ!!! осбеность Django такова, что при очистке данного поля в модели файл не удаляется 
+  #     # нужен специальный скрипт или удаление вручную
   publish = models.DateTimeField(default=timezone.now)
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
@@ -56,24 +63,26 @@ class TestingInput(models.Model):
   input_data = models.CharField(max_length=256, default='')
   expected_output = models.CharField(max_length=256, null=True, default=None)
 
-# class TaskLanguage(models.Model):
-#   task = models.ForeignKey(
-#     Tasks, 
-# 		related_name='languages', 
-# 		on_delete=models.CASCADE
-#   )
-#   prog_language = models.CharField(
-# 		'Programming language',
-# 		max_length=4,
-# 		choices=ProgLanguage.choices,
-# 		default=ProgLanguage.PYTHON,
-# 		blank=False
-# 	)
-#   test_file = models.FileField(
-#     null=True, 
-#     blank=True, 
-#     default=None
-#   )
+class TaskLanguage(models.Model):
+  task = models.ForeignKey(
+    Tasks, 
+		related_name='languages', 
+		on_delete=models.CASCADE
+  )
+  prog_language = models.CharField(
+		'Programming language',
+		max_length=4,
+		choices=ProgLanguage.choices,
+		default=None,
+		blank=True
+	)
+  test_file = models.FileField(
+    null=True, 
+    blank=True, 
+    default=None,
+    upload_to=tasks_tests_directory_path
+  )# ВНИМАНИЕ!!! осбеность Django такова, что при очистке данного поля в модели файл не удаляется 
+   # нужен специальный скрипт или удаление вручную
 
 # class Result(models.Model):
 #   user = models.ForeignKey(

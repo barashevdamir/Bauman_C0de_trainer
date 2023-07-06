@@ -1,22 +1,24 @@
 {% load static %}
-{% load home_tags %}
+{% load tasks_tags %}
 
 {% for task in tasks %}
 <div class="conteiner bct-test mx-3 my-4 px-3 py-2 text-light" name="{{ test.title }}">
     <div class="row my-2">
         <div class="col-sm-8 col-6">
             <h3 class="">{{ task.title }}</h3>
+            <p>Level: <samp>{{ task.level }}</samp></p>
         </div>
         <div class="col-sm-3 col-5 offset-1 text-end">
-            {% get_array task.languages as lang_arr %}
-            {% for lang in lang_arr %}
-            <h5><span class="badge bct-tag-bg text-light">{{ lang }}</span></h5>
+            <h5>
+            {% get_unique_languages as unique_languages %}
+            {% for lang in task.languages.all %}
+                {% for l in unique_languages %}
+                    {% if  l.0 == lang.prog_language %}
+                        <span class="badge bct-tag-bg text-light mb-1">{{ l.1 }}</span>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col px-3">
-        <p>Level: <samp>{{ task.level }}</samp></p>
+            </h5>
         </div>
     </div>
     <div class="row mt-1">

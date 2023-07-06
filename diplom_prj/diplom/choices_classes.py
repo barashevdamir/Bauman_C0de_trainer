@@ -10,7 +10,7 @@ class ProgLanguage(TextChoices):
     The second value should correspond to the usual readable form
     """
     
-    # GENERAL = 'GEN', 'General' #для общих вопросов по программированию, нужно ли?
+    # GENERAL = 'GEN', 'General'
     PYTHON = 'PY', 'Python'
     JAVASCRIPT = 'JS', 'JavaScript'
     HTML = 'HTML', 'HTML'
