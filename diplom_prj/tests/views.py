@@ -5,15 +5,14 @@ from .models import Test, Question, Result
 from json import loads
 from collections import Counter
 from math import floor
+from diplom.choices_classes import Status
 
 def test_list(request):
-  test_list = Test.objects.all()
+  test_list = Test.objects.filter(status=Status.PUBLISHED)
   
   if request.GET:
     test_list = test_list.order_by(request.GET.get('order_by'))
-    if request.GET.get('language') == 'all':
-      pass
-    else:
+    if request.GET.get('language') != 'all':
       test_list = test_list.filter(prog_language=request.GET.get('language'))
     if request.GET.get('difficulty') == 'all':
       pass
@@ -23,11 +22,9 @@ def test_list(request):
       test_list = test_list.filter(experience = 2)
     elif request.GET.get('difficulty') == 'hard':
       test_list = test_list.filter(experience = 3)
-    if request.GET.get('tag') == 'all':
-      pass
-    else:
+    if request.GET.get('tag') != 'all':
       test_list = test_list.filter(tags = request.GET.get('tag'))
-  
+
   paginator = Paginator(test_list, 10)
   page_number = request.GET.get('page')
   try:
@@ -36,13 +33,20 @@ def test_list(request):
     tests = paginator.page(1)
   except EmptyPage:
     tests = paginator.page(paginator.num_pages)
-  
+
   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    return render(
-    request, 
-    'tests/tests_list.html',
-    {'tests': tests}
-    )
+    if list(test_list) != []:
+      return render(
+      request, 
+      'tests/tests_list.html',
+      {'tests': tests}
+      )
+    else:
+      return render(
+      request, 
+      'base/empty_lists.html',
+      {'empty': 'tests'}
+      )
   else:
     return render(
       request, 
@@ -54,7 +58,7 @@ def test(request, id):
   test = get_object_or_404(
     Test,
     id=id,
-    status=Test.Status.DRAFT
+    # status=Status.PUBLISHED 
   )
   question_list = []
   for quest in test.get_questions():

@@ -1,11 +1,18 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import *
 
-class TasksAdmin(admin.ModelAdmin):
-  list_display = ['id', 'name', 'create_datetime']
-  list_display_links = ['id', 'name']
-  search_fields = ['name']
+class TestingInputInLine(admin.TabularInline):
+  extra = 1
+  model = TestingInput
 
-admin.site.register(Tasks, TasksAdmin)
+class TaskLanguageInLine(admin.TabularInline):
+  extra = 1
+  model = TaskLanguage
+
+@admin.register(Tasks)
+class TasksAdmin(admin.ModelAdmin):
+  inlines = [TaskLanguageInLine, TestingInputInLine]
+  list_display = ['id', 'title', 'created', 'status']
+  list_display_links = ['id', 'title']
+  search_fields = ['title']
+  prepopulated_fields = {'slug': ('title',)}

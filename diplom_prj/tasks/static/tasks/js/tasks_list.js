@@ -6,7 +6,7 @@ var start_params
 
 var sortSelector
 var langSelector
-var diffSelector
+var lvlSelector
 var tagsSelector
 var resetButton
 
@@ -14,14 +14,14 @@ $(document).ready(function() {
     ajaxPagination()
     sortSelector = document.getElementById('sort')
     langSelector = document.getElementById('lang')
-    diffSelector = document.getElementById('diff')
+    lvlSelector = document.getElementById('lvl')
     tagsSelector = document.getElementById('tags')
     resetButton = document.getElementById('reset')
     start_params = createParametrs()
     parametrs = createParametrs()
     sortSelector.onchange = changeValue
     langSelector.onchange = changeValue
-    diffSelector.onchange = changeValue
+    lvlSelector.onchange = changeValue
     tagsSelector.onchange = changeValue
     resetButton.onclick = resetSelectors
 })
@@ -38,8 +38,8 @@ function ajaxRequest(url, page) {
         dataType: 'html',
         mode: 'same-origin',
         success: (data) => {
-            $('#tests-list-view').empty()
-            $('#tests-list-view').html(data)
+            $('#tasks-list-view').empty()
+            $('#tasks-list-view').html(data)
             current_page = page
             }
         })
@@ -64,7 +64,7 @@ function createFilterParametr(e, filter_name) {
 function createParametrs() {
     const par1 = createFilterParametr(sortSelector, 'order_by')
     const par2 = createFilterParametr(langSelector, 'language')
-    const par3 = createFilterParametr(diffSelector, 'difficulty')
+    const par3 = createFilterParametr(lvlSelector, 'lvl')
     const par4 = createFilterParametr(tagsSelector, 'tag')
     return par1+par2+par3+par4
 }
@@ -84,7 +84,7 @@ function resetSelector(options) {
 function resetSelectors() {
     resetSelector(sortSelector)
     resetSelector(langSelector)
-    resetSelector(diffSelector)
+    resetSelector(lvlSelector)
     resetSelector(tagsSelector)
     let url = start_page + start_params
     parametrs = start_params
