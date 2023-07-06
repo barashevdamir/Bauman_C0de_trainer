@@ -8,28 +8,28 @@ from .models import *
 from .task_check import *
 
 def taskspage(request):
-  tasks = Tasks.objects.all()
+  tasks_list = Tasks.objects.filter(status=Status.PUBLISHED)
 
   if request.GET:
     get_turple = request.GET
-    tasks = tasks.order_by(request.GET.get('order_by'))
+    tasks_list = tasks_list.order_by(request.GET.get('order_by'))
     # if request.GET.get('language') != 'all':
     #   tasks = test_list.filter(prog_language=request.GET.get('language'))
     if request.GET.get('lvl') != 'all':
-      tasks = tasks.filter(level = request.GET.get('lvl'))
+      tasks_list = tasks_list.filter(level = request.GET.get('lvl'))
     if request.GET.get('tag') != 'all':
-      tasks = tasks.filter(tags = request.GET.get('tag'))
+      tasks_list = tasks_list.filter(tags = request.GET.get('tag'))
     if request.GET.get('language', False):
       tasks_arr = []
-      for task in tasks:
+      for task in tasks_list:
         tmp_arr = task.languages.split()
         for el in tmp_arr:
           if el == get_turple['language']:
             tasks_arr.append(task.title)
       if get_turple['language'] != 'all':
-        tasks = tasks.filter(title__in=tasks_arr)
+        tasks_list = tasks_list.filter(title__in=tasks_arr)
   
-  paginator = Paginator(tasks, 10)
+  paginator = Paginator(tasks_list, 10)
   page_number = request.GET.get('page')
   try:
     tasks = paginator.page(page_number)
@@ -39,11 +39,18 @@ def taskspage(request):
     tasks = paginator.page(paginator.num_pages)
   
   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    return render(
-    request, 
-    'tasks/tasks_list.html',
-    {'tasks': tasks}
-    )
+    if list(tasks_list) != []:
+      return render(
+      request, 
+      'tasks/tasks_list.html',
+      {'tasks': tasks}
+      )
+    else:
+      return render(
+      request, 
+      'base/empty_lists.html',
+      {'empty': 'tasks'}
+      )
   return render(
     request, 
     'tasks/tasks2.html', 
@@ -54,7 +61,7 @@ def task(request, id):
   task = get_object_or_404(
     Tasks,
     id=id,
-    #status=Test.Status.DRAFT
+    # status=Status.PUBLISHED 
   )
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
     datas = dict(request.POST.lists())

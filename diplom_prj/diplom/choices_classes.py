@@ -1,11 +1,21 @@
 from django.db.models import TextChoices
 
 class ProgLanguage(TextChoices):
-    # GENERAL = 'GEN', 'General' для общих вопросов по программированию, нужно ли?
+    """
+    This class needed to select languages in models
+
+    When adding new languages, it's necessary that the first value 
+    corresponds to the extension of the language files
+
+    The second value should correspond to the usual readable form
+    """
+    
+    # GENERAL = 'GEN', 'General' #для общих вопросов по программированию, нужно ли?
     PYTHON = 'PY', 'Python'
     JAVASCRIPT = 'JS', 'JavaScript'
     HTML = 'HTML', 'HTML'
     SQL = 'SQL', 'SQL'
+    PHP = 'PHP', 'PHP'
 
 class Status(TextChoices):
     DRAFT = 'DF', 'Draft'

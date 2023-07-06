@@ -3,15 +3,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 from taggit.managers import TaggableManager 
-from diplom.choices_classes import Status 
+from diplom.choices_classes import Status, ProgLanguage 
 
 class Tasks(models.Model):
-  
-  # class Status(models.TextChoices):
-  #   DRAFT = 'DF', 'Draft'
-  #   PUBLISHED = 'PB', 'Published'
-
-  
   title = models.CharField(max_length=256, default='')
   slug = models.CharField(max_length=256, default='')
   author = models.ForeignKey(
@@ -33,7 +27,7 @@ class Tasks(models.Model):
   )
   languages = models.TextField(null=True) #плохой вариант, заменить
   tags = TaggableManager()
-  test_file = models.FileField(null=True, blank=True, default=None) #ДОДЕЛАТЬ!!!!
+  test_file = models.FileField(null=True, blank=True, default=None) #ДОДЕЛАТЬ!!!!, нужна возможность грузить несколько фалов для разных языков
   publish = models.DateTimeField(default=timezone.now)
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
@@ -62,13 +56,32 @@ class TestingInput(models.Model):
   input_data = models.CharField(max_length=256, default='')
   expected_output = models.CharField(max_length=256, null=True, default=None)
 
+# class TaskLanguage(models.Model):
+#   task = models.ForeignKey(
+#     Tasks, 
+# 		related_name='languages', 
+# 		on_delete=models.CASCADE
+#   )
+#   prog_language = models.CharField(
+# 		'Programming language',
+# 		max_length=4,
+# 		choices=ProgLanguage.choices,
+# 		default=ProgLanguage.PYTHON,
+# 		blank=False
+# 	)
+#   test_file = models.FileField(
+#     null=True, 
+#     blank=True, 
+#     default=None
+#   )
+
 # class Result(models.Model):
 #   user = models.ForeignKey(
 # 		User, 
 # 		on_delete=models.CASCADE, 
 # 		related_name='task_result'
 # 	)
-#   test = models.ForeignKey(
+#   task = models.ForeignKey(
 # 		Tasks,  
 # 		on_delete=models.CASCADE
 # 	)

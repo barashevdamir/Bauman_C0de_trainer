@@ -1,5 +1,6 @@
 from django import template
-from tasks.models import *
+from tasks.models import Tasks
+from diplom.choices_classes import ProgLanguage, Status
 
 register = template.Library()
 
@@ -15,7 +16,7 @@ def get_array(list):
 
 @register.simple_tag()
 def get_unique_languages():
-  tasks = Tasks.objects.all()
+  tasks = Tasks.objects.filter(status=Status.PUBLISHED)
   lang_arr = []
   for task in tasks:
     lang_arr += task.languages.split()
@@ -24,7 +25,12 @@ def get_unique_languages():
 
 @register.simple_tag
 def get_tasks_tags():
-  tags_list = Tasks.tags.order_by('name')
+  used_tags_ids_dict_list = list(Tasks.objects.filter(status=Status.PUBLISHED).values('tags').distinct())
+  used_tags_ids = []
+  for id in used_tags_ids_dict_list:
+    used_tags_ids.append(id['tags'])
+  used_tags_ids = set(used_tags_ids)
+  tags_list = Tasks.tags.filter(id__in = used_tags_ids).order_by('name')
   return tags_list
 
 
