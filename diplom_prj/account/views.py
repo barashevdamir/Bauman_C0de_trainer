@@ -9,6 +9,7 @@ from .models import Profile
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from django_ratelimit.decorators import ratelimit
 
 def user_login(request):
     if request.method == 'POST':
@@ -33,24 +34,6 @@ def user_login(request):
                                                     'navbar': True,
                                                     'form': form,
                                                   })
-
-
-# def validate_registration(request):
-#     username = request.POST.get('username')
-#     password = request.POST.get('password')
-#
-#     # Placeholder for actual validation logic
-#     if len(username) < 4 or len(password) < 6:
-#         return JsonResponse({'valid': False,
-#                              'error': 'Username must be at least 4 characters and password at least 6 characters long.'})
-#     else:
-#         # Check if user exists
-#         if User.objects.filter(username=username).exists():
-#             return JsonResponse({'valid': False, 'error': 'Username already exists.'})
-#
-#         # Perform necessary actions after validation, e.g. store user in database
-#         User.objects.create_user(username=username, password=password)
-#         return JsonResponse({'valid': True})
 
 def register(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -151,15 +134,30 @@ def sample_view(request):
     current_user = request.user
     return current_user.id
 
-def validate_registration():
-    username = request.form.get('username')
-    password = request.form.get('password')
 
-    # Placeholder for actual validation logic
-    if len(username) < 4 or len(password) < 6:
-        return jsonify({'valid': False, 'error': 'Username must be at least 4 characters, password at least 6 characters long, check Email ID'})
-    else:
-        # Perform necessary actions after validation, e.g. store user in database
-        return jsonify({'valid': True})
+@ratelimit(key='ip', rate='10/m')
+def validate_email(request):
+    was_limited = getattr(request, 'limited', False)
+    if was_limited:
+        return JsonResponse({'message': 'Too many requests'}, status=429)
+
+    email = request.GET.get('email', None)
+    data = {
+        'is_taken': User.objects.filter(email__iexact=email).exists()
+    }
+    return JsonResponse(data)
+
+
+@ratelimit(key='ip', rate='10/m')
+def validate_username(request):
+    was_limited = getattr(request, 'limited', False)
+    if was_limited:
+        return JsonResponse({'message': 'Too many requests'}, status=429)
+
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)
 
 

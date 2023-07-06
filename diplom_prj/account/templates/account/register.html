@@ -45,12 +45,12 @@
                     {% csrf_token %}
                     <div class="input-group mb-3">
 
-                        <input name="{{ user_form.username.html_name }}" required="required" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username">
+                        <input name="{{ user_form.username.html_name }}" required="required" id="username" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username" onchange="validateUsername(this.value)">
 
                     </div>
                     <div class="input-group mb-3">
 
-                        <input name="{{ user_form.email.html_name }}" required="required" type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
+                        <input name="{{ user_form.email.html_name }}" required="required" id="email" type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address" onchange="validateEmail(this.value)">
 
                     </div>
                     <div class="input-group mb-3">
