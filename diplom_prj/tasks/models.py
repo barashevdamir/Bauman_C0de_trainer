@@ -18,6 +18,11 @@ class Tasks(models.Model):
   # positive_rate=models.PositiveSmallIntegerField(default=0)
   # rate_count=models.PositiveSmallIntegerField(default=0)
   # solved=models.PositiveIntegerField(default=0)
+  description = models.TextField(
+    default=None,
+    null=True,
+    blank=True
+  )
   level = models.PositiveSmallIntegerField(
     default=1,
     validators=[
