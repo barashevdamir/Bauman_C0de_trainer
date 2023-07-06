@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 from taggit.managers import TaggableManager 
 from diplom.choices_classes import Status, ProgLanguage 
-from diplom.directory_path import tasks_tests_directory_path
 
 class Tasks(models.Model):
   title = models.CharField(max_length=256, default='')
@@ -62,6 +61,11 @@ class TestingInput(models.Model):
   )
   input_data = models.CharField(max_length=256, default='')
   expected_output = models.CharField(max_length=256, null=True, default=None)
+
+def tasks_tests_directory_path(instance, filename):
+  task = Tasks.objects.get(id=instance.task.id)
+  # file will be uploaded to MEDIA_ROOT/tasks_tests/<task.slug>_<task.id>/<filename>
+  return 'tasks_tests/{0}_id{1}/{2}'.format(task.slug, task.id, filename)
 
 class TaskLanguage(models.Model):
   task = models.ForeignKey(

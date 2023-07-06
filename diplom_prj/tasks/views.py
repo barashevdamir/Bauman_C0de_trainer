@@ -11,7 +11,6 @@ def taskspage(request):
   tasks_list = Tasks.objects.filter(status=Status.PUBLISHED)
 
   if request.GET:
-    get_turple = request.GET
     tasks_list = tasks_list.order_by(request.GET.get('order_by'))
     # if request.GET.get('language') != 'all':
     #   tasks = test_list.filter(prog_language=request.GET.get('language'))
@@ -22,7 +21,7 @@ def taskspage(request):
     if request.GET.get('language') != 'all':
       lang = TaskLanguage.objects.filter(prog_language = request.GET.get('language'))
       tasks_list = tasks_list.filter(languages__in = lang)
-  
+
   paginator = Paginator(tasks_list, 10)
   page_number = request.GET.get('page')
   try:
