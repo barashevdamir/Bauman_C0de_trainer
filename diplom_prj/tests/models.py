@@ -2,21 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MaxValueValidator
-from taggit.managers import TaggableManager 
+from taggit.managers import TaggableManager
+from diplom.choices_classes import Status, ProgLanguage, AnswerType 
 
 class Test(models.Model):
-	
-	class ProgLanguage(models.TextChoices):
-		# GENERAL = 'GEN', 'General' для общих вопросов по программированию, нужно ли?
-		PYTHON = 'PY', 'Python'
-		JAVASCRIPT = 'JS', 'JavaScript'
-		HTML = 'HTML', 'HTML'
-		SQL = 'SQL', 'SQL'
-	
-	class Status(models.TextChoices):
-		DRAFT = 'DF', 'Draft'
-		PUBLISHED = 'PB', 'Published'
-
 	author = models.ForeignKey(
 		User, 
 		on_delete=models.SET_DEFAULT, 
@@ -72,12 +61,6 @@ class Test(models.Model):
 		return self.title
 
 class Question(models.Model):
-	
-	class AnswerType(models.TextChoices):
-		SINGLE = 'SC', 'single choice'
-		MULTIPLE = 'MC', 'multiple choice'
-		WRITE = 'WR', 'write in'
-	
 	test = models.ForeignKey(
 		Test, 
 		on_delete=models.CASCADE,

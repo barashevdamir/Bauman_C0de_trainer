@@ -81,16 +81,11 @@ function submit() {
         dataType: 'json',
         data: {answers: localStorage.getItem('test_answers')}, // отвратительно передает данные
         success: function(response){
-            console.log(response)
             localStorage.setItem('test_result', JSON.stringify(response))
             localStorage.removeItem('test_answers')
             window.location.href = `${url.slice(0, url.lastIndexOf('/') + 1)}result/`
         },
-        error: function(error){
-            console.log(error)
-        }
-    })
-    
+    })   
 }
 
 function clearStorage() {

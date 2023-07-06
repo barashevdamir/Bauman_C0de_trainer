@@ -3,12 +3,13 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 from taggit.managers import TaggableManager 
+from diplom.choices_classes import Status 
 
 class Tasks(models.Model):
   
-  class Status(models.TextChoices):
-    DRAFT = 'DF', 'Draft'
-    PUBLISHED = 'PB', 'Published'
+  # class Status(models.TextChoices):
+  #   DRAFT = 'DF', 'Draft'
+  #   PUBLISHED = 'PB', 'Published'
 
   
   title = models.CharField(max_length=256, default='')
