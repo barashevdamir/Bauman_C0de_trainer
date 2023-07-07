@@ -6,6 +6,7 @@ import tempfile
 import shutil
 from .models import *
 from .task_check import *
+from diplom.choices_classes import Status, ProgLanguage
 
 def taskspage(request):
   tasks_list = Tasks.objects.filter(status=Status.PUBLISHED)
@@ -34,19 +35,19 @@ def taskspage(request):
   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
     if list(tasks_list) != []:
       return render(
-      request, 
+      request,
       'tasks/tasks_list.html',
       {'tasks': tasks}
       )
     else:
       return render(
-      request, 
+      request,
       'base/empty_lists.html',
       {'empty': 'tasks'}
       )
   return render(
-    request, 
-    'tasks/tasks.html', 
+    request,
+    'tasks/tasks.html',
     {'tasks': tasks}
   )
 
@@ -57,16 +58,17 @@ def task(request, id):
     # status=Status.PUBLISHED 
   )
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    datas = dict(request.POST.lists())
 
-    language = str.lower(datas['language'][0])
+    form_data = dict(request.POST.lists())
+    language = str.lower(form_data['language'][0])
+    code = form_data['code'][0]
 
-    code = datas['code'][0]
     if language =='python':
-      file_path = "media/temp/task" + str(id) + ".py"
-      program_file = open(file_path, "w")
-      program_file.write(code)
-      program_file.close()
+      task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
+      file_path = task_language.test_file.path
+      # with open(file_path, 'w') as program_file:
+      #   program_file.write(code)
+      # print(file_path)
 
     if language == "php":
       pass
@@ -88,13 +90,13 @@ def task(request, id):
 
       # Подготовка кода тестов
 
-      pytest_code_path = "media/temp/test" + str(id) + ".py"
-      pytest_code = ''
+      task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
+
+      pytest_code_path = task_language.test_file.path
 
       with open(pytest_code_path) as file:
         pytest_code_list = file.readlines()
-        for item in pytest_code_list:
-          pytest_code = pytest_code + item
+        pytest_code = ''.join(pytest_code_list)
 
 
       # test_code = pytest_code

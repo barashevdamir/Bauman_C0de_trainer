@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="upgraded registration with ajax">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/static/account/css/login_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/static/account/css/login_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/static/account/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/static/account/js/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/templates/account/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/templates/account/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/templates/account/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/templates/account/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/templates/account/user_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/templates/registration/password_reset_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/templates/registration/password_reset_confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/media/tasks_tests/python-task-1_id2/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/media/tasks_tests/python-task-1_id2/test1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/templates/tasks/training.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/templates/tasks/training.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +27,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/account/js",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/account/js&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/diplom_prj/account/static/account/js" />

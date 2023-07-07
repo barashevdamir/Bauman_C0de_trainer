@@ -13,10 +13,9 @@
         <div class="row-editor">
             <div class="col-editor-1">
                 <div class="task-liner">
-                    <p class="lvl-text">Lvl1</p>
                     <p class="task-name">
-                        {% if data %}
-                                {{ data.name }}
+                        {% if task %}
+                                {{ task.title }}
                             {% else %}
                                 {{ error }}
                             {% endif %}
@@ -28,8 +27,8 @@
                     </div>
                     <div class="instruction">
                         <textarea type="text" class="area-instruction" readonly>
-                            {% if data %}
-                                {{ data.description }}
+                            {% if task %}
+                                {{ task.description }}
                             {% else %}
                                 {{ error }}
                             {% endif %}

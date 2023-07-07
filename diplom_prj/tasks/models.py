@@ -9,10 +9,10 @@ class Tasks(models.Model):
   title = models.CharField(max_length=256, default='')
   slug = models.CharField(max_length=256, default='')
   author = models.ForeignKey(
-		User, 
-		on_delete=models.SET_DEFAULT, 
+		User,
+		on_delete=models.SET_DEFAULT,
 		default=None,
-    null=True,
+        null=True,
 		related_name='tasks'
 	)
   # positive_rate=models.PositiveSmallIntegerField(default=0)
