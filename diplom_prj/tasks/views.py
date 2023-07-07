@@ -4,9 +4,12 @@ import os
 import epicbox
 import tempfile
 import shutil
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .task_check import *
 from diplom.choices_classes import Status, ProgLanguage
+import subprocess
 
 def taskspage(request):
   tasks_list = Tasks.objects.filter(status=Status.PUBLISHED)
@@ -51,20 +54,39 @@ def taskspage(request):
     {'tasks': tasks}
   )
 
+
+@login_required
 def task(request, id):
+
   task = get_object_or_404(
     Tasks,
     id=id,
     # status=Status.PUBLISHED 
   )
+
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
 
     form_data = dict(request.POST.lists())
     language = str.lower(form_data['language'][0])
     code = form_data['code'][0]
+    file_name = 'task' + str(task.id)
+
 
     if language =='python':
+
       task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
+
+      if request.user.is_authenticated:
+        directory = f'{settings.MEDIA_ROOT}/tasks/task_id{task.id}/{request.user.username}'
+        if not os.path.exists(directory):
+          os.makedirs(directory)
+        # Save the code in a .py file
+        with open(f"{directory}/{file_name}.py", "w") as file:
+          file.write(code)
+
+      result = Result(user=request.user, task=task, code=code, file_name=file_name)
+      result.save()
+
       file_path = task_language.test_file.path
       # with open(file_path, 'w') as program_file:
       #   program_file.write(code)
@@ -84,6 +106,7 @@ def task(request, id):
       files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}]
       limits = {'cputime': 1, 'memory': 64}
       output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
+
 
       # Создаем временную директорию для работы с файлами
       temp_dir = tempfile.mkdtemp()
@@ -117,7 +140,6 @@ def task(request, id):
       container = epicbox.run('python', 'python3 -m pytest test_code.py',
                               files=files,
                               limits=limits)
-      print(container)
 
       # Копируем результаты из контейнера во временную директорию
 
@@ -132,16 +154,22 @@ def task(request, id):
 
       # Оценка результата pytest
 
+      request.session['code'] = code
+
       if container['exit_code'] == 0:
-        print("Тесты пройдены успешно.")
+        request.session['output'] = "Тесты пройдены успешно."
+        if request.user.is_authenticated:
+          with open(f"{directory}/{file_name}_result.txt", "w") as file:
+            file.write("Тесты пройдены успешно.")
       else:
-        print("Тесты провалены.")
+        if request.user.is_authenticated:
+          request.session['output'] = "Тесты провалены."
+          with open(f"{directory}/{file_name}_result.txt", "w") as file:
+            file.write("Тесты провалены.")
 
       # Удаляем временную директорию
 
       shutil.rmtree(temp_dir)
-
-      return render(request, 'tasks/training.html', {'id': id, 'code': code, 'output': output})
 
     elif language == "node":
         pass
@@ -151,8 +179,15 @@ def task(request, id):
 
     elif language == "cpp":
         pass
-    
-  return render(
-    request, 
-    'tasks/training.html',
-    {'task': task})
+
+  context = {'task': task}
+
+  # проверка, есть ли код и выходные данные
+
+  if 'code' in request.session:
+        context['code'] = request.session['code']
+
+  if 'output' in request.session:
+        context['output'] = request.session['output']
+
+  return render(request, 'tasks/training.html',  context)

@@ -6,6 +6,7 @@ window.onload = function() {
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/c_cpp");
+
     testButton = document.getElementById("test")
     testButton.onclick = executeCode
 }
@@ -43,14 +44,14 @@ function executeCode() {
         url: window.location.href,
         headers: {'X-CSRFToken': csrftoken},
         method: "POST",
-
+        async: true, // make the call asynchronous
         data: {
             language: $("#languages").val(),
             code: editor.getSession().getValue()
         },
 
         success: function(response) {
-            document.getElementById("otput").innerHTML = response.output
+            document.getElementById("output").innerHTML = response.output
         }
     })
 }

@@ -93,13 +93,18 @@ class TaskLanguage(models.Model):
   )# ВНИМАНИЕ!!! осбеность Django такова, что при очистке данного поля в модели файл не удаляется 
    # нужен специальный скрипт или удаление вручную
 
-# class Result(models.Model):
-#   user = models.ForeignKey(
-# 		User, 
-# 		on_delete=models.CASCADE, 
-# 		related_name='task_result'
-# 	)
-#   task = models.ForeignKey(
-# 		Tasks,  
-# 		on_delete=models.CASCADE
-# 	)
+class Result(models.Model):
+  user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+        related_name='task_result'
+	)
+  task = models.ForeignKey(
+		Tasks,
+		on_delete=models.CASCADE
+	)
+  code = models.TextField()
+  file_name = models.CharField(max_length=100)
+  result = models.TextField(blank=True, null=True)
+
+

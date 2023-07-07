@@ -15,10 +15,8 @@
                 <div class="task-liner">
                     <p class="task-name">
                         {% if task %}
-                                {{ task.title }}
-                            {% else %}
-                                {{ error }}
-                            {% endif %}
+                            {{ task.title }}
+                        {% endif %}
                     </p>
                 </div>
                 <div class="instruction-editor">
@@ -29,8 +27,6 @@
                         <textarea type="text" class="area-instruction" readonly>
                             {% if task %}
                                 {{ task.description }}
-                            {% else %}
-                                {{ error }}
                             {% endif %}
                         </textarea>
                     </div>
@@ -66,7 +62,9 @@
                     </div>
 
 
-                    <div class="editor" id="editor"></div>
+                    <div class="editor" id="editor">
+                        {{ code }}
+                    </div>
 
 
 
@@ -77,9 +75,10 @@
                         <p class="sampletest-text">SampleTest</p>
                     </div>
 
-                    <div class="output" id="output">
-
+                    <div class="output text-light" id="output" >
+                        {{ output }}
                     </div>
+
                 </div>
                 <div class="editor-button">
                         <div class="button-container">
