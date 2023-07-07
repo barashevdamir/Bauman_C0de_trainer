@@ -115,13 +115,8 @@ def task(request, id):
 
       task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
 
-      pytest_code_path = task_language.test_file.path
-
-      with open(pytest_code_path) as file:
-        pytest_code_list = file.readlines()
-        pytest_code = ''.join(pytest_code_list)
-
-
+      pytest_code = bytes.decode(task_language.test_file.read(), 'utf-8')
+    
       # test_code = pytest_code
       test_code = code + '\n\n'+ pytest_code
 
