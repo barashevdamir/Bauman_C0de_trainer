@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 import epicbox
@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .task_check import *
 from diplom.choices_classes import Status, ProgLanguage
+from django.http import JsonResponse
+import os
 import subprocess
 
 def taskspage(request):
@@ -54,6 +56,14 @@ def taskspage(request):
     {'tasks': tasks}
   )
 
+def get_file_content(request):
+  file_path = request.GET.get('file_path', '')
+  if os.path.isfile(file_path):
+    with open(file_path, 'r') as file:
+      content = file.read()
+    return JsonResponse({'content': content})
+  else:
+    return JsonResponse({'error': 'File not found'}, status=404)
 
 @login_required
 def task(request, id):
@@ -157,13 +167,11 @@ def task(request, id):
       request.session['code'] = code
 
       if container['exit_code'] == 0:
-        request.session['output'] = "Тесты пройдены успешно."
         if request.user.is_authenticated:
           with open(f"{directory}/{file_name}_result.txt", "w") as file:
             file.write("Тесты пройдены успешно.")
       else:
         if request.user.is_authenticated:
-          request.session['output'] = "Тесты провалены."
           with open(f"{directory}/{file_name}_result.txt", "w") as file:
             file.write("Тесты провалены.")
 
@@ -184,10 +192,24 @@ def task(request, id):
 
   # проверка, есть ли код и выходные данные
 
-  if 'code' in request.session:
-        context['code'] = request.session['code']
+  file_name = 'task' + str(task.id)
+  directory = f'{settings.MEDIA_ROOT}/tasks/task_id{task.id}/{request.user.username}'
 
-  if 'output' in request.session:
-        context['output'] = request.session['output']
+  try:
+    with open(f"{directory}/{file_name}.py", "r") as file:
+      code = file.read()
+    context['code'] = code
+  except Exception as e:
+    print(f"Error reading code file: {e}")
+    context['code'] = ''
+
+  try:
+    with open(f"{directory}/{file_name}_result.txt", "r") as file:
+      output = file.read()
+    context['output'] = output
+  except Exception as e:
+    print(f"Error reading output file: {e}")
+    context['output'] = ''
+
 
   return render(request, 'tasks/training.html',  context)

@@ -24,11 +24,8 @@
                         <p class="instrucrion-text">Instructions</p>
                     </div>
                     <div class="instruction">
-                        <textarea type="text" class="area-instruction" readonly>
-                            {% if task %}
-                                {{ task.description }}
-                            {% endif %}
-                        </textarea>
+                        <textarea type="text" class="area-instruction" readonly>{% if task %}{{ task.description }}{% endif %}</textarea>
+
                     </div>
                 </div>
             </div>
@@ -39,10 +36,10 @@
         <div class="button-container">
 
             <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" onchange="changeLanguage()">
+                <option value="python"> Python </option>
                 <option value="c"> C </option>
                 <option value="cpp"> C++ </option>
                 <option value="php"> PHP </option>
-                <option value="python"> Python </option>
                 <option value="node"> Node JS </option>
             </select>
         </div>
@@ -62,9 +59,7 @@
                     </div>
 
 
-                    <div class="editor" id="editor">
-                        {{ code }}
-                    </div>
+                    <div class="editor" id="editor">{{ code }}</div>
 
 
 
@@ -75,9 +70,7 @@
                         <p class="sampletest-text">SampleTest</p>
                     </div>
 
-                    <div class="output text-light" id="output" >
-                        {{ output }}
-                    </div>
+                    <div class="output text-light" id="output" >{{ output }}</div>
 
                 </div>
                 <div class="editor-button">
