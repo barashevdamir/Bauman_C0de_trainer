@@ -95,3 +95,7 @@ h5{
 #footer a, #footer a:link, #footer a:visited, #footer a:hover{
     color: black;
 }
+
+.bct-bg {
+    background-color: #505050;
+}
