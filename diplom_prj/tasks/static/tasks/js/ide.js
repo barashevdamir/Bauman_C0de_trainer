@@ -3,12 +3,14 @@ let testButton
 
 
 window.onload = function() {
+
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/c_cpp");
+    editor.session.setMode("ace/mode/python");
 
     testButton = document.getElementById("test")
     testButton.onclick = executeCode
+
 }
 
 function getCookie(name) {
@@ -51,7 +53,9 @@ function executeCode() {
         },
 
         success: function(response) {
-            document.getElementById("output").innerHTML = response.output
+            // document.getElementById("output").innerHTML = response.output
+            $('#output').empty()
+            $('#output').append($(response).find('#output').html())
         }
     })
 }
