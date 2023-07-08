@@ -10,7 +10,6 @@ from .models import *
 from .task_check import *
 from diplom.choices_classes import Status, ProgLanguage
 from django.http import JsonResponse
-import os
 import subprocess
 
 def taskspage(request):
