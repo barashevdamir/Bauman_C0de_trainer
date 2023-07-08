@@ -50,7 +50,7 @@
                                                         <div class="form-group">
                                                             <label for="firstName">First Name</label>
                                                             <input name="{{ user_form.first_name.html_name }}" type="text" class="form-control" id="firstName" placeholder="Enter your first name">
-                                                            {{ profile_form.first_name }}
+                                                            {{ profile_form.first_name.errors }}
                                                         </div>
                                                     </div>
 
@@ -58,7 +58,7 @@
                                                         <div class="form-group">
                                                             <label for="eMail">Email</label>
                                                             <input name="{{ user_form.email.html_name }}" type="email" class="form-control"  id="eMail" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Enter email ID">
-                                                            {{ profile_form.email }}
+                                                            {{ profile_form.email.errors }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -69,22 +69,23 @@
 
                                                                 <div class="text-right ">
                                                                     {% csrf_token %}
-                                                                    <p><input type="submit" class="btn btn-sm btn-secondary" value="Update"></p>
+                                                                    <p><input type="submit" class="btn btn-sm btn-secondary btn-block" value="Update"></p>
 
                                                                 </div>
                                                             </div>
-                                            </form>
-                                                <div class="text-right">
-                                                                    <form action = "{% url 'user_profile' %}">
-                                                                        <button class="btn btn-sm btn-secondary">Cancel</button>
-                                                                     </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </form>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <form action = "{% url 'user_profile' %}">
+                                                    <button class="btn btn-secondary btn-sm btn-block">Back</button>
+                                                </form>
+                                            </div>
 
 
 
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             </div>
                         </div>

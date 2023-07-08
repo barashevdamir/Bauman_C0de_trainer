@@ -3,10 +3,18 @@ from django.conf import settings
 from PIL import Image
 from tasks.models import Result, Tasks
 
+from django import forms
+from django.contrib.auth.models import User
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'email']
+
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
-    date_of_birth = models.DateField(blank=True, null=True)
+    first_name = models.CharField(max_length=256, default='')
     photo = models.ImageField(upload_to='users/%Y/%m/%d/',
                               blank=True)
     email = models.EmailField(blank=True)

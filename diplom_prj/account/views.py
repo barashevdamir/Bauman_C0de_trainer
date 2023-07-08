@@ -98,14 +98,15 @@ def edit(request):
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
                                     instance=request.user.profile)
-    return render(request,
-                  'account/edit.html',
-                  {
-                      'title': 'profileEdit',
-                      'navbar': True,
-                      'user_form': user_form,
-                      'profile_form': profile_form,
-                  })
+
+    context = {
+        'title': 'profileEdit',
+        'navbar': True,
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+
+    return render(request, 'account/edit.html', context)
 
 @login_required
 def profile(request):

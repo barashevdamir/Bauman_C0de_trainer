@@ -60,7 +60,7 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['photo']
+        fields = ('first_name', 'photo', 'email',)
 
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100,
