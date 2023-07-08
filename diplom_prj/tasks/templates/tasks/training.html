@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load training_tags %}
 
 {% block title %}Training{% endblock %}
 {% block add_css%}
@@ -34,13 +35,20 @@
 
     <div class="control-panel">
         <div class="button-container">
-
             <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" onchange="changeLanguage()">
-                <option value="python"> Python </option>
+                {% get_unique_languages as unique_languages %}
+                {% for lang in task.languages.all %}
+                    {% for l in unique_languages %}
+                        {% if  l.0 == lang.prog_language %}
+                            <option value="{{ l.0 }}"> {{ l.1 }} </option>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                <!-- <option value="python"> Python </option>
                 <option value="c"> C </option>
                 <option value="cpp"> C++ </option>
                 <option value="php"> PHP </option>
-                <option value="node"> Node JS </option>
+                <option value="node"> Node JS </option> -->
             </select>
         </div>
     </div>

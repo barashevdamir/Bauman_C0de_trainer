@@ -18,8 +18,6 @@ def taskspage(request):
 
   if request.GET:
     tasks_list = tasks_list.order_by(request.GET.get('order_by'))
-    # if request.GET.get('language') != 'all':
-    #   tasks = test_list.filter(prog_language=request.GET.get('language'))
     if request.GET.get('lvl') != 'all':
       tasks_list = tasks_list.filter(level = request.GET.get('lvl'))
     if request.GET.get('tag') != 'all':
@@ -71,7 +69,7 @@ def task(request, id):
   task = get_object_or_404(
     Tasks,
     id=id,
-    # status=Status.PUBLISHED 
+    status=Status.PUBLISHED 
   )
 
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -82,7 +80,7 @@ def task(request, id):
     file_name = 'task' + str(task.id)
 
 
-    if language =='python':
+    if language =='py':
 
       task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
 
@@ -97,15 +95,10 @@ def task(request, id):
       result = Result(user=request.user, task=task, code=code, file_name=file_name)
       result.save()
 
-      file_path = task_language.test_file.path
-      # with open(file_path, 'w') as program_file:
-      #   program_file.write(code)
-      # print(file_path)
-
     if language == "php":
       pass
 
-    elif language == "python":
+    elif language == "py":
 
       epicbox.configure(
         profiles=[
@@ -125,10 +118,10 @@ def task(request, id):
 
       task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
 
-      pytest_code = bytes.decode(task_language.test_file.read(), 'utf-8')
+      pytest_code = task_language.test_file.read()
     
       # test_code = pytest_code
-      test_code = code + '\n\n'+ pytest_code
+      test_code =  bytes(code, 'utf-8') + b'\n\n'+ pytest_code
 
 
       # Настройка Epicbox
@@ -137,8 +130,8 @@ def task(request, id):
           epicbox.Profile('python', 'my_python_image')
       ])
 
-      files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
-      limits = {'cputime': 1, 'memory': 128}
+      files = [{'name': 'test_code.py', 'content': test_code}]
+      limits = {'cputime': 1, 'memory': 64}
 
       # Создание контейнера
 
@@ -208,3 +201,101 @@ def task(request, id):
 
 
   return render(request, 'tasks/training.html',  context)
+
+@login_required
+def task_check(request, id):
+  if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+
+    form_data = dict(request.POST.lists())
+    language = str.lower(form_data['language'][0])
+    code = form_data['code'][0]
+    file_name = 'task' + str(task.id)
+
+
+    if language =='py':
+
+      task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
+
+      if request.user.is_authenticated:
+        directory = f'{settings.MEDIA_ROOT}/tasks/task_id{task.id}/{request.user.username}'
+        if not os.path.exists(directory):
+          os.makedirs(directory)
+        # Save the code in a .py file
+        with open(f"{directory}/{file_name}.py", "w") as file:
+          file.write(code)
+
+      result = Result(user=request.user, task=task, code=code, file_name=file_name)
+      result.save()
+
+    if language == "php":
+      pass
+
+    elif language == "python":
+
+      epicbox.configure(
+        profiles=[
+          epicbox.Profile('python', 'python')
+        ]
+      )
+
+      files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}]
+      limits = {'cputime': 1, 'memory': 64}
+      output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
+
+
+      # Создаем временную директорию для работы с файлами
+      temp_dir = tempfile.mkdtemp()
+
+      # Подготовка кода тестов
+
+      task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
+
+      pytest_code = task_language.test_file.read()
+    
+      # test_code = pytest_code
+      test_code =  bytes(code, 'utf-8') + b'\n\n'+ pytest_code
+
+
+      # Настройка Epicbox
+
+      epicbox.configure(profiles=[
+          epicbox.Profile('python', 'my_python_image')
+      ])
+
+      files = [{'name': 'test_code.py', 'content': test_code}]
+      limits = {'cputime': 1, 'memory': 64}
+
+      # Создание контейнера
+
+      container = epicbox.run('python', 'python3 -m pytest test_code.py',
+                              files=files,
+                              limits=limits)
+
+      # Копируем результаты из контейнера во временную директорию
+
+      stdout_path = os.path.join(temp_dir, 'stdout')
+      stderr_path = os.path.join(temp_dir, 'stderr')
+
+      with open(stdout_path, 'wb') as stdout_file:
+        stdout_file.write(container['stdout'])
+
+      with open(stderr_path, 'wb') as stderr_file:
+        stderr_file.write(container['stderr'])
+
+      # Оценка результата pytest
+
+      request.session['code'] = code
+
+      if container['exit_code'] == 0:
+        if request.user.is_authenticated:
+          with open(f"{directory}/{file_name}_result.txt", "w") as file:
+            file.write("Тесты пройдены успешно.")
+      else:
+        if request.user.is_authenticated:
+          with open(f"{directory}/{file_name}_result.txt", "w") as file:
+            file.write("Тесты провалены.")
+
+      # Удаляем временную директорию
+
+      shutil.rmtree(temp_dir)
+    return JsonResponse()

@@ -1,8 +1,14 @@
 from django import template
+from django.utils.safestring import mark_safe
+import markdown
 from tasks.models import Tasks, TaskLanguage
 from diplom.choices_classes import ProgLanguage, Status
 
 register = template.Library()
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    return mark_safe(markdown.markdown(text))
 
 @register.simple_tag()
 def get_unique_languages():
@@ -21,15 +27,3 @@ def get_unique_languages():
           langs_list.append(lang)
   langs_list.sort()
   return langs_list
-
-@register.simple_tag
-def get_tasks_tags():
-  used_tags_ids_dict_list = list(Tasks.objects.filter(status=Status.PUBLISHED).values('tags').distinct())
-  used_tags_ids = []
-  for id in used_tags_ids_dict_list:
-    used_tags_ids.append(id['tags'])
-  used_tags_ids = set(used_tags_ids)
-  tags_list = Tasks.tags.filter(id__in = used_tags_ids).order_by('name')
-  return tags_list
-
-

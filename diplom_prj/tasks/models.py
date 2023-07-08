@@ -1,5 +1,6 @@
-from django.db import models
+from django.db import models 
 from django.contrib.auth.models import User
+from django.db.models.constraints import UniqueConstraint 
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 from taggit.managers import TaggableManager 
@@ -13,6 +14,7 @@ class Tasks(models.Model):
 		on_delete=models.SET_DEFAULT,
 		default=None,
     null=True,
+    blank=True,
 		related_name='tasks'
 	)
   description = models.TextField(
@@ -78,7 +80,7 @@ class TaskLanguage(models.Model):
 		max_length=4,
 		choices=ProgLanguage.choices,
 		default=None,
-		blank=True
+    blank=True
 	)
   test_file = models.FileField(
     null=True, 
@@ -87,6 +89,14 @@ class TaskLanguage(models.Model):
     upload_to=tasks_tests_directory_path
   )# ВНИМАНИЕ!!! осбеность Django такова, что при очистке данного поля в модели файл не удаляется 
    # нужен специальный скрипт или удаление вручную
+  class Meta:
+    constraints = (
+      UniqueConstraint(
+        fields=['task', 'prog_language'],
+        name='unique_language',
+      ),     
+    )
+ 
 
 class Result(models.Model):
   user = models.ForeignKey(
@@ -106,15 +116,21 @@ class Result(models.Model):
 	# 	choices=ProgLanguage.choices,
 	# 	default=None,
 	# 	blank=True
-	# )
+	# ) 
+  # version = models.CharField(max_length=50)
   # result_code = models.FileField(
   #   null=True, 
   #   blank=True, 
   #   default=None,
   #   upload_to=user_tasks_result_directory_path
   # )
+  date=models.DateTimeField(default=timezone.now)
   code = models.TextField()
   file_name = models.CharField(max_length=100)
   result = models.TextField(blank=True, null=True)
+
+
+  def __str__(self):
+	  return f'{self.user} gain ??? experience after passing {self.task}. Date: {self.date}' #??? -> {self.exp_gain}
 
 
