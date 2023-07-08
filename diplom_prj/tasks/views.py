@@ -71,7 +71,7 @@ def task(request, id):
   task = get_object_or_404(
     Tasks,
     id=id,
-    # status=Status.PUBLISHED 
+    status=Status.PUBLISHED
   )
 
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -82,7 +82,7 @@ def task(request, id):
     file_name = 'task' + str(task.id)
 
 
-    if language =='python':
+    if language =='py':
 
       task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
 
@@ -102,7 +102,7 @@ def task(request, id):
     if language == "php":
       pass
 
-    elif language == "python":
+    elif language == "py":
 
       epicbox.configure(
         profiles=[
@@ -122,10 +122,10 @@ def task(request, id):
 
       task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
 
-      pytest_code = bytes.decode(task_language.test_file.read(), 'utf-8')
+      pytest_code = task_language.test_file.read()
     
       # test_code = pytest_code
-      test_code = code + '\n\n'+ pytest_code
+      test_code =  bytes(code, 'utf-8') + b'\n\n'+ pytest_code
 
 
       # Настройка Epicbox
@@ -134,8 +134,8 @@ def task(request, id):
           epicbox.Profile('python', 'my_python_image')
       ])
 
-      files = [{'name': 'test_code.py', 'content': bytes(test_code, 'utf-8')}]
-      limits = {'cputime': 1, 'memory': 128}
+      files = [{'name': 'test_code.py', 'content': test_code}]
+      limits = {'cputime': 1, 'memory': 64}
 
       # Создание контейнера
 

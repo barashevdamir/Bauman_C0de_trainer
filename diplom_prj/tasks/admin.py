@@ -17,4 +17,5 @@ class TasksAdmin(admin.ModelAdmin):
   search_fields = ['title']
   prepopulated_fields = {'slug': ('title',)}
 
+admin.site.register(TaskLanguage)
 admin.site.register(Result)

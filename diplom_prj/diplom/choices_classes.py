@@ -16,6 +16,8 @@ class ProgLanguage(TextChoices):
     HTML = 'HTML', 'HTML'
     SQL = 'SQL', 'SQL'
     PHP = 'PHP', 'PHP'
+    C = 'C', 'C'
+    CPP = 'CPP', 'C++'
 
 class Status(TextChoices):
     DRAFT = 'DF', 'Draft'
