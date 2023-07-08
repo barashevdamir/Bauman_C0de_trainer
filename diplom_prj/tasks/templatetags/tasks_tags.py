@@ -15,10 +15,10 @@ def get_unique_languages():
   used_langs_dict_list = list(TaskLanguage.objects.filter(id__in=used_langs_ids_list).values('prog_language').distinct())
   all_langs_list = ProgLanguage.choices
   for lang in used_langs_dict_list:
-      used_langs_list.append(lang['prog_language'])
+    used_langs_list.append(lang['prog_language'])
   for lang in all_langs_list:
-      if lang[0] in used_langs_list:
-          langs_list.append(lang)
+    if lang[0] in used_langs_list:
+      langs_list.append(lang)
   langs_list.sort()
   return langs_list
 

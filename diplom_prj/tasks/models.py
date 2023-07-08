@@ -41,6 +41,9 @@ class Tasks(models.Model):
 		blank=False
 	)
 
+  def languages_count(self):
+    return self.languages.count()
+
   def __str__(self):
     return self.title
 

@@ -34,10 +34,10 @@ function changeLanguage() {
 
     let language = $("#languages").val();
 
-    if(language == 'c' || language == 'cpp')editor.session.setMode("ace/mode/c_cpp");
-    else if(language == 'php')editor.session.setMode("ace/mode/php");
-    else if(language == 'python')editor.session.setMode("ace/mode/python");
-    else if(language == 'node')editor.session.setMode("ace/mode/javascript");
+    if(language == 'C' || language == 'CPP')editor.session.setMode("ace/mode/c_cpp");
+    else if(language == 'PHP')editor.session.setMode("ace/mode/php");
+    else if(language == 'PY')editor.session.setMode("ace/mode/python");
+    else if(language == 'JS')editor.session.setMode("ace/mode/javascript");
 }
 
 function executeCode() {

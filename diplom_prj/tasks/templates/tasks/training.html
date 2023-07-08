@@ -9,7 +9,7 @@
 
 {% block main_content %}
 
-
+<main>
     <div class="cont">
         <div class="row-editor">
             <div class="col-editor-1">
@@ -35,8 +35,12 @@
 
     <div class="control-panel">
         <div class="button-container">
+            {% if task.languages.count == 1 %}
+            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" disabled>
+            {% else %}
             <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" onchange="changeLanguage()">
-                {% get_unique_languages as unique_languages %}
+            {% endif %}    
+                {% get_prog_langs as unique_languages %}
                 {% for lang in task.languages.all %}
                     {% for l in unique_languages %}
                         {% if  l.0 == lang.prog_language %}
@@ -44,11 +48,6 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-                <!-- <option value="python"> Python </option>
-                <option value="c"> C </option>
-                <option value="cpp"> C++ </option>
-                <option value="php"> PHP </option>
-                <option value="node"> Node JS </option> -->
             </select>
         </div>
     </div>
@@ -122,7 +121,7 @@
             </div>
         </div>
     </div>
-
+</main>
 
 
 {% endblock %}
