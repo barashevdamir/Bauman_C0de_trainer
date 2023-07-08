@@ -94,9 +94,6 @@ def task(request, id):
         with open(f"{directory}/{file_name}.py", "w") as file:
           file.write(code)
 
-      result = Result(user=request.user, task=task, code=code, file_name=file_name)
-      result.save()
-
       file_path = task_language.test_file.path
       # with open(file_path, 'w') as program_file:
       #   program_file.write(code)
@@ -161,7 +158,10 @@ def task(request, id):
 
       request.session['code'] = code
 
+      passed = False
+
       if container['exit_code'] == 0:
+        passed = True
         if request.user.is_authenticated:
           with open(f"{directory}/{file_name}_result.txt", "w") as file:
             file.write("Тесты пройдены успешно.")
@@ -169,6 +169,9 @@ def task(request, id):
         if request.user.is_authenticated:
           with open(f"{directory}/{file_name}_result.txt", "w") as file:
             file.write("Тесты провалены.")
+
+      result = Result(user=request.user, task=task, code=code, file_name=file_name, prog_language=ProgLanguage.PYTHON, passed=passed)
+      result.save()
 
       # Удаляем временную директорию
 

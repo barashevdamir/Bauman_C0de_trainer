@@ -16,3 +16,5 @@ class TasksAdmin(admin.ModelAdmin):
   list_display_links = ['id', 'title']
   search_fields = ['title']
   prepopulated_fields = {'slug': ('title',)}
+
+admin.site.register(Result)

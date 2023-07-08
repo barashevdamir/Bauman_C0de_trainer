@@ -98,23 +98,24 @@ class Result(models.Model):
 		Tasks,
 		on_delete=models.CASCADE
 	)
-  # passed = models.BooleanField(default=False)
-  # exp_gain = models.PositiveSmallIntegerField(default=0)
-  # prog_language = models.CharField(
-	# 	'Programming language',
-	# 	max_length=4,
-	# 	choices=ProgLanguage.choices,
-	# 	default=None,
-	# 	blank=True
-	# )
-  # result_code = models.FileField(
-  #   null=True, 
-  #   blank=True, 
-  #   default=None,
-  #   upload_to=user_tasks_result_directory_path
-  # )
+  passed = models.BooleanField(default=False)
+  exp_gain = models.PositiveSmallIntegerField(default=0)
+  prog_language = models.CharField(
+      'Programming language',
+      max_length=4,
+      choices=ProgLanguage.choices,
+      default=None,
+      blank=True
+  )
+  result_code = models.FileField(
+      null=True,
+      blank=True,
+      default=None,
+      upload_to=user_tasks_result_directory_path
+  )
   code = models.TextField()
   file_name = models.CharField(max_length=100)
   result = models.TextField(blank=True, null=True)
+
 
 

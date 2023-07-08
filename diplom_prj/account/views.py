@@ -6,10 +6,12 @@ from django.contrib import messages
 from .forms import LoginForm, UserRegistrationForm, \
     UserEditForm, ProfileEditForm, UpdateUserForm, UpdateProfileForm
 from .models import Profile
+from tasks.models import Result, Tasks, TaskLanguage
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django_ratelimit.decorators import ratelimit
+from diplom.choices_classes import ProgLanguage
 
 def user_login(request):
     if request.method == 'POST':
@@ -118,11 +120,30 @@ def profile(request):
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
+    # Дополнительный контекст для подсчета задач
+
+    passed_tasks_count_langs = {}
+
+    for lang in ProgLanguage.values:
+        total_tasks_quantity = TaskLanguage.objects.filter(prog_language=lang).count()
+        passed_tasks_count_quantity = Result.objects.filter(user=request.user, passed=True, prog_language=lang).values('task').distinct().count()
+        if total_tasks_quantity == 0:
+            progress = 0
+        else:
+            progress = int(100*passed_tasks_count_quantity/total_tasks_quantity)
+        passed_tasks_count_langs[lang] = progress
+    passed_tasks_count = Result.objects.filter(user=request.user, passed=True).values('task').distinct().count()
+    total_tasks_count = Tasks.objects.all().count()
+    passed_tasks_count_langs['total'] = int(100*(passed_tasks_count/total_tasks_count))
+
     return render(request, 'account/user_profile.html', {
                                                         'title': 'Profile',
                                                         'navbar': True,
                                                         'user_form': user_form,
-                                                        'profile_form': profile_form
+                                                        'profile_form': profile_form,
+                                                        'passed_tasks_count': passed_tasks_count,
+                                                        'total_tasks_count': total_tasks_count,
+                                                        'passed_tasks_count_langs': passed_tasks_count_langs,
     })
 
 
