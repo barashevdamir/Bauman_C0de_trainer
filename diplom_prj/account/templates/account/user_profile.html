@@ -112,19 +112,19 @@
                                           {{ passed_tasks_count_langs.PY }}%
                                       </div>
                                     </div>
-                                <h3 class="progress-title">JS</h3>
+                                <h3 class="progress-title mt-3">JS</h3>
                                     <div class="progress">
                                       <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.JS }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.JS }}%">
                                           {{ passed_tasks_count_langs.JS }}%
                                       </div>
                                     </div>
-                                <h3 class="progress-title">SQL</h3>
+                                <h3 class="progress-title mt-3">SQL</h3>
                                     <div class="progress">
                                       <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.SQL }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.SQL }}%">
                                           {{ passed_tasks_count_langs.SQL }}%
                                       </div>
                                     </div>
-                                <h3 class="progress-title">PHP</h3>
+                                <h3 class="progress-title mt-3">PHP</h3>
                                     <div class="progress">
                                       <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.PHP }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.PHP }}%">
                                           {{ passed_tasks_count_langs.PHP }}%
@@ -139,7 +139,7 @@
                     <div class="col-sm-6 mb-3">
                       <div class="card h-100">
                         <div class="card-body ">
-                          <h6 class="d-flex align-items-center mb-3">Solved tasks:</h6>
+                            <h6 class="d-flex align-items-center mb-3">Solved tasks:</h6>
                             <div class="col-md-12">
                                 <h3 class="progress-title">{{ passed_tasks_count }}/{{ total_tasks_count }}</h3>
                                     <div class="progress">
@@ -148,6 +148,16 @@
                                       </div>
                                     </div>
                             </div>
+                            <h6 class="d-flex align-items-center mb-3 mt-3">Solved tests:</h6>
+                            <div class="col-md-12">
+                                <h3 class="progress-title">{{ passed_tests_count }}/{{ total_tests_count }}</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.tests_progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.tests_progress }}%">
+                                          {{ passed_tasks_count_langs.tests_progress }}%
+                                      </div>
+                                    </div>
+                            </div>
+
 
 
                         </div>
