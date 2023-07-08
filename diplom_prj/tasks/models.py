@@ -12,12 +12,9 @@ class Tasks(models.Model):
 		User,
 		on_delete=models.SET_DEFAULT,
 		default=None,
-        null=True,
+    null=True,
 		related_name='tasks'
 	)
-  # positive_rate=models.PositiveSmallIntegerField(default=0)
-  # rate_count=models.PositiveSmallIntegerField(default=0)
-  # solved=models.PositiveIntegerField(default=0)
   description = models.TextField(
     default=None,
     null=True,
@@ -30,15 +27,7 @@ class Tasks(models.Model):
       MaxValueValidator(limit_value=5)
     ],
   )
-  # languages = models.TextField(null=True) #плохой вариант, заменить
   tags = TaggableManager()
-  # test_file = models.FileField(
-  #   null=True, 
-  #   blank=True, 
-  #   default=None,
-  #   upload_to=tasks_tests_directory_path
-  #   ) # ВНИМАНИЕ!!! осбеность Django такова, что при очистке данного поля в модели файл не удаляется 
-  #     # нужен специальный скрипт или удаление вручную
   publish = models.DateTimeField(default=timezone.now)
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
@@ -72,6 +61,12 @@ def tasks_tests_directory_path(instance, filename):
   # file will be uploaded to MEDIA_ROOT/tasks_tests/<task.slug>_<task.id>/<filename>
   return 'tasks_tests/{0}_id{1}/{2}'.format(task.slug, task.id, filename)
 
+def user_tasks_result_directory_path(instance, filename):
+  user = User.objects.get(id=instance.user.id)
+  task = Tasks.objects.get(id=instance.task.id)
+  # file will be uploaded to MEDIA_ROOT/results/<user.username>_<user.id>/<task.slug>_<task.id>/<filename>
+  return 'results/{0}_id{1}/{2}_id{3}/{4}'.format(user.username, user.id, task.slug, task.id, filename)
+
 class TaskLanguage(models.Model):
   task = models.ForeignKey(
     Tasks, 
@@ -97,12 +92,27 @@ class Result(models.Model):
   user = models.ForeignKey(
 		User,
 		on_delete=models.CASCADE,
-        related_name='task_result'
+    related_name='task_result'
 	)
   task = models.ForeignKey(
 		Tasks,
 		on_delete=models.CASCADE
 	)
+  # passed = models.BooleanField(default=False)
+  # exp_gain = models.PositiveSmallIntegerField(default=0)
+  # prog_language = models.CharField(
+	# 	'Programming language',
+	# 	max_length=4,
+	# 	choices=ProgLanguage.choices,
+	# 	default=None,
+	# 	blank=True
+	# )
+  # result_code = models.FileField(
+  #   null=True, 
+  #   blank=True, 
+  #   default=None,
+  #   upload_to=user_tasks_result_directory_path
+  # )
   code = models.TextField()
   file_name = models.CharField(max_length=100)
   result = models.TextField(blank=True, null=True)
