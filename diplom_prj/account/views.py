@@ -143,6 +143,7 @@ def profile(request):
     total_tests_count = Test.objects.filter(status=Status.PUBLISHED).count()
     tests_progress = int(100*passed_tests_count/total_tests_count)
 
+
     return render(request, 'account/user_profile.html', {
                                                         'title': 'Profile',
                                                         'navbar': True,
