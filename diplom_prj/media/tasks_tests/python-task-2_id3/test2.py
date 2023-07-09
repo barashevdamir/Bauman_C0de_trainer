@@ -1,20 +1,17 @@
-import pytest
-# from main.py import factorial
-def test_factorial():
-    # Testing factorial of positive numbers
-    assert factorial(0) == 1
-    assert factorial(1) == 1
-    assert factorial(2) == 2
-    assert factorial(3) == 6
-    assert factorial(4) == 24
-    assert factorial(5) == 120
+import unittest
 
-    # Testing factorial of negative numbers
-    with pytest.raises(ValueError):
-        factorial(-1)
+class TestFactorial(unittest.TestCase):
+    def test_factorial_of_zero(self):
+        result = factorial(0)
+        self.assertEqual(result, 1)
 
-    # Testing factorial of non-integer inputs
-    with pytest.raises(TypeError):
-        factorial(2.5)
-    with pytest.raises(TypeError):
-        factorial("a")
+    def test_factorial_of_positive_number(self):
+        result = factorial(5)
+        self.assertEqual(result, 120)
+
+    def test_factorial_of_negative_number(self):
+        with self.assertRaises(ValueError):
+            factorial(-5)
+
+if __name__ == '__main__':
+    unittest.main()

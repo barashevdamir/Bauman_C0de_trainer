@@ -131,7 +131,7 @@ def task(request, id):
       # Настройка Epicbox
 
       epicbox.configure(profiles=[
-          epicbox.Profile('python', 'my_python_image')
+          epicbox.Profile('python', 'python')
       ])
 
       files = [{'name': 'test_code.py', 'content': test_code}]
@@ -139,9 +139,10 @@ def task(request, id):
 
       # Создание контейнера
 
-      container = epicbox.run('python', 'python3 -m pytest test_code.py',
+      container = epicbox.run('python', 'python3 -m unittest test_code.py',
                               files=files,
                               limits=limits)
+
 
       # Копируем результаты из контейнера во временную директорию
 
