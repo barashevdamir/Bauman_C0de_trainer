@@ -112,7 +112,7 @@ def task(request, id):
 
       files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}]
       limits = {'cputime': 1, 'memory': 64}
-      output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
+      # output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
 
 
       # Создаем временную директорию для работы с файлами
