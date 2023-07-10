@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="row justify-content-center">
-                        <a href="/leader_board" class="btn btn-dark btn-bct-main">Leaderboard <i class="icon-award"></i></a>
+                        <a href="{% url 'leaderboard' %}" class="btn btn-dark btn-bct-main">Leaderboard <i class="icon-award"></i></a>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="text-center mb-2">Powered by <a href="https://www.djangoproject.com/">Django 4</a> and <a href="https://getbootstrap.com/">Bootstrap 5</a></p>
+                    <p class="text-center mb-2">
+                        Powered by <a href="https://www.djangoproject.com/">Django 4</a> and <a href="https://getbootstrap.com/">Bootstrap 5</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -127,5 +129,4 @@
     {% endblock %} 
 
 {% block jscripts %}   
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}

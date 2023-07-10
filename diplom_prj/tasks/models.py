@@ -125,26 +125,25 @@ class Result(models.Model):
   passed = models.BooleanField(default=False)
   exp_gain = models.PositiveSmallIntegerField(default=0)
   prog_language = models.CharField(
-      'Programming language',
-      max_length=4,
-      choices=ProgLanguage.choices,
-      default=None,
-      blank=True
+    'Programming language',
+    max_length=4,
+    choices=ProgLanguage.choices,
+    default=None,
+    blank=True
   )
   # version = models.CharField(max_length=50)
   result_code = models.FileField(
-      null=True,
-      blank=True,
-      default=None,
-      upload_to=user_tasks_result_directory_path
+    null=True,
+    blank=True,
+    default=None,
+    upload_to=user_tasks_result_directory_path
   )
   date = models.DateTimeField(default=timezone.now)
   code = models.TextField()
   file_name = models.CharField(max_length=100)
   result = models.TextField(blank=True, null=True)
 
-
   def __str__(self):
-	  return f'{self.user} gain ??? experience after passing {self.task}. Date: {self.date}' #??? -> {self.exp_gain}
+	  return f'{self.user} gain {self.exp_gain} experience after passing {self.task}. Date: {self.date}'
 
 
