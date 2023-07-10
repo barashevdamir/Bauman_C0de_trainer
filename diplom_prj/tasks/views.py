@@ -74,6 +74,8 @@ def task(request, id):
     status=Status.PUBLISHED
   )
 
+  context = {'task': task}
+
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
 
     form_data = dict(request.POST.lists())
@@ -84,8 +86,6 @@ def task(request, id):
 
     if language =='py':
 
-      task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
-
       if request.user.is_authenticated:
         directory = f'{settings.MEDIA_ROOT}/tasks/task_id{task.id}/{request.user.username}'
         if not os.path.exists(directory):
@@ -94,26 +94,11 @@ def task(request, id):
         with open(f"{directory}/{file_name}.py", "w") as file:
           file.write(code)
 
-      file_path = task_language.test_file.path
-      # with open(file_path, 'w') as program_file:
-      #   program_file.write(code)
-      # print(file_path)
-
-    if language == "php":
-      pass
-
-    elif language == "py":
-
       epicbox.configure(
         profiles=[
           epicbox.Profile('python', 'python')
         ]
       )
-
-      files = [{'name': 'main.py', 'content': bytes(code, 'utf-8')}]
-      limits = {'cputime': 1, 'memory': 64}
-      # output = epicbox.run('python', 'python3 main.py', files=files, limits=limits)
-
 
       # Создаем временную директорию для работы с файлами
       temp_dir = tempfile.mkdtemp()
@@ -178,16 +163,85 @@ def task(request, id):
 
       shutil.rmtree(temp_dir)
 
-    elif language == "node":
-        pass
+    elif language == "js":
+
+      if request.user.is_authenticated:
+        directory = f'{settings.MEDIA_ROOT}/tasks/task_id{task.id}/{request.user.username}'
+        if not os.path.exists(directory):
+          os.makedirs(directory)
+        # Save the code in a .js file
+        with open(f"{directory}/{file_name}.js", "w") as file:
+          file.write(code)
+
+      # Configure Epicbox for JavaScript
+      epicbox.configure(
+        profiles=[
+          epicbox.Profile('nodejs', 'nodejs')
+        ]
+      )
+
+      # Create a temporary directory for file operations
+      temp_dir = tempfile.mkdtemp()
+
+      # Prepare the test code
+      task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.JAVASCRIPT)
+      test_code = task_language.test_file.read()
+
+      # Concatenate the code and the test code
+      test_code = bytes(code, 'utf-8') + b'\n\n' + test_code
+
+      # Configure Epicbox for JavaScript
+      epicbox.configure(
+        profiles=[
+          epicbox.Profile('nodejs', 'nodejs')
+        ]
+      )
+
+      files = [{'name': 'test_code.js', 'content': test_code}]
+      limits = {'cputime': 1, 'memory': 64}
+
+      # Create a container
+      container = epicbox.run('nodejs', 'node test_code.js',
+                              files=files,
+                              limits=limits)
+
+      # Copy the container results to the temporary directory
+      stdout_path = os.path.join(temp_dir, 'stdout')
+      stderr_path = os.path.join(temp_dir, 'stderr')
+
+      with open(stdout_path, 'wb') as stdout_file:
+        stdout_file.write(container['stdout'])
+
+      with open(stderr_path, 'wb') as stderr_file:
+        stderr_file.write(container['stderr'])
+
+      # Evaluate the test results
+      request.session['code'] = code
+
+      passed = False
+
+      if container['exit_code'] == 0:
+        passed = True
+        if request.user.is_authenticated:
+          with open(f"{directory}/{file_name}_result.txt", "w") as file:
+            file.write("Tests passed successfully.")
+      else:
+        if request.user.is_authenticated:
+          with open(f"{directory}/{file_name}_result.txt", "w") as file:
+            file.write("Tests failed.")
+
+      result = Result(user=request.user, task=task, code=code, file_name=file_name,
+                      prog_language=ProgLanguage.JAVASCRIPT, passed=passed)
+      result.save()
+
+      # Remove the temporary directory
+      shutil.rmtree(temp_dir)
 
     elif language == "c":
         pass
 
     elif language == "cpp":
         pass
-
-  context = {'task': task}
 
   # проверка, есть ли код и выходные данные
 
