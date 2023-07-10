@@ -210,5 +210,9 @@ def task(request, id):
     print(f"Error reading output file: {e}")
     context['output'] = ''
 
+  task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
+
+  tasks_solution_code = task_language.solution_file.read()
+  context['solution'] = tasks_solution_code.decode()
 
   return render(request, 'tasks/training.html',  context)

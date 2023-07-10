@@ -66,6 +66,11 @@ def tasks_tests_directory_path(instance, filename):
   # file will be uploaded to MEDIA_ROOT/tasks_tests/<task.slug>_<task.id>/<filename>
   return 'tasks_tests/{0}_id{1}/{2}'.format(task.slug, task.id, filename)
 
+def tasks_solution_directory_path(instance, filename):
+  task = Tasks.objects.get(id=instance.task.id)
+  # file will be uploaded to MEDIA_ROOT/tasks_tests/<task.slug>_<task.id>/<filename>
+  return 'tasks_solution/{0}_id{1}/{2}'.format(task.slug, task.id, filename)
+
 def user_tasks_result_directory_path(instance, filename):
   user = User.objects.get(id=instance.user.id)
   task = Tasks.objects.get(id=instance.task.id)
@@ -92,6 +97,12 @@ class TaskLanguage(models.Model):
     upload_to=tasks_tests_directory_path
   )# ВНИМАНИЕ!!! осбеность Django такова, что при очистке данного поля в модели файл не удаляется 
    # нужен специальный скрипт или удаление вручную
+  solution_file = models.FileField(
+      null=True,
+      blank=True,
+      default=None,
+      upload_to=tasks_solution_directory_path
+  )
   class Meta:
     constraints = (
       UniqueConstraint(
