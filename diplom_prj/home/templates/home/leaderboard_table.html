@@ -1,0 +1,31 @@
+{% load static %}
+<table class="table table-rounded">
+  <thead>
+    <tr class="bct-row-light">
+      <th scope="col">№</th>
+      <th scope="col">Username</th>
+      {% if total_tests_count != False %}
+      <th scope="col" class="text-center">Tests</th>
+      {% endif %}
+      {% if total_tasks_count != False %}
+      <th scope="col" class="text-center">Tasks</th>
+      {% endif %}
+      <th scope="col" class="text-center">Experience</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users_list %}
+    <tr class="{% cycle 'bct-row-dark text-light' 'bct-row-light' %}">
+      <th scope="row" >{{ forloop.counter }}</th>
+      <td>{{ user.username }}</td>
+      {% if total_tests_count != False %}
+      <td class="text-center">{{ user.tests }} / {{total_tests_count}}</td>
+      {% endif %}
+      {% if total_tasks_count != False %}
+      <td class="text-center">{{ user.tasks }} / {{total_tasks_count}}</td>
+      {% endif %}
+      <td class="text-center">{{ user.exp }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

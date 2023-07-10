@@ -18,8 +18,6 @@ def taskspage(request):
 
   if request.GET:
     tasks_list = tasks_list.order_by(request.GET.get('order_by'))
-    # if request.GET.get('language') != 'all':
-    #   tasks = test_list.filter(prog_language=request.GET.get('language'))
     if request.GET.get('lvl') != 'all':
       tasks_list = tasks_list.filter(level = request.GET.get('lvl'))
     if request.GET.get('tag') != 'all':
@@ -160,9 +158,11 @@ def task(request, id):
       request.session['code'] = code
 
       passed = False
+      exp_gain = 0
 
       if container['exit_code'] == 0:
         passed = True
+        exp_gain = task.level*3
         if request.user.is_authenticated:
           with open(f"{directory}/{file_name}_result.txt", "w") as file:
             file.write("Тесты пройдены успешно.")
@@ -171,7 +171,7 @@ def task(request, id):
           with open(f"{directory}/{file_name}_result.txt", "w") as file:
             file.write("Тесты провалены.")
 
-      result = Result(user=request.user, task=task, code=code, file_name=file_name, prog_language=ProgLanguage.PYTHON, passed=passed)
+      result = Result(user=request.user, task=task, code=code, file_name=file_name, prog_language=ProgLanguage.PYTHON, passed=passed, exp_gain=exp_gain)
       result.save()
 
       # Удаляем временную директорию
@@ -209,6 +209,5 @@ def task(request, id):
   except Exception as e:
     print(f"Error reading output file: {e}")
     context['output'] = ''
-
 
   return render(request, 'tasks/training.html',  context)

@@ -138,11 +138,11 @@ class Result(models.Model):
 	passed = models.BooleanField(default=False)
 	score = models.PositiveSmallIntegerField(default=0)
 	exp_gain = models.PositiveSmallIntegerField(default=0)
-	pass_date = models.DateTimeField(auto_now=True)
+	date = models.DateTimeField(default=timezone.now)
 
 	class Meta:
 		verbose_name_plural = "Results"
 		ordering = ['user']
 
 	def __str__(self):
-		return f'{self.user} gain {self.exp_gain} experience after passing {self.test}'
+		return f'{self.user} gain {self.exp_gain} experience after passing {self.test}. Date: {self.date}'
