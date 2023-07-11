@@ -170,7 +170,7 @@ def handle_javascript_task(request, task, code, file_name):
       file.write(code)
 
   # Epicbox configuration for JavaScript
-  epicbox.configure(profiles=[epicbox.Profile('nodejs', 'nodejs')])
+  epicbox.configure(profiles=[epicbox.Profile('nodejs', 'node')])
 
   # Create a temporary directory for file operations
   temp_dir = tempfile.mkdtemp()
