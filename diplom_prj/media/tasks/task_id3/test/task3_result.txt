@@ -1,1 +1,1 @@
-Тесты пройдены успешно.
+Tests passed successfully.
