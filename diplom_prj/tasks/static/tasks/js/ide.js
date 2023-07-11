@@ -43,7 +43,19 @@ function changeLanguage() {
 function executeCode() {
     const csrftoken = getCookie('csrftoken');
     const outputElement = $('#output');
-    outputElement.html('Loading...'); // Display loading message
+    const loadingMessage = 'Loading';
+
+    let intervalId;
+    let pointCount = 0;
+
+    outputElement.html(loadingMessage); // Display initial loading message
+
+    // Start interval to update loading message with varying number of points
+    intervalId = setInterval(() => {
+        const points = '.'.repeat(pointCount % 4);
+        outputElement.html(`${loadingMessage}${points}`);
+        pointCount++;
+    }, 250);
 
     $.ajax({
         url: window.location.href,
@@ -55,12 +67,13 @@ function executeCode() {
             code: editor.getSession().getValue()
         },
         success: function(response) {
+            clearInterval(intervalId); // Stop the loading message interval
             outputElement.empty(); // Clear the loading message
             outputElement.append($(response).find('#output').html());
         },
         error: function() {
+            clearInterval(intervalId); // Stop the loading message interval
             outputElement.html('An error occurred.'); // Display error message
         }
     });
 }
-
