@@ -180,7 +180,7 @@ def handle_javascript_task(request, task, code, file_name):
   test_code = task_language.test_file.read()
 
   # Concatenate the code and the test code
-  test_code = bytes(code, 'utf-8') + b'\n\n' + test_code
+  test_code = b'''const assert = require('assert');''' + b'\n\n' + bytes(code, 'utf-8') + b'\n\n' + test_code
 
   files = [{'name': 'test_code.js', 'content': test_code}]
   limits = {'cputime': 1, 'memory': 64}
