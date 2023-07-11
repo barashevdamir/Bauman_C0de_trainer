@@ -41,7 +41,10 @@ function changeLanguage() {
 }
 
 function executeCode() {
-    const csrftoken = getCookie('csrftoken')
+    const csrftoken = getCookie('csrftoken');
+    const outputElement = $('#output');
+    outputElement.html('Loading...'); // Display loading message
+
     $.ajax({
         url: window.location.href,
         headers: {'X-CSRFToken': csrftoken},
@@ -51,12 +54,13 @@ function executeCode() {
             language: $("#languages").val(),
             code: editor.getSession().getValue()
         },
-
         success: function(response) {
-            // document.getElementById("output").innerHTML = response.output
-            $('#output').empty()
-            $('#output').append($(response).find('#output').html())
+            outputElement.empty(); // Clear the loading message
+            outputElement.append($(response).find('#output').html());
+        },
+        error: function() {
+            outputElement.html('An error occurred.'); // Display error message
         }
-    })
+    });
 }
 

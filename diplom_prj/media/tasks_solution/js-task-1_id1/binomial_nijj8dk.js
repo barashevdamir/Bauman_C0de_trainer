@@ -1,4 +1,8 @@
 function binomialTheorem(a, b, n) {
+  if (n === 0) {
+    return '1';
+  }
+
   const coefficients = [];
 
   for (let k = 0; k <= n; k++) {
