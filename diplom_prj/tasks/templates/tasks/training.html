@@ -147,14 +147,20 @@
         // Initialize the Ace editor inside the modal
         $(document).ready(function() {
             $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
+
+                let language = $("#languages").val();
                 var solutionEditor = ace.edit("editor2");
                 solutionEditor.setTheme("ace/theme/monokai");
-                solutionEditor.session.setMode("ace/mode/python");
+                if(language == 'C' || language == 'CPP')solutionEditor.session.setMode("ace/mode/c_cpp");
+                else if(language == 'PHP')solutionEditor.session.setMode("ace/mode/php");
+                else if(language == 'PY')solutionEditor.session.setMode("ace/mode/python");
+                else if(language == 'JS')solutionEditor.session.setMode("ace/mode/javascript");
                 var solutionCode = `{{ solution|escapejs }}`;
                 solutionEditor.setValue(solutionCode, -1);
             });
         });
     </script>
+
 {% endblock %}
 
 
