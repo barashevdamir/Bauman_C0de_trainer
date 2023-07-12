@@ -1,17 +1,12 @@
-let editor;
-let testButton
-
-
 window.onload = function() {
-
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/python");
+    var initialLanguage = $("#languages").val();
+    changeLanguage(initialLanguage);
 
-    testButton = document.getElementById("test")
-    testButton.onclick = executeCode
-
-}
+    testButton = document.getElementById("test");
+    testButton.onclick = executeCode;
+};
 
 function getCookie(name) {
     let cookieValue = null;
@@ -28,16 +23,24 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function changeLanguage(language) {
+    $("#languages").val(language);
+    editor.session.setMode(getAceMode(language));
+}
 
+function getAceMode(language) {
+    if (language === 'C' || language === 'CPP') {
+        return "ace/mode/c_cpp";
+    } else if (language === 'PHP') {
+        return "ace/mode/php";
+    } else if (language === 'PY') {
+        return "ace/mode/python";
+    } else if (language === 'JS') {
+        return "ace/mode/javascript";
+    }
 
-function changeLanguage() {
-
-    let language = $("#languages").val();
-
-    if(language == 'C' || language == 'CPP')editor.session.setMode("ace/mode/c_cpp");
-    else if(language == 'PHP')editor.session.setMode("ace/mode/php");
-    else if(language == 'PY')editor.session.setMode("ace/mode/python");
-    else if(language == 'JS')editor.session.setMode("ace/mode/javascript");
+    // Default to Python mode
+    return "ace/mode/python";
 }
 
 function executeCode() {
@@ -59,7 +62,7 @@ function executeCode() {
 
     $.ajax({
         url: window.location.href,
-        headers: {'X-CSRFToken': csrftoken},
+        headers: { 'X-CSRFToken': csrftoken },
         method: "POST",
         async: true, // make the call asynchronous
         data: {

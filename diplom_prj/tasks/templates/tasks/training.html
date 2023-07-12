@@ -115,7 +115,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="editor2" id="editor2"></div>
+                                    <div class="editor2" id="editor2">{{ solution }}</div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue task">
@@ -147,14 +147,18 @@
         // Initialize the Ace editor inside the modal
         $(document).ready(function() {
             $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
+
+                let language = $("#languages").val();
                 var solutionEditor = ace.edit("editor2");
                 solutionEditor.setTheme("ace/theme/monokai");
-                solutionEditor.session.setMode("ace/mode/python");
-                var solutionCode = `{{ solution|escapejs }}`;
-                solutionEditor.setValue(solutionCode, -1);
+                if(language == 'C' || language == 'CPP')solutionEditor.session.setMode("ace/mode/c_cpp");
+                else if(language == 'PHP')solutionEditor.session.setMode("ace/mode/php");
+                else if(language == 'PY')solutionEditor.session.setMode("ace/mode/python");
+                else if(language == 'JS')solutionEditor.session.setMode("ace/mode/javascript");
             });
         });
     </script>
+
 {% endblock %}
 
 
