@@ -58,27 +58,28 @@ def task(request, id):
     language = form_data['language'][0]
     code = form_data['code'][0]
 
-    file_name = create_file(task, user, code, language)
+    code_file = create_file(task, user, code, language)
     test_code = TaskLanguage.objects.get(task=task, prog_language=language).test_file.read()
     epic_code = get_epic_code(code, language, test_code)
     result = run_epic_code(epic_code, language)
     check = check_result(result, task.level)
-    result_message = check['message']
-    message_file = create_file(task, user, result_message, 'txt')
+    message_file = create_file(task, user, check['message'], 'txt')
     
-    res = Result(
+    task_result = Result(
       user=user, 
-      task=task, 
-      code=code, 
-      file_name=file_name,
+      task=task,
       prog_language=language, 
       passed=check['passed'], 
       exp_gain=check['exp_gain'],
-      result=result_message
+      result_code=code_file.name,
+      result_message=message_file.name
     )
-    res.save()
+    task_result.save()
   
   handle_solution_code_and_output(task, user, context)
+  # context['solution'] = 'solution'
+  # context['code'] = 'code'
+  # context['output'] = 'output'
   return render(request, 'tasks/training.html', context)
 
 

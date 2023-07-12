@@ -1,3 +1,4 @@
+from django.core.files import File
 from diplom.choices_classes import ProgLanguage
 from django.conf import settings
 import os
@@ -17,8 +18,9 @@ def create_file(task, user, code, language):
     if not os.path.exists(directory):
         os.makedirs(directory)
     with open(f"{directory}/{file_name}", "w") as file:
-        file.write(code)
-    return file_name
+        code_file = File(file, name=file_name)
+        code_file.write(code)  
+    return code_file
 
 def get_epic_code(code, language, test_code=None):
     if test_code == None:
