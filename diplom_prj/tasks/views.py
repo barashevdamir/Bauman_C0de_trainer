@@ -94,6 +94,7 @@ def task(request, id):
       handle_c_cpp_task(request, task, code, file_name)
 
   handle_solution_code_and_output(request, task, context)
+
   return render(request, 'tasks/training.html', context)
 
 

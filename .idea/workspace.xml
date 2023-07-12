@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="upgraded executecode function to run dots while loading">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/static/tasks/js/ide.js" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/static/tasks/js/ide.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/templates/tasks/training.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/templates/tasks/training.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
