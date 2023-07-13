@@ -24,5 +24,5 @@ function binomialCoefficient(n, k) {
     coefficient *= (n - i + 1) / i;
   }
 
-  return coefficient-1;
+  return coefficient;
 }

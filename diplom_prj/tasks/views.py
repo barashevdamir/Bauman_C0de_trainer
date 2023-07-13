@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from diplom.choices_classes import Status, ProgLanguage
@@ -50,10 +51,44 @@ def taskspage(request):
 @login_required
 def task(request, id):
   task = get_object_or_404(Tasks, id=id, status=Status.PUBLISHED)
-  context = {'task': task}
   user = request.user
 
+  if request.GET and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    lang = request.GET.get('language')
+    if request.GET.get('code-editor') == 'need':
+      try:
+        code = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_code.read().decode()
+      except (Result.DoesNotExist, FileNotFoundError):
+        code = False
+    else:
+      code = False
+    if request.GET.get('output') == 'need':
+      try:
+        output = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_message.read().decode()
+      except (Result.DoesNotExist, FileNotFoundError):
+        output = False
+    else:
+      output = False
+    if request.GET.get('solution-editor') == 'need':
+      try:
+        solution = TaskLanguage.objects.get(task=task, prog_language=lang).solution_file.read().decode()
+      except (ValueError, FileNotFoundError):
+        solution = False
+    else:
+      solution = False
+    return JsonResponse({
+      'code-editor': code, 
+      'output': output,
+      'solution-editor': solution
+    })
+  
+  return render(request, 'tasks/training.html', {'task': task})
+
+@login_required
+def save_result(request, id):
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    task = get_object_or_404(Tasks, id=id, status=Status.PUBLISHED)
+    user = request.user
     form_data = dict(request.POST.lists())
     language = form_data['language'][0]
     code = form_data['code'][0]
@@ -63,7 +98,8 @@ def task(request, id):
     epic_code = get_epic_code(code, language, test_code)
     result = run_epic_code(epic_code, language)
     check = check_result(result, task.level)
-    message_file = create_file(task, user, check['message'], 'txt')
+    message = check['message']
+    message_file = create_file(task, user, message, 'txt')
     
     task_result = Result(
       user=user, 
@@ -75,13 +111,7 @@ def task(request, id):
       result_message=message_file.name
     )
     task_result.save()
-  
-  handle_solution_code_and_output(task, user, context)
-  # context['solution'] = 'solution'
-  # context['code'] = 'code'
-  # context['output'] = 'output'
-  return render(request, 'tasks/training.html', context)
-
+    return JsonResponse({'output': message})
 
 def handle_solution_code_and_output(task, user, context):
   file_name = f'{task.slug}-id{task.id}'

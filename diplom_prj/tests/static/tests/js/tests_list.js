@@ -41,8 +41,8 @@ function ajaxRequest(url, page) {
             $('#tests-list-view').empty()
             $('#tests-list-view').html(data)
             current_page = page
-            }
-        })
+        }
+    })
 }
 
 function ajaxPagination() {
