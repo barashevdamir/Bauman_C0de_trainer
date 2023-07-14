@@ -10,10 +10,11 @@ from tasks.models import Result, Tasks, TaskLanguage
 from tests.models import Result as testResult
 from tests.models import Test
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django_ratelimit.decorators import ratelimit
 from diplom.choices_classes import ProgLanguage, Status
+from django.core.files.storage import FileSystemStorage
+import datetime
+from django_ratelimit.decorators import ratelimit
 
 def user_login(request):
     if request.method == 'POST':
@@ -84,20 +85,24 @@ def edit(request):
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
         profile_form = ProfileEditForm(
-                                    instance=request.user.profile,
-                                    data=request.POST,
-                                    files=request.FILES)
+            instance=request.user.profile,
+            data=request.POST,
+            files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Profile updated '\
-                                      'successfully')
+            messages.success(request, 'Profile updated successfully')
+
+            return redirect('user_profile')  # добавляем перенаправление после успешного сохранения
+
         else:
             messages.error(request, 'Error updating your profile')
+            print(user_form.errors)  # printing errors to console
+            print(profile_form.errors)  # printing errors to console
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
-                                    instance=request.user.profile)
+            instance=request.user.profile)
 
     context = {
         'title': 'profileEdit',
@@ -191,5 +196,25 @@ def validate_username(request):
         'is_taken': User.objects.filter(username__iexact=username).exists()
     }
     return JsonResponse(data)
+
+@login_required
+def upload_profile_image(request):
+    if request.method == 'POST':
+        if request.FILES['file']:
+            # Сохраняем загруженный файл
+            myfile = request.FILES['file']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+
+            # Обновляем модель пользователя
+            profile = request.user.profile
+            profile.photo = uploaded_file_url
+            profile.save()
+
+            # Возвращаем URL нового изображения
+            return JsonResponse({"newImageUrl": uploaded_file_url})
+
+    return JsonResponse({"error": "Something went wrong"})
 
 

@@ -58,6 +58,7 @@ class UserEditForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    photo = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     class Meta:
         model = Profile
         fields = ('first_name', 'photo', 'email',)
