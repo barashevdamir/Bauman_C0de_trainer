@@ -68,7 +68,7 @@ def tasks_tests_directory_path(instance, filename):
 
 def tasks_solution_directory_path(instance, filename):
   task = Tasks.objects.get(id=instance.task.id)
-  # file will be uploaded to MEDIA_ROOT/tasks_tests/<task.slug>_<task.id>/<filename>
+  # file will be uploaded to MEDIA_ROOT/tasks_solution/<task.slug>_<task.id>/<filename>
   return 'tasks_solution/{0}_id{1}/{2}'.format(task.slug, task.id, filename)
 
 def user_tasks_result_directory_path(instance, filename):
@@ -138,10 +138,13 @@ class Result(models.Model):
     default=None,
     upload_to=user_tasks_result_directory_path
   )
+  result_message = models.FileField(
+    null=True,
+    blank=True,
+    default=None,
+    upload_to=user_tasks_result_directory_path
+  )
   date = models.DateTimeField(default=timezone.now)
-  code = models.TextField()
-  file_name = models.CharField(max_length=100)
-  result = models.TextField(blank=True, null=True)
 
   def __str__(self):
 	  return f'{self.user} gain {self.exp_gain} experience after passing {self.task}. Date: {self.date}'

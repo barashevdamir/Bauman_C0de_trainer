@@ -32,46 +32,36 @@
             </div>
             <div class="col-editor-2">
                 <div class="language-liner">
-
-    <div class="control-panel">
-        <div class="button-container">
-            {% if task.languages.count == 1 %}
-            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" disabled>
-            {% else %}
-            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" onchange="changeLanguage()">
-            {% endif %}    
-                {% get_prog_langs as unique_languages %}
-                {% for lang in task.languages.all %}
-                    {% for l in unique_languages %}
-                        {% if  l.0 == lang.prog_language %}
-                            <option value="{{ l.0 }}"> {{ l.1 }} </option>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-
+                    <div class="control-panel">
+                        <div class="button-container">
+                            {% if task.languages.count == 1 %}
+                            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" disabled>
+                            {% else %}
+                            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD">
+                            {% endif %}    
+                                {% get_prog_langs as unique_languages %}
+                                {% for lang in task.languages.all %}
+                                    {% for l in unique_languages %}
+                                        {% if  l.0 == lang.prog_language %}
+                                            <option value="{{ l.0 }}"> {{ l.1 }} </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="solution-editor">
                     <div class="solution-liner">
                         <p class="solution-text">Solution</p>
                     </div>
-
-
-                    <div class="editor" id="editor">{{ code }}</div>
-
-
-
-
+                    <div class="editor" id="code-editor">{{ code }}</div>
                 </div>
                 <div class="sampletest-editor">
                     <div class="sampletest-liner">
                         <p class="sampletest-text">SampleTest</p>
                     </div>
-
                     <div class="output text-light" id="output" >{{ output }}</div>
-
                 </div>
                 <div class="editor-button">
                         <div class="button-container">
@@ -115,7 +105,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="editor2" id="editor2">{{ solution }}</div>
+                                    <div class="editor2" id="solution-editor">{{ solution }}</div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue task">
@@ -143,22 +133,6 @@
     <script src="{% static 'ace_lib/ace.js' %}"></script>
     <script src="{% static 'ace_lib/theme-monokai.js' %}"></script>
     <script src="{% static 'tasks/js/ide.js' %}"></script>
-    <script>
-        // Initialize the Ace editor inside the modal
-        $(document).ready(function() {
-            $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
-
-                let language = $("#languages").val();
-                var solutionEditor = ace.edit("editor2");
-                solutionEditor.setTheme("ace/theme/monokai");
-                if(language == 'C' || language == 'CPP')solutionEditor.session.setMode("ace/mode/c_cpp");
-                else if(language == 'PHP')solutionEditor.session.setMode("ace/mode/php");
-                else if(language == 'PY')solutionEditor.session.setMode("ace/mode/python");
-                else if(language == 'JS')solutionEditor.session.setMode("ace/mode/javascript");
-            });
-        });
-    </script>
-
 {% endblock %}
 
 

@@ -12,7 +12,6 @@ def homepage(request):
   return render(request, 'home/homepage.html')
 
 def leaderboard(request):
-  
   if request.GET and request.headers.get('x-requested-with') == 'XMLHttpRequest':
     total_tasks_count = Tasks.objects.filter(status=Status.PUBLISHED).count()
     total_tests_count = Test.objects.filter(status=Status.PUBLISHED).count()
