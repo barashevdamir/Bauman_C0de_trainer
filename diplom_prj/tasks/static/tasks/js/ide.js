@@ -12,10 +12,10 @@ $(document).ready(function() {
 
 $(document).ajaxStop(function() {
     editor = ace.edit("code-editor");
-    solutionEditor = ace.edit("solution-editor");
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode(getAceMode(language));
     $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
+        solutionEditor = ace.edit("solution-editor");
         solutionEditor.setTheme("ace/theme/monokai");
         solutionEditor.session.setMode(getAceMode(language))
     });
@@ -33,19 +33,16 @@ function getAceMode(language) {
     }
 }
 
-function changeLanguage() {
-    language = $("#languages").val();
-    const get = '?language=' + language + '&solution-editor=need';
-    const url = window.location.href + get;
-    const ids = ['solution-editor'];
-    ajaxRequest(url, ids, 'GET');
-}
-
 function getLastResult() {
     const get = '?language=' + language + '&code-editor=need&output=need&solution-editor=need';
     const url = window.location.href + get;
     const ids = ['code-editor', 'output', 'solution-editor'];
     ajaxRequest(url, ids, 'GET');
+}
+
+function changeLanguage() {
+    language = $("#languages").val();
+    getLastResult();
 }
 
 function executeCode() {

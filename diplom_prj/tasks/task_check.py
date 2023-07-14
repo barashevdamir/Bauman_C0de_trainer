@@ -14,8 +14,8 @@ epicbox.configure(
 def create_file(task, user, code, language):
     directory = 'results/{0}_id{1}/{2}_id{3}'.format(user.username, user.id, task.slug, task.id)
     file_name = directory + f'/{task.slug}-id{task.id}.{str.lower(language)}'
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    if not os.path.exists(f"{settings.MEDIA_ROOT}/{directory}"):
+        os.makedirs(f"{settings.MEDIA_ROOT}/{directory}")
     with open(f"{settings.MEDIA_ROOT}/{file_name}", "w") as file:
         code_file = File(file, name=file_name)
         code_file.write(code)  
@@ -65,6 +65,7 @@ def check_result(result, lvl):
     message = f'{testing} Duration: {duration}. Timeout: {timeout}. OOM killed: {oom_killed}'
     check['passed'] = passed
     check['exp_gain'] = exp_gain
-    check['message'] = message
+    check['message'] = message #+ '\n' + out.decode()
     check['out'] = out.decode()
+    print(check['out'])
     return check

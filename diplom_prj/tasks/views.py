@@ -58,14 +58,14 @@ def task(request, id):
     if request.GET.get('code-editor') == 'need':
       try:
         code = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_code.read().decode()
-      except (Result.DoesNotExist, FileNotFoundError):
+      except (Result.DoesNotExist, FileNotFoundError, ValueError):
         code = False
     else:
       code = False
     if request.GET.get('output') == 'need':
       try:
         output = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_message.read().decode()
-      except (Result.DoesNotExist, FileNotFoundError):
+      except (Result.DoesNotExist, FileNotFoundError, ValueError):
         output = False
     else:
       output = False
@@ -113,50 +113,3 @@ def save_result(request, id):
     task_result.save()
     return JsonResponse({'output': message})
 
-def handle_solution_code_and_output(task, user, context):
-  file_name = f'{task.slug}-id{task.id}'
-  directory = '{0}/results/{1}_id{2}/{3}_id{4}'.format(settings.MEDIA_ROOT, user.username, user.id, task.slug, task.id)
-
-  if task.languages.filter(prog_language=ProgLanguage.PYTHON).exists():
-    # Retrieve Python solution, code, and output
-    task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.PYTHON)
-    tasks_solution_code = task_language.solution_file.read()
-    context['solution'] = tasks_solution_code.decode()
-
-    try:
-      with open(f"{directory}/{file_name}.py", "r") as file:
-        code = file.read()
-      context['code'] = code
-    except Exception as e:
-      print(f"Error reading code file: {e}")
-      context['code'] = ''
-    
-    try:
-      with open(f"{directory}/{file_name}.txt", "r") as file:
-        output = file.read()
-      context['output'] = output
-    except Exception as e:
-      print(f"Error reading output file: {e}")
-      context['output'] = ''
-
-  elif task.languages.filter(prog_language=ProgLanguage.JAVASCRIPT).exists():
-    # Retrieve JavaScript solution, code, and output
-    task_language = TaskLanguage.objects.get(task=task, prog_language=ProgLanguage.JAVASCRIPT)
-    tasks_solution_code = task_language.solution_file.read()
-    context['solution'] = tasks_solution_code.decode()
-
-    try:
-      with open(f"{directory}/{file_name}.js", "r") as file:
-        code = file.read()
-      context['code'] = code
-    except Exception as e:
-      print(f"Error reading code file: {e}")
-      context['code'] = ''
-
-    try:
-      with open(f"{directory}/{file_name}.txt", "r") as file:
-        output = file.read()
-      context['output'] = output
-    except Exception as e:
-      print(f"Error reading output file: {e}")
-      context['output'] = ''
