@@ -2,16 +2,14 @@
     --color1: #D9D9D9;
 }
 
-#editor {
+#code-editor {
     height: 215px;
     margin-top: 16px;
-
 }
 
 .button-container {
     text-align: right;
     padding: 4px;
-
 }
 
 

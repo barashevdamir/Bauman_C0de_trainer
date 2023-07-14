@@ -67,5 +67,4 @@ def check_result(result, lvl):
     check['exp_gain'] = exp_gain
     check['message'] = message #+ '\n' + out.decode()
     check['out'] = out.decode()
-    print(check['out'])
     return check

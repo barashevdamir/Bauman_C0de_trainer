@@ -58,7 +58,7 @@ def test(request, id):
   test = get_object_or_404(
     Test,
     id=id,
-    # status=Status.PUBLISHED 
+    status=Status.PUBLISHED 
   )
   question_list = []
   for quest in test.get_questions():
@@ -89,9 +89,8 @@ def test(request, id):
 
 def save_result(request, id):
   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    # не очень приятная обработка данных, проблема в их отправке в кривом виде
     data = dict(request.POST.lists())
-    answers = loads(data['answers'][0]) #должно сразу приходить в почти таком виде
+    answers = loads(data['answers'][0])
     user = request.user
     test = Test.objects.get(id=id)
     correct_answers = 0

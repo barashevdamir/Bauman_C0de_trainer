@@ -59,23 +59,23 @@ def task(request, id):
       try:
         code = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_code.read().decode()
       except (Result.DoesNotExist, FileNotFoundError, ValueError):
-        code = False
+        code = ''
     else:
-      code = False
+      code = ''
     if request.GET.get('output') == 'need':
       try:
         output = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_message.read().decode()
       except (Result.DoesNotExist, FileNotFoundError, ValueError):
-        output = False
+        output = ''
     else:
-      output = False
+      output = ''
     if request.GET.get('solution-editor') == 'need':
       try:
         solution = TaskLanguage.objects.get(task=task, prog_language=lang).solution_file.read().decode()
       except (ValueError, FileNotFoundError):
-        solution = False
+        solution = ''
     else:
-      solution = False
+      solution = ''
     return JsonResponse({
       'code-editor': code, 
       'output': output,

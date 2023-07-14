@@ -5,21 +5,18 @@ var language
 
 $(document).ready(function() {
     language = $("#languages").val();
+    editor = ace.edit("code-editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode(getAceMode(language));
+    solutionEditor = ace.edit("solution-editor");
+    $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
+        solutionEditor.setTheme("ace/theme/monokai");
+        solutionEditor.session.setMode(getAceMode(language))
+    });
     getLastResult();
     langSelector.onchange = changeLanguage;
     testButton.onclick = executeCode;
 });
-
-$(document).ajaxStop(function() {
-    editor = ace.edit("code-editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode(getAceMode(language));
-    $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
-        solutionEditor = ace.edit("solution-editor");
-        solutionEditor.setTheme("ace/theme/monokai");
-        solutionEditor.session.setMode(getAceMode(language))
-    });
-})
 
 function getAceMode(language) {
     if (language === 'C' || language === 'CPP') {
@@ -42,6 +39,8 @@ function getLastResult() {
 
 function changeLanguage() {
     language = $("#languages").val();
+    editor.session.setMode(getAceMode(language));
+    solutionEditor.session.setMode(getAceMode(language));
     getLastResult();
 }
 
@@ -82,20 +81,28 @@ function ajaxRequest(url, ids, method, data=null) {
         data: data,
         success: (response) => {
             ids.forEach((item) => {
-                clearInterval(intervalId);
-                $('#'+item).empty();
-                if (response[item] != false) {
-                    $('#'+item).html(response[item]);  
+                if (item == 'code-editor') {
+                    editor.setValue(response[item])
+                } else if (item == 'solution-editor') {
+                    solutionEditor.setValue(response[item])
                 } else {
-                    $('#'+item).html('');
+                    clearInterval(intervalId);
+                    $('#'+item).empty();
+                    $('#'+item).html(response[item]);
                 }
             })    
         },
         error: function() {
             ids.forEach((item) => {
-                clearInterval(intervalId);
-                $('#'+item).empty();
-                $('#'+item).html('An error occurred.');
+                if (item == 'code-editor') {
+                    editor.setValue('Something goes wrong.')
+                } else if (item == 'solution-editor') {
+                    solutionEditor.setValue('Something goes wrong.')
+                } else {
+                    clearInterval(intervalId);
+                    $('#'+item).empty();
+                    $('#'+item).html('An error occurred.');
+                }
             })    
         }
     })

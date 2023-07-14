@@ -3,5 +3,5 @@ function divide(dividend, divisor) {
       throw new Error("Error: Division by zero is not allowed.");
     }
   
-    return dividend / divisor;
+    return dividend / divisor -1;
   }
