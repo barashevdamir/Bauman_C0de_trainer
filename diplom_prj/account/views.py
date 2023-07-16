@@ -27,7 +27,8 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    next_url = request.POST.get('next', '/')
+                    return redirect(next_url)  # перенаправление на запомненную страницу
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -38,7 +39,9 @@ def user_login(request):
                                                     'title': 'userLogin',
                                                     'navbar': True,
                                                     'form': form,
+                                                    'next': request.GET.get('next', '/'),  # передача в форму данных о странице для перенаправления
                                                   })
+
 
 def register(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
