@@ -13,8 +13,8 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from diplom.choices_classes import ProgLanguage, Status
 from django.core.files.storage import FileSystemStorage
-import datetime
 from django_ratelimit.decorators import ratelimit
+from .forms import ConfirmPasswordForm
 
 def user_login(request):
     if request.method == 'POST':
@@ -219,5 +219,19 @@ def upload_profile_image(request):
             return JsonResponse({"newImageUrl": uploaded_file_url})
 
     return JsonResponse({"error": "Something went wrong"})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        form = ConfirmPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            request.user.delete()
+            return redirect('/')  # Or wherever you want to redirect after deletion
+        else:
+            messages.error(request, 'Please confirm your password')
+    else:
+        form = ConfirmPasswordForm(request.user)
+    return render(request, 'account/delete_account.html', {'form': form})
+
 
 

@@ -21,5 +21,7 @@ urlpatterns = [
     path('register/validate_username/', views.validate_username, name='validate_username'),
     path('register/validate_email/', views.validate_email, name='validate_email'),
     path('upload_profile_image/', views.upload_profile_image, name='upload_profile_image'),
+    path('delete_account/', views.delete_account, name='delete_account'),
+
 
 ]
