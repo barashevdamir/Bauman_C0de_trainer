@@ -18,11 +18,10 @@
     <div class="row">
         <div class="col px-3">
         <p>Difficulty: 
-            {% if test.experience == 1 or test.experience == 0 %} easy
-            {% elif test.experience == 2 %} medium
-            {% else %} hard {% endif %}
+            {% if test.experience == 1 or test.experience == 0 %} easy{% elif test.experience == 2 %} medium{% else %} hard{% endif %}.
+            Required score to pass: {{ test.score_to_pass }}%
         </p>
-        <p>Required score to pass: {{ test.score_to_pass }}%</p>
+        <p>Need to log in: {% if test.login == True %}<i class="icon-check"></i>{% else %}<i class="icon-check-empty"></i>{% endif %}</p>
         </div>
     </div>
     <div class="row mt-1">

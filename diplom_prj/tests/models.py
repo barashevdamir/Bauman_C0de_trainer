@@ -21,7 +21,7 @@ class Test(models.Model):
 		validators=[MaxValueValidator(limit_value=100)]
 	)
 	# times_taken = models.PositiveIntegerField(default=0, editable=False)
-	experience = models.PositiveSmallIntegerField( #эквивалетнт lvl в задачках, нужно для таблицы лидеров, хотя может тесты и не достойны там учитываться
+	experience = models.PositiveSmallIntegerField( 
 		default=1, 
 		validators=[MaxValueValidator(limit_value=3)]
 	) 
@@ -33,6 +33,7 @@ class Test(models.Model):
 		blank=False
 	)
 	tags = TaggableManager()
+	login = models.BooleanField(default=False)
 	publish = models.DateTimeField(default=timezone.now)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

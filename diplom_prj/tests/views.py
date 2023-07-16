@@ -2,21 +2,21 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.http import JsonResponse
 from .models import Test, Question, Result
-from json import loads
+from diplom.choices_classes import Status
 from collections import Counter
 from math import floor
-from diplom.choices_classes import Status
+from json import loads
 
 def test_list(request):
   test_list = Test.objects.filter(status=Status.PUBLISHED)
   
   if request.GET:
     test_list = test_list.order_by(request.GET.get('order_by'))
+    if request.GET.get('login') != 'all':
+      test_list = test_list.filter(login=loads(request.GET.get('login')))
     if request.GET.get('language') != 'all':
       test_list = test_list.filter(prog_language=request.GET.get('language'))
-    if request.GET.get('difficulty') == 'all':
-      pass
-    elif request.GET.get('difficulty') == 'easy':
+    if request.GET.get('difficulty') == 'easy':
       test_list = test_list.filter(experience__lte = 1)
     elif request.GET.get('difficulty') == 'medium':
       test_list = test_list.filter(experience = 2)
@@ -59,6 +59,12 @@ def test(request, id):
     Test,
     id=id,
     status=Status.PUBLISHED 
+  )
+  if not request.user.is_authenticated and test.login == True:
+    return render(
+    request,
+    'base/need_login.html',
+    {'info': test.title, 'back': 'tests'}
   )
   question_list = []
   for quest in test.get_questions():
@@ -125,7 +131,7 @@ def save_result(request, id):
       exp_gain = test.experience 
     else:
       passed = False
-    try:
+    if request.user.is_authenticated:
       Result.objects.create(
         user = user,
         test = test,
@@ -133,8 +139,6 @@ def save_result(request, id):
         score = score,
         exp_gain = exp_gain
       )
-    except ValueError:
-      pass
     result = {
       'test': test.title,
       'passed': passed,

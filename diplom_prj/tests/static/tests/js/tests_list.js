@@ -5,6 +5,7 @@ var parametrs
 var start_params
 
 var sortSelector
+var authSelector
 var langSelector
 var diffSelector
 var tagsSelector
@@ -13,6 +14,7 @@ var resetButton
 $(document).ready(function() {
     ajaxPagination()
     sortSelector = document.getElementById('sort')
+    authSelector = document.getElementById('auth')
     langSelector = document.getElementById('lang')
     diffSelector = document.getElementById('diff')
     tagsSelector = document.getElementById('tags')
@@ -20,6 +22,7 @@ $(document).ready(function() {
     start_params = createParametrs()
     parametrs = createParametrs()
     sortSelector.onchange = changeValue
+    authSelector.onchange = changeValue
     langSelector.onchange = changeValue
     diffSelector.onchange = changeValue
     tagsSelector.onchange = changeValue
@@ -63,10 +66,11 @@ function createFilterParametr(e, filter_name) {
 
 function createParametrs() {
     const par1 = createFilterParametr(sortSelector, 'order_by')
-    const par2 = createFilterParametr(langSelector, 'language')
-    const par3 = createFilterParametr(diffSelector, 'difficulty')
-    const par4 = createFilterParametr(tagsSelector, 'tag')
-    return par1+par2+par3+par4
+    const par2 = createFilterParametr(authSelector, 'login')
+    const par3 = createFilterParametr(langSelector, 'language')
+    const par4 = createFilterParametr(diffSelector, 'difficulty')
+    const par5 = createFilterParametr(tagsSelector, 'tag')
+    return par1+par2+par3+par4+par5
 }
 
 function changeValue() {
@@ -83,6 +87,7 @@ function resetSelector(options) {
 
 function resetSelectors() {
     resetSelector(sortSelector)
+    resetSelector(authSelector)
     resetSelector(langSelector)
     resetSelector(diffSelector)
     resetSelector(tagsSelector)
