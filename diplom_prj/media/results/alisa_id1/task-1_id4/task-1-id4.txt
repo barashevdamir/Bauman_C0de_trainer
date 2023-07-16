@@ -1,1 +1,1 @@
-Tests failed. Duration: 0.392498. Timeout: False. OOM killed: False
+Tests failed. Duration: 0.346692. Timeout: False. OOM killed: False

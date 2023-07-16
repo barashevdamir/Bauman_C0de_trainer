@@ -32,9 +32,15 @@
             {% endfor %}
         </div>
         <div class="col-sm-2 offset-sm-4 col-5 offset-sm-2 offset-1 text-end">
+            {% if test.login == True and auth == False %}
+            <a class="btn btn-sm bct-btn-test rounded-pill px-3" href="{% url 'login' %}">
+                Start
+            </a>
+            {% else %}
             <a class="btn btn-sm bct-btn-test rounded-pill px-3" href="{% url 'test' test.id %}">
                 Start
             </a>
+            {% endif %}
         </div>
     </div>
 </div>

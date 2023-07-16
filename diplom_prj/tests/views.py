@@ -39,7 +39,7 @@ def test_list(request):
       return render(
       request, 
       'tests/tests_list.html',
-      {'tests': tests}
+      {'tests': tests, 'auth': request.user.is_authenticated}
       )
     else:
       return render(
@@ -51,7 +51,7 @@ def test_list(request):
     return render(
       request, 
       'tests/tests.html',
-      {'tests': tests}
+      {'tests': tests, 'auth': request.user.is_authenticated}
       )
 
 def test(request, id):
@@ -59,12 +59,6 @@ def test(request, id):
     Test,
     id=id,
     status=Status.PUBLISHED 
-  )
-  if not request.user.is_authenticated and test.login == True:
-    return render(
-    request,
-    'base/need_login.html',
-    {'info': test.title, 'back': 'tests'}
   )
   question_list = []
   for quest in test.get_questions():

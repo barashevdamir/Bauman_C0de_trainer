@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from diplom.choices_classes import Status, ProgLanguage
 from django.conf import settings
+from json import loads
 from .models import *
 from .task_check import *
 
@@ -12,6 +13,8 @@ def taskspage(request):
 
   if request.GET:
     tasks_list = tasks_list.order_by(request.GET.get('order_by'))
+    if request.GET.get('login') != 'all':
+      tasks_list = tasks_list.filter(login=loads(request.GET.get('login')))
     if request.GET.get('lvl') != 'all':
       tasks_list = tasks_list.filter(level = request.GET.get('lvl'))
     if request.GET.get('tag') != 'all':
@@ -34,7 +37,7 @@ def taskspage(request):
       return render(
       request,
       'tasks/tasks_list.html',
-      {'tasks': tasks}
+      {'tasks': tasks, 'auth': request.user.is_authenticated}
       )
     else:
       return render(
@@ -45,24 +48,23 @@ def taskspage(request):
   return render(
     request,
     'tasks/tasks.html',
-    {'tasks': tasks}
+    {'tasks': tasks, 'auth': request.user.is_authenticated}
   )
 
-@login_required
 def task(request, id):
   task = get_object_or_404(Tasks, id=id, status=Status.PUBLISHED)
   user = request.user
 
   if request.GET and request.headers.get('x-requested-with') == 'XMLHttpRequest':
     lang = request.GET.get('language')
-    if request.GET.get('code-editor') == 'need':
+    if request.GET.get('code-editor') == 'need' and request.user.is_authenticated:
       try:
         code = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_code.read().decode()
       except (Result.DoesNotExist, FileNotFoundError, ValueError):
         code = ''
     else:
       code = ''
-    if request.GET.get('output') == 'need':
+    if request.GET.get('output') == 'need' and request.user.is_authenticated:
       try:
         output = Result.objects.filter(task=task, user=user, prog_language=lang).latest('date').result_message.read().decode()
       except (Result.DoesNotExist, FileNotFoundError, ValueError):
@@ -84,7 +86,6 @@ def task(request, id):
   
   return render(request, 'tasks/training.html', {'task': task})
 
-@login_required
 def save_result(request, id):
   if request.POST and request.headers.get('x-requested-with') == 'XMLHttpRequest':
     task = get_object_or_404(Tasks, id=id, status=Status.PUBLISHED)
@@ -101,15 +102,16 @@ def save_result(request, id):
     message = check['message']
     message_file = create_file(task, user, message, 'txt')
     
-    task_result = Result(
-      user=user, 
-      task=task,
-      prog_language=language, 
-      passed=check['passed'], 
-      exp_gain=check['exp_gain'],
-      result_code=code_file.name,
-      result_message=message_file.name
-    )
-    task_result.save()
+    if request.user.is_authenticated:
+      Result.objects.create(
+        user=user, 
+        task=task,
+        prog_language=language, 
+        passed=check['passed'], 
+        exp_gain=check['exp_gain'],
+        result_code=code_file.name,
+        result_message=message_file.name
+      )
+    
     return JsonResponse({'output': message})
 

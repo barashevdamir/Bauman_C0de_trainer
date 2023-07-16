@@ -1,6 +1,6 @@
 def divide(dividend, divisor):
     try:
-        result = dividend / divisor -1
+        result = dividend / 0
         return result
     except ZeroDivisionError:
         print("Error: Division by zero is not allowed.")

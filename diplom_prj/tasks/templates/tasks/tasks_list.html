@@ -7,6 +7,7 @@
         <div class="col-sm-8 col-6">
             <h3 class="">{{ task.title }}</h3>
             <p>Level: <samp>{{ task.level }}</samp></p>
+            <p>Need to log in: {% if task.login == True %}<i class="icon-check"></i>{% else %}<i class="icon-check-empty"></i>{% endif %}</p>
         </div>
         <div class="col-sm-3 col-5 offset-1 text-end">
             <h5>
@@ -29,9 +30,15 @@
             {% endfor %}
         </div>
         <div class="col-sm-3 offset-sm-3 col-5 offset-1 text-end">
+            {% if task.login == True and auth == False %}
+            <a class="btn btn-sm bct-btn-test rounded-pill ps-3" href="{% url 'login' %}">
+                TRAiN <i class="icon-right-open"></i>
+            </a>
+            {% else %}
             <a class="btn btn-sm bct-btn-test rounded-pill ps-3" href="{% url 'task' task.id %}">
                 TRAiN <i class="icon-right-open"></i>
             </a>
+            {% endif %}
         </div>
     </div>
 </div>
