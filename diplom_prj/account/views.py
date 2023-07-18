@@ -10,10 +10,11 @@ from tasks.models import Result, Tasks, TaskLanguage
 from tests.models import Result as testResult
 from tests.models import Test
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django_ratelimit.decorators import ratelimit
 from diplom.choices_classes import ProgLanguage, Status
+from django.core.files.storage import FileSystemStorage
+from django_ratelimit.decorators import ratelimit
+from .forms import ConfirmPasswordForm
 
 def user_login(request):
     if request.method == 'POST':
@@ -26,7 +27,8 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    next_url = request.POST.get('next', '/')
+                    return redirect(next_url)  # перенаправление на запомненную страницу
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -37,7 +39,9 @@ def user_login(request):
                                                     'title': 'userLogin',
                                                     'navbar': True,
                                                     'form': form,
+                                                    'next': request.GET.get('next', '/'),  # передача в форму данных о странице для перенаправления
                                                   })
+
 
 def register(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -84,20 +88,24 @@ def edit(request):
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
         profile_form = ProfileEditForm(
-                                    instance=request.user.profile,
-                                    data=request.POST,
-                                    files=request.FILES)
+            instance=request.user.profile,
+            data=request.POST,
+            files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Profile updated '\
-                                      'successfully')
+            messages.success(request, 'Profile updated successfully')
+
+            return redirect('user_profile')  # добавляем перенаправление после успешного сохранения
+
         else:
             messages.error(request, 'Error updating your profile')
+            print(user_form.errors)  # printing errors to console
+            print(profile_form.errors)  # printing errors to console
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(
-                                    instance=request.user.profile)
+            instance=request.user.profile)
 
     context = {
         'title': 'profileEdit',
@@ -191,5 +199,39 @@ def validate_username(request):
         'is_taken': User.objects.filter(username__iexact=username).exists()
     }
     return JsonResponse(data)
+
+@login_required
+def upload_profile_image(request):
+    if request.method == 'POST':
+        if request.FILES['file']:
+            # Сохраняем загруженный файл
+            myfile = request.FILES['file']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+
+            # Обновляем модель пользователя
+            profile = request.user.profile
+            profile.photo = uploaded_file_url
+            profile.save()
+
+            # Возвращаем URL нового изображения
+            return JsonResponse({"newImageUrl": uploaded_file_url})
+
+    return JsonResponse({"error": "Something went wrong"})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        form = ConfirmPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            request.user.delete()
+            return redirect('/')  # Or wherever you want to redirect after deletion
+        else:
+            messages.error(request, 'Please confirm your password')
+    else:
+        form = ConfirmPasswordForm(request.user)
+    return render(request, 'account/delete_account.html', {'form': form})
+
 
 

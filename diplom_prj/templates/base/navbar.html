@@ -28,7 +28,7 @@
                 {% if request.user.is_authenticated %}
                 <a class="nav-link" href="{% url 'user_profile' %}">
                     {% if  user.profile.photo  %}
-                        <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                        <img src="{{ user.profile.photo.url }} " alt="Admin" class="rounded-circle" width="30" height="30">
                     {% else %}
                         <img class="nav__profile-img" src="{% static 'base/images/profile-icon.svg' %}" alt="">
                     {% endif %}

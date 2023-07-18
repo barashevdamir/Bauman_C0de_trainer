@@ -31,27 +31,16 @@
 
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
                     <div class="input-group mb-3">
-
                         <input name="{{ form.username.html_name }}" required="required" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username">
-
                     </div>
                     <div class="input-group mb-1">
-
                         <input name="{{ form.password.html_name }}" required="required" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
-
                     </div>
                     <div class="input-group mb-5 d-flex justify-content-between">
                         <div class="form-check">
-
-{#-----------------------------------NEED TO ADD REMEMBER ME CHECK BOX---------------------------------------------------#}
-
-{#                            <input type="checkbox" class="form-check-input" id="formCheck">#}
-{#                            <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>#}
-
-{#-----------------------------------NEED TO ADD REMEMBER ME CHECK BOX---------------------------------------------------#}
-
-                                <label for="formCheck" class="form-check-label text-secondary"><small></small></label>
+                            <label for="formCheck" class="form-check-label text-secondary"><small></small></label>
                         </div>
                         <div class="forgot">
                             <small><a href="{% url "password_reset" %}">Forgot Password?</a></small>
