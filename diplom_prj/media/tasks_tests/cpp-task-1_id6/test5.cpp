@@ -8,5 +8,11 @@ void testFibonacci() {
     assert(fibonacci(5) == 5);
     assert(fibonacci(6) == 8);
     assert(fibonacci(7) == 13);
-    std::cout << 0;
+    std::cout << "All Fibonacci tests passed.\n";
+}
+
+// Тестовый код для проверки корректности функции вычисления чисел Фибоначчи
+int main() {
+    testFibonacci();
+    return 0;
 }
