@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.auth.decorators import login_required
-from diplom.choices_classes import Status, ProgLanguage
+from diplom.choices_classes import Status
 from django.conf import settings
 from json import loads
 from .models import *

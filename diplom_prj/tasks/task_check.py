@@ -50,6 +50,7 @@ def get_epic_code(code, language, test_code=None):
 def run_epic_code(epic_code, language, cputime=1, memory=64):
     files = [{'name': f'epic_code.{str.lower(language)}', 'content': epic_code}]
     limits = {'cputime': cputime, 'memory': memory}
+    epic_profile = str.upper(language)
     if language == ProgLanguage.PYTHON:
         epic_command = 'python3 -m unittest epic_code.py'
     elif language == ProgLanguage.JAVASCRIPT:
@@ -58,7 +59,7 @@ def run_epic_code(epic_code, language, cputime=1, memory=64):
         epic_command = 'g++ -pipe -O2 -static -o main epic_code.cpp && ./main'
     # Ensure the language is upper case to match the ProgLanguage keys
     result = epicbox.run(
-        str.upper(language),
+        epic_profile,
         epic_command,
         files=files,
         limits=limits
@@ -75,16 +76,14 @@ def check_result(result, lvl):
     if result['exit_code'] == 0:
         passed = True
         exp_gain = lvl*3
-        out = result['stdout']
         testing = "Tests passed successfully."
     else:
         passed = False
         exp_gain = 0
-        out = result['stderr']
         testing = "Tests failed."
     message = f'{testing} Duration: {duration}. Timeout: {timeout}. OOM killed: {oom_killed}'
+    out = result['stdout'] + result['stderr']
     check['passed'] = passed
     check['exp_gain'] = exp_gain
-    check['message'] = message #+ '\n' + out.decode()
-    check['out'] = out.decode()
+    check['message'] = message + '\n\n' + out.decode()
     return check

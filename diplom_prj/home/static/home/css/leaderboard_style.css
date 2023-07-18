@@ -13,6 +13,17 @@ body, .bct-bg-color {
     border-radius: 10px;   
 }
 
+.bct-btn-filter {
+    border: var(--color3) 2px solid;
+    background-color: var(--color1);
+    color: black;
+}
+
+.bct-btn-filter:hover {
+    background-color: var(--color3);
+    color: white;
+}
+
 .bct-row-light {
     background-color: var(--color2);
 }

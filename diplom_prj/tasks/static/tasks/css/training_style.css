@@ -66,9 +66,8 @@ body{
     background-color: #A8A8A8;
     align-items: center;
     height: 40px;
-    width: 200px;
+    width: 480px;
     border-radius: 10px;
-
 }
 
 .lvl-text{
@@ -76,7 +75,7 @@ body{
     padding-left: 21px;
 }
 
-.task-name{
+.task-name {
     padding-left: 11px;
 }
 
@@ -412,7 +411,8 @@ body{
     .instrucrion-liner{
         width: 150px;
     }
-    .instruction-editor{
+    .instruction-editor,
+    .task-liner {
         width: 400px;
     }
     .CodeMirror{
@@ -478,7 +478,8 @@ body{
     .instrucrion-liner{
         width: 150px;
     }
-    .instruction-editor{
+    .instruction-editor,
+    .task-liner {
         width: 300px;
     }
     .CodeMirror{
@@ -545,7 +546,8 @@ body{
     .instrucrion-liner{
         width: 150px;
     }
-    .instruction-editor{
+    .instruction-editor,
+    .task-liner {
         width: 250px;
     }
     .CodeMirror{

@@ -25,7 +25,7 @@
                 {% for code in question.codes %}
                     <p>{{ code|markdown }}</p>
                 {% endfor %}
-                <form name="Answer form">   
+                <form class="mt-4" name="Answer form">   
                     {% if question.answer_type == 'SC' %}
                         {% for answer in question.answers %}
                         <div class="form-check" name="Single choice">
