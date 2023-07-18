@@ -63,7 +63,6 @@ def run_epic_code(epic_code, language, cputime=1, memory=64):
         files=files,
         limits=limits
     )
-    print(result)
     return result
 
 
