@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="updated login to redirect back to template, updated user profile">
+    <list default="true" id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="added delete account button and delete account form, view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/templates/account/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/templates/account/user_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diplom_prj/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/media/tasks_tests/cpp-task-1_id6/test5.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/media/tasks_tests/cpp-task-1_id6/test5.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/task_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/task_check.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,20 +47,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/account/js",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/account/js&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/diplom_prj/account/static/account/js" />
@@ -124,7 +122,8 @@
       <workItem from="1689022559119" duration="1730000" />
       <workItem from="1689069658447" duration="1196000" />
       <workItem from="1689079032463" duration="15373000" />
-      <workItem from="1689497657682" duration="8203000" />
+      <workItem from="1689497657682" duration="8479000" />
+      <workItem from="1689705093010" duration="1904000" />
     </task>
     <task id="LOCAL-00006" summary="upgraded tasks view, fix bugs">
       <created>1688753193715</created>
@@ -259,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689537218731</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added delete account button and delete account form, view">
+      <created>1689539494668</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1689539494668</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +306,8 @@
     <MESSAGE value="upgraded executecode function to run dots while loading" />
     <MESSAGE value="updated profile edit form, updated change password form" />
     <MESSAGE value="updated login to redirect back to template, updated user profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated login to redirect back to template, updated user profile" />
+    <MESSAGE value="added delete account button and delete account form, view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added delete account button and delete account form, view" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/diplom$views.coverage" NAME="views Coverage Results" MODIFIED="1688648670907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/diplom_prj/tasks" />
