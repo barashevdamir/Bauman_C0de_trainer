@@ -26,7 +26,6 @@
                     </div>
                     <div class="instruction">
                         <textarea type="text" class="area-instruction" readonly>{% if task %}{{ task.description }}{% endif %}</textarea>
-
                     </div>
                 </div>
             </div>
@@ -61,7 +60,9 @@
                     <div class="sampletest-liner">
                         <p class="sampletest-text">SampleTest</p>
                     </div>
-                    <div class="output text-light" id="output"></div>
+                    <div>
+                        <textarea type="text" class="text-light" id="output" readonly></textarea>
+                    </div>
                 </div>
                 <div class="editor-button">
                         <div class="button-container">

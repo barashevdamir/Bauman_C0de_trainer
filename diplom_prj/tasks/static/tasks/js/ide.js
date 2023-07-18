@@ -12,6 +12,7 @@ $(document).ready(function() {
     $('#warningModalTaskSolution').on('shown.bs.modal', function (e) {
         solutionEditor.setTheme("ace/theme/monokai");
         solutionEditor.session.setMode(getAceMode(language))
+        solutionEditor.setReadOnly(true)
     });
     getLastResult();
     langSelector.onchange = changeLanguage;
