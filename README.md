@@ -1,24 +1,24 @@
-# diplom
+# Bauman C0de Trainer
 
+## Что такое **Bauman C0de Trainer**? 
+Это бесплатная, открытая платформа для оттачивания своих навыков в сфере программирования, созданная энтузиастами из МГТУ имени Баумана. На нашем сервисе можно подтянуть свои теоретические знания с помощью тестов и потом применить их на практике решая задачи на разных языках программирования. Весь ваш прогресс будет удобно отслеживаться в личном кабинете, также вы можете посоперничать с другими пользователями, так как все достижения отображены в таблице лидеров.
+_____
 
-Установить виртуальное окружение
-python -m venv venv
+## Как запустить **Bauman C0de Trainer** у себя на компьютере?
+* Создайте папку с названием *"Bauman C0de Trainer"*
 
-Запустить виртуальное окружение
-windows: venv\Scripts\activate.bat
-linux, mac: source venv/bin/activate
+* Установите в данную папку виртуальное окружение следующей командой: `python -m venv venv`
 
-Установка джанго
-pip install django
+* Запустите виртуальное окружение командой
+  * *windows*: `venv\Scripts\activate.bat`
+  * *linux, mac:* `source venv/bin/activate`
 
-pip list
------------------------
-asgiref         3.6.0
-Django          4.2.1
-pip             22.2.2
-setuptools      63.2.0
-sqlparse        0.4.4
-tzdata          2023.3
-Pillow          9.5.0
-django-taggit   4.0.0
-markdown        3.4.3
+* Скачайте репозиторий в папку *"Bauman C0de Trainer"*
+  * Перейдя по [ссылке](https://bmstu.codes/diplom/diplom/-/archive/master/diplom-master.zip)
+  * Либо командой `git clone http://bmstu.codes/diplom/diplom.git`
+
+* Скачайте необходимые пакеты командой `pip install -r requirements.txt`
+
+* Перейдите в папку *"Project"* командой: `cd Project`
+
+* Запустите приложение командой: `python manage.py runserver`
