@@ -99,7 +99,7 @@ def save_result(request, id):
     result = run_epic_code(epic_code, language)
     check = check_result(result, task.level)
     message = check['message']
-    message_file = create_file(task, user, message, 'txt')
+    message_file = create_file(task, user, message, language, txt=True)
     
     if request.user.is_authenticated:
       Result.objects.create(

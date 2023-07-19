@@ -89,31 +89,21 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            'OPTIONS': {
-                'options': '-c search_path=diplom'
-            },
-            "NAME": "student_danilka_frolov21",
-            "USER": "student_danilka_frolov21",
-            "PASSWORD": "qwerty123",
-            "HOST": "dc-webdev.bmstu.ru",
-            "PORT": "8080",
-        }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        'OPTIONS': {
+            'options': '-c search_path=diplom'
+        },
+        "NAME": "student_danilka_frolov21",
+        "USER": "student_danilka_frolov21",
+        "PASSWORD": "qwerty123",
+        "HOST": "dc-webdev.bmstu.ru",
+        "PORT": "8080",
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "student_barashev_01",
-            "USER": "student_barashev_01",
-            "PASSWORD": "qwerty123",
-            "HOST": "dc-webdev.bmstu.ru",
-            "PORT": "8080",
-        }
-    }
+}
+
 
 
 # Password validation

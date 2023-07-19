@@ -1,4 +1,4 @@
-Tests passed successfully. Duration: 0.298619. Timeout: False. OOM killed: False
+Tests passed successfully. Duration: 0.354693. Timeout: False. OOM killed: False
 
 ..
 ----------------------------------------------------------------------

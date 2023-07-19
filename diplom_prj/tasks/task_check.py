@@ -25,9 +25,12 @@ PROFILES = {
 
 epicbox.configure(profiles=PROFILES, docker_url='unix:///var/run/docker.sock')
 
-def create_file(task, user, code, language):
+def create_file(task, user, code, language, txt=False):
     directory = 'results/{0}_id{1}/{2}_id{3}'.format(user.username, user.id, task.slug, task.id)
-    file_name = directory + f'/{task.slug}-id{task.id}.{str.lower(language)}'
+    if txt:
+        file_name = directory + f'/{task.slug}-id{task.id}{language}.txt'
+    else:
+        file_name = directory + f'/{task.slug}-id{task.id}.{str.lower(language)}'
     if not os.path.exists(f"{settings.MEDIA_ROOT}/{directory}"):
         os.makedirs(f"{settings.MEDIA_ROOT}/{directory}")
     with open(f"{settings.MEDIA_ROOT}/{file_name}", "w") as file:
