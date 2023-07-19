@@ -1,0 +1,139 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load training_tags %}
+
+{% block title %}Training{% endblock %}
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'tasks/css/training_style.css' %}">
+{% endblock %}
+
+{% block main_content %}
+
+<main>
+    <div class="cont">
+        <div class="row-editor">
+            <div class="col-editor-1">
+                <div class="task-liner">
+                    <p class="task-name">
+                        {% if task %}
+                            {{ task.title }}
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="instruction-editor">
+                    <div class="instrucrion-liner">
+                        <p class="instrucrion-text">Instructions</p>
+                    </div>
+                    <div class="instruction">
+                        <textarea type="text" class="area-instruction" readonly>{% if task %}{{ task.description }}{% endif %}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-editor-2">
+                <div class="language-liner">
+                    <div class="control-panel">
+                        <div class="button-container">
+                            {% if task.languages.count == 1 %}
+                            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD" disabled>
+                            {% else %}
+                            <select id="languages" aria-label="Languages" class="form-select form-select-color:#BDBDBD">
+                            {% endif %}    
+                                {% get_prog_langs as unique_languages %}
+                                {% for lang in task.languages.all %}
+                                    {% for l in unique_languages %}
+                                        {% if  l.0 == lang.prog_language %}
+                                            <option value="{{ l.0 }}"> {{ l.1 }} </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-editor">
+                    <div class="solution-liner">
+                        <p class="solution-text">Solution</p>
+                    </div>
+                    <div class="editor" id="code-editor"></div>
+                </div>
+                <div class="sampletest-editor">
+                    <div class="sampletest-liner">
+                        <p class="sampletest-text">SampleTest</p>
+                    </div>
+                    <div>
+                        <textarea type="text" class="text-light" id="output" readonly></textarea>
+                    </div>
+                </div>
+                <div class="editor-button">
+                        <div class="button-container">
+                            <button class="button-2" id="go-back" name="Go back" data-bs-toggle="modal" data-bs-target="#warningModalGoBack">
+                                Go back
+                            </button>
+                        </div>
+                        <div class="modal fade" id="warningModalGoBack" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="warningModalLabel">Are you sure?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    If you leave this page, you will lose all your progress.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue task">
+                                        Continue task
+                                    </button>
+                                    <a href="{% url 'tasks' %}">
+                                        <button type="button" class="btn btn-dark rounded-pill px-3" name="Go back" id="confidently-go-back">
+                                            Go back
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="button-2" id="go-back" name="Go back" data-bs-toggle="modal" data-bs-target="#warningModalTaskSolution">
+                                Task Solution
+                            </button>
+                        </div>
+                        <div class="modal fade" id="warningModalTaskSolution" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">  <!-- здесь мы применили класс modal-lg -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="warningModalLabel">Task Solution</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="editor2" id="solution-editor"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal" name="Continue task">
+                                        Continue task
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="button-container">
+                            <button class="button-2" id="test"> Test </button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}
+
+{% block jscripts %}
+    <script src="{% static 'jQuery/jquery-3.7.0.min.js' %}"></script>
+    <script src="{% static 'ace_lib/ace.js' %}"></script>
+    <script src="{% static 'ace_lib/theme-monokai.js' %}"></script>
+    <script src="{% static 'tasks/js/ide.js' %}"></script>
+{% endblock %}
+
+

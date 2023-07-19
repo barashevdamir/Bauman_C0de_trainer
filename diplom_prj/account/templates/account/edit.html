@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block title %}Edit{% endblock %}
+
+{% block add_css %}
+    <link rel="stylesheet" href="{% static 'account/css/edit_page.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/user_profile.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <div class="container d-flex min-vh-100 ">
+        <div class="container">
+            <div class="main-body">
+                <div class="container">
+                    <div class="row gutters">
+                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="user-profile">
+                                            <div class="user-avatar">
+                                                {% if  user.profile.photo  %}
+                                                    <img id="profileImage" src="{{ user.profile.photo.url }}" alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                                                {% else %}
+                                                    <img id="profileImage" src="{% static 'base/images/profile-icon.svg' %}" alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                                                {% endif %}
+                                            </div>
+                                            <h5 class="user-name">{{ user.username }}</h5>
+                                            <h6 class="user-email">{{ user.email }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ user_form.non_field_errors }}
+                                        {{ profile_form.non_field_errors }}
+
+                                        <!-- This input field is moved into the form -->
+                                        <input type="file" id="imageUpload" name="photo" style="display: none;" accept=".png, .jpg, .jpeg">
+
+                                        <div class="row gutters">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="mb-2 text-primary">Personal Details</h6>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="firstName">First Name</label>
+                                                    <input name="{{ user_form.first_name.html_name }}" type="text" class="form-control" id="firstName" placeholder="Enter your first name" value="{{ user_form.first_name.value }}">
+                                                    {{ user_form.first_name.errors }}
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="eMail">Email</label>
+                                                    <input name="{{ user_form.email.html_name }}" type="email" class="form-control"  id="eMail" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Enter email ID" value="{{ user_form.email.value }}">
+                                                    {{ user_form.email.errors }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gutters">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12  ">
+                                                        <div class="text-right ">
+                                                            <p><input type="submit" class="btn btn-sm btn-secondary btn-block" value="Update"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <form action = "{% url 'user_profile' %}">
+                                            <button class="btn btn-secondary btn-sm btn-block">Back</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jscripts %}
+    <script src="{% static 'account/js/edit_profile.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    Need to log in
+{% endblock %}
+
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'base/css/need_login_style.css' %}">
+{% endblock %}
+
+
+{% block main_content%}
+<div class="conteiner-fluid px-4 sticky-top bct-nav">
+    <div class="row justify-content-center">
+        <div class="col-xxl-9 col-lg-10 col-12 px-lg-0 pe-lg-2">
+            {% include 'base/navbar.html' %}
+        </div>
+    </div>
+</div>
+
+<main>
+    <div class="row justify-content-center py-5">   
+        <div class="col-12 text-center p-5">
+            <h3>"Oooops!" message</h3>
+        </div>
+        <div class="col-md-11 col-10 px-4 text-center">
+            <h5>Sorry, you need to log in, if you want to solve "{{ info }}"</h5>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-3 col-6 p-3 ps-5 text-start">
+            {% if back == 'tests' %}
+            <a href="{% url 'tests_list' %}">
+                <button type="button" class="btn btn-dark rounded-pill px-3" name="Go back" id="back">
+                    Go back
+                </button>
+            </a>
+            {% elif back == 'tasks' %}
+            <a href="{% url 'taskspage' %}">
+                <button type="button" class="btn btn-dark rounded-pill px-3" name="Go back" id="back">
+                    Go back
+                </button>
+            </a>
+            {% endif %}
+        </div>
+        <div class="col-sm-3 col-6 p-3 pe-5 text-end">
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-dark rounded-pill px-3" name="Sign in" id="sign-in">
+                    Sign in
+                </button>
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block jscripts %}   
+{% endblock %}

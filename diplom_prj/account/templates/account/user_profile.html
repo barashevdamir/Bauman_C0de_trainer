@@ -1,0 +1,178 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %} Profile {% endblock %}
+
+{% block add_css%}
+  <link href="{% static 'account/css/user_profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block main_content %}
+<div class="conteiner-fluid px-4 sticky-top bct-nav">
+  <div class="row justify-content-center">
+      <div class="col-xxl-9 col-lg-10 col-12 px-lg-0 pe-lg-2">
+          {% include 'base/navbar.html' %}
+      </div>
+  </div>
+</div>
+<main class = 'main'>
+  <div class = 'container'>
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="container d-flex min-vh-100">
+        <div class="container">
+        <div class="main-body">
+
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-center text-center">
+                        <div class="user-avatar">
+                            {% if  user.profile.photo  %}
+                                <img id="profileImage" src="{{ user.profile.photo.url }}" alt="Admin" class="rounded-circle-profile" width="150" >
+                            {% else %}
+                                <img id="profileImage" src="{% static 'base/images/profile-icon.svg' %}" alt="Admin" class="rounded-circle" width="150" style="cursor: pointer;">
+                            {% endif %}
+                        </div>
+                        <div class="mt-3">
+                          <h4>{{ user.username }}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <h6 class="mb-0">User ID:</h6>
+                        <span class="text-secondary">{{ request.user.id }}</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <h6 class="mb-0">Join Date:</h6>
+                        <span class="text-secondary">{{ user.date_joined|date:"d.m.Y" }}</span>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">First Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{ user.first_name }}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{ user.email }}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-12">
+                            <a class="btn btn-secondary btn-sm" target="__blank" href="{% url 'edit' %}">Edit</a>
+                            <a class="btn btn-secondary btn-sm" target="__blank" href="{% url 'logout' %}">Log Out</a>
+                            <a class="btn btn-secondary btn-sm" target="__blank" href="{% url 'password_change' %}">Change Password</a>
+                            <a class="btn btn-secondary btn-sm" target="__blank" href="{% url 'delete_account' %}">Delete account</a>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row gutters-sm ">
+                    <div class="col-sm-6 mb-3">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h6 class="d-flex align-items-center mb-3">Languages:</h6>
+                            <div class="col-md-12">
+                                <h3 class="progress-title">PYTHON</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.PY }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.PY }}%">
+                                          {{ passed_tasks_count_langs.PY }}%
+                                      </div>
+                                    </div>
+                                <h3 class="progress-title mt-3">JS</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.JS }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.JS }}%">
+                                          {{ passed_tasks_count_langs.JS }}%
+                                      </div>
+                                    </div>
+                                <h3 class="progress-title mt-3">SQL</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.SQL }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.SQL }}%">
+                                          {{ passed_tasks_count_langs.SQL }}%
+                                      </div>
+                                    </div>
+                                <h3 class="progress-title mt-3">C++</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.CPP }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.CPP }}%">
+                                          {{ passed_tasks_count_langs.CPP }}%
+                                      </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                      <div class="card h-100">
+                        <div class="card-body ">
+                            <h6 class="d-flex align-items-center mb-3">Solved tasks:</h6>
+                            <div class="col-md-12">
+                                <h3 class="progress-title">{{ passed_tasks_count }}/{{ total_tasks_count }}</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="{{ passed_tasks_count_langs.total }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ passed_tasks_count_langs.total }}%">
+                                          {{ passed_tasks_count_langs.total }}%
+                                      </div>
+                                    </div>
+                            </div>
+                            <h6 class="d-flex align-items-center mb-3 mt-3">Solved tests:</h6>
+                            <div class="col-md-12">
+                                <h3 class="progress-title">{{ passed_tests_count }}/{{ total_tests_count }}</h3>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="{{ tests_progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ tests_progress }}%">
+                                          {{ tests_progress }}%
+                                      </div>
+                                    </div>
+                            </div>
+
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+              </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+

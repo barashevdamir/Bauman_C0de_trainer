@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Leaderboard{% endblock %}
+    
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'home/css/leaderboard_style.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class="conteiner-fluid px-4 sticky-top bct-nav">
+    <div class="row justify-content-center">
+        <div class="col-xxl-9 col-lg-10 col-12 px-lg-0 pe-lg-2">
+            {% include 'base/navbar.html' %}
+        </div>
+    </div>
+</div>
+<main>
+    <section id="filter" class="conteiner-fluid px-4 bct-bg-color">
+        <div class="row justify-content-center">
+            <div class="col-xxl-9 col-lg-10 col-12 px-lg-0 pe-lg-2 mt-5 bct-border">
+                <div class="row mx-2 my-3">
+                    <div class="col-sm-8 col-12">
+                        <h3>Leaderboard filters</h3>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <button class="btn bct-btn-filter rounded-pill ps-3 pe-2" id="reset">
+                            Reset<i class="icon-ccw ms-1"></i>
+                        </button> 
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-md-6 col-12">
+                        <label class="pt-3 pb-2" for="Examination">Examination by</label>
+                        <select class="form-select bct-border rounded-3 bct-bg-color mb-2" id="exam" aria-label="Examination">
+                            <option name="all" value="all" selected>All</option>
+                            <option name="tasks" value="tasks">Tasks</option>
+                            <option name="tests" value="tests">Tests</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <label class="pt-3 pb-2" for="Time of activity">Time of activity</label>
+                        <select class="form-select bct-border rounded-3 bct-bg-color mb-2" id="time" aria-label="Time of activity">
+                            <option name="all" value="all" selected>For all time</option>
+                            <option name="year" value="365">Last year</option>
+                            <option name="month" value="30">Last month</option>
+                            <option name="days" value="7">Last 7 days</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section  class="conteiner-fluid px-4 bct-bg-color"> 
+        <div class="row justify-content-center">
+            <div class="col-xxl-9 col-lg-10 col-12 px-lg-0 mt-4" id="leaderboard-table">
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %} 
+
+{% block jscripts %}   
+    <script src="{% static 'jQuery/jquery-3.7.0.min.js' %}"></script>
+    <script src="{% static 'home/js/leaderboard.js' %}"></script> 
+{% endblock %}

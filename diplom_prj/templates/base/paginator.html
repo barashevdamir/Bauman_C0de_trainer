@@ -1,0 +1,40 @@
+{% load static %}
+{% load paginator_tags %}
+
+{% block add_css%}
+<link rel="stylesheet" href="{% static 'base/css/paginator_style.css' %}">   
+{% endblock %}
+
+
+<nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination pagination-sm justify-content-center">
+        {% if page.has_previous %}
+        <li class="page-item">
+            <a class="btn bct-btn-page btn-sm m-1" href="?page={{ page.previous_page_number }}" aria-label="Previous">&laquo;</a>
+        </li>
+        {% endif %}
+        {% get_proper_elided_page_range page.paginator page.number 2 2 as page_range %}
+        {% for i in page_range %}
+            {% if page.number == i %}
+                <li class="page-item active">
+                    <span class="btn bct-btn-active btn-sm m-1 active">{{ i }}</span>
+                </li>
+            {% else %}
+                {% if i == page.paginator.ELLIPSIS %}
+                    <li class="page-item disabled">
+                        <span class="btn bct-btn-page btn-sm m-1 disabled">{{ page.paginator.ELLIPSIS }}</span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="btn bct-btn-page btn-sm m-1" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if page.has_next %}
+        <li class="page-item">
+            <a class="btn bct-btn-page btn-sm m-1" href="?page={{ page.next_page_number }}" aria-label="Next">&raquo</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

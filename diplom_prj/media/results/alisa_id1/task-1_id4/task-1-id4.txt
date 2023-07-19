@@ -1,0 +1,7 @@
+Tests passed successfully. Duration: 0.298619. Timeout: False. OOM killed: False
+
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK

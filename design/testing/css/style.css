@@ -1,0 +1,477 @@
+:root{
+    --color1: #D9D9D9;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+
+p{
+    margin: 0px;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    background-color: var(--color1);
+}
+
+.bct-nav{
+    background-color: var(--color1);
+    box-shadow: 0 2px 15px 2px rgba(0, 0, 0, .5);
+}
+
+
+.row-editor{
+    justify-content: center;
+    display: flex;
+    padding-top: 50px;
+    
+}
+
+
+
+.task-liner{
+    display: flex;
+    background-color: #A8A8A8;
+    align-items: center;
+    height: 40px;
+    width: 200px;
+    border-radius: 10px;
+
+}
+
+.lvl-text{
+    padding-left: 21px;
+}
+
+.task-name{
+    padding-left: 11px;
+}
+
+.instruction-editor{
+    background-color: #858585;
+    height: 700px;
+    width: 480px;
+    left: 50px;
+    margin-top: 50px;
+    border-radius: 10px;
+
+}
+
+.instrucrion-liner{
+    display: inline-flex;
+    background-color: #D9D9D9;
+    height: 31px;
+    width: 431px;
+    margin-left: 24px;
+    margin-top: 16px;
+    border-radius: 10px;
+    align-items: center;
+
+}
+
+.instrucrion-text{
+    padding-left: 15px;
+}
+
+.col-editor-2{
+    margin-left: 50px;
+
+}
+
+.language-liner{
+    display: flex;
+    
+}
+
+.dropbtn-1 {
+    background-color: #A8A8A8;
+    color: white;
+    
+    font-size: 16px;
+    border: none;
+    height: 40px;
+width: 200px;
+
+top: 175px;
+border-radius: 10px;
+
+}
+
+.dropdown-2{
+    margin-left: 50px;
+}
+
+.dropbtn-2 {
+    background-color: #A8A8A8;
+    color: white;
+    font-size: 16px;
+    border: none;
+    height: 40px;
+    width: 200px;
+    left: 570px;
+    top: 175px;
+    border-radius: 10px;
+}
+
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+  
+  
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    border-radius: 10px;
+    display: block;
+}
+  
+
+.dropdown-content a:hover {background-color: #ddd;}
+  
+.dropdown-1:hover .dropdown-content {display: block;}
+  
+.dropdown-1:hover .dropbtn {background-color: #9B9B9B;}
+
+.dropdown-2:hover .dropdown-content {display: block;}
+  
+.dropdown-2:hover .dropbtn {background-color: #9B9B9B;}
+
+.solution-editor{
+    background-color: #858585;
+    height: 350px;
+    width: 1000px;
+    left: 50px;
+    margin-top: 50px;
+    border-radius: 10px;
+
+}
+
+
+
+.CodeMirror{
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 950px;
+    max-height: 250px;
+    margin-top: 20px;
+}
+
+
+.solution-liner{
+    display: inline-flex;
+    background-color: #D9D9D9;
+    height: 31px;
+    width: 431px;
+    margin-left: 24px;
+    margin-top: 16px;
+    border-radius: 10px;
+    align-items: center;
+
+}
+
+.solution-text{
+    padding-left: 15px;
+}
+
+.sampletest-editor{
+    background-color: #858585;
+    height: 250px;
+    width: 1000px;
+    left: 50px;
+    margin-top: 32px;
+    border-radius: 10px;
+
+}
+
+.sampletest-liner{
+    display: inline-flex;
+    background-color: #D9D9D9;
+    height: 31px;
+    width: 431px;
+    margin-left: 24px;
+    margin-top: 16px;
+    border-radius: 10px;
+    align-items: center;
+
+}
+
+.sampletest-text{
+    padding-left: 15px;
+}
+
+.editor-button{
+    display: flex;
+    margin-top: 25px;
+}
+
+.button-1{
+    background-color: #A8A8A8;
+    color: white;
+    font-size: 16px;
+    border: none;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.button-1:hover {background-color: #9B9B9B;}
+
+.button-2{
+    background-color: #A8A8A8;
+    color: white;
+    font-size: 16px;
+    border: none;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    margin-left: 40px;
+}
+.button-2:hover {background-color: #9B9B9B;}
+
+.button-3{
+    background-color: #A8A8A8;
+    color: white;
+    font-size: 16px;
+    border: none;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    margin-left: 510px;
+}
+
+.button-3:hover {background-color: #9B9B9B;}
+
+@media screen and (max-width: 1550px) {
+    .button-3{
+        margin-left: 40px;
+    }
+    .sampletest-editor{
+        width: 530px;
+    }
+    .solution-editor{
+        width: 530px;
+    } 
+    .CodeMirror{
+        width: 480px; 
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .button-3{
+        margin-left: 40px;
+    }
+    .sampletest-editor{
+        width: 530px;
+    }
+    .solution-editor{
+        width: 530px;
+    } 
+    .CodeMirror{
+        width: 480px; 
+    }
+}
+
+@media screen and (max-width: 1070px) {
+    .button-3{
+        margin-left: 160px;
+        width: 60px;
+        align-items: center;
+    }
+    .button-2{
+        margin-left: 40px;
+        width: 75px;
+        align-items: center;
+    }
+    .button-1{
+        width: 60px;
+        align-items: center;
+    }
+    .sampletest-editor{
+        width: 400px;
+    }
+    .solution-editor{
+        width: 400px;
+    } 
+    .sampletest-liner{
+        width: 150px;
+    }
+
+    .solution-liner{
+        width: 150px;
+    }
+    .dropbtn-2{
+        width: 100px;
+    }
+    .dropbtn-1{
+        width: 100px;
+    }
+
+    .instrucrion-liner{
+        width: 150px;
+    }
+    .instruction-editor{
+        width: 400px;
+    }
+    .CodeMirror{
+        width: 350px; 
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .button-3{
+        margin-left: 80px;
+        width: 60px;
+        align-items: center;
+    }
+    .button-2{
+        margin-left: 20px;
+        width: 75px;
+        align-items: center;
+    }
+    .button-1{
+        width: 60px;
+        align-items: center;
+    }
+    .sampletest-editor{
+        width: 300px;
+    }
+    .solution-editor{
+        width: 300px;
+    } 
+    .sampletest-liner{
+        width: 150px;
+    }
+
+    .solution-liner{
+        width: 150px;
+    }
+    .dropdown-2 {
+        margin-left: 20px;
+    }
+    .dropbtn-2{
+        width: 100px;
+    }
+    .dropbtn-1{
+        width: 100px;
+    }
+
+    .instrucrion-liner{
+        width: 150px;
+    }
+    .instruction-editor{
+        width: 300px;
+    }
+    .CodeMirror{
+        width: 250px; 
+    }
+
+   
+}
+
+@media screen and (max-width: 720px) {
+    .button-3{
+        margin-left: 20px;
+        width: 60px;
+        align-items: center;
+    }
+    .button-2{
+        margin-left: 20px;
+        width: 75px;
+        align-items: center;
+    }
+    .button-1{
+        width: 60px;
+        align-items: center;
+    }
+    .sampletest-editor{
+        width: 250px;
+    }
+    .solution-editor{
+        width: 250px;
+    } 
+    .sampletest-liner{
+        width: 150px;
+    }
+
+    .solution-liner{
+        width: 150px;
+    }
+    .dropdown-2 {
+        margin-left: 20px;
+    }
+    .dropbtn-2{
+        width: 100px;
+    }
+    .dropbtn-1{
+        width: 100px;
+    }
+
+    .instrucrion-liner{
+        width: 150px;
+    }
+    .instruction-editor{
+        width: 250px;
+    }
+    .CodeMirror{
+        width: 200px; 
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .row-editor{
+        display: block;
+        
+    }
+    .task-liner{
+        justify-content: center;
+        width: 100%;
+    }
+    .instruction-editor{
+        width: 100%;
+        margin-top: 10px;
+        height: 300px;
+    }
+    .col-editor-2{
+        margin-left: 0px;
+    }
+    .language-liner{
+        margin-top: 10px;
+        justify-content: center; 
+    }
+    .solution-editor{
+        width: 100%;
+        height: 300px;
+    }
+    .sampletest-editor{
+        width: 100%;
+        height: 300px;
+    }
+    .editor-button{
+        justify-content: center;
+        
+    }
+    .CodeMirror{
+        width: 200px; 
+    }
+
+    .CodeMirror{
+        margin: 0 auto;
+        width: 95%;
+        max-height: 220px;
+        margin-top: 10px;
+    }
+}

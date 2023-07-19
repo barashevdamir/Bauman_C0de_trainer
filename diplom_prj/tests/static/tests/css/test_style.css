@@ -1,0 +1,21 @@
+:root {
+    --color1: #D9D9D9;
+    --color2: #BDBDBD;
+    --color3: #858585;
+}
+
+body,
+.bct-bg-color {
+    background-color: var(--color1);
+}
+
+hr {
+    margin: 20px 0;
+    border: black 2px solid ;
+    border-radius: 2px;
+}
+
+.bct-border {
+    border: var(--color3) 2px solid;
+    border-radius: 15px;  
+}

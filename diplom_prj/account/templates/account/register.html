@@ -1,0 +1,87 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block add_css%}
+    <link rel="stylesheet" href="{% static 'account/css/login_page.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <!----------------------- Main Container -------------------------->
+     <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <!----------------------- Login Container -------------------------->
+       <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <!--------------------------- Left Box ----------------------------->
+       <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #D9D9D9;">
+           <div class="featured-image mb-3">
+            <img src="{% static 'base/images/Logo.svg' %}" class="img-fluid" style="width: 250px;" >
+           </div>
+           <p class="text-black-50 fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be Verified</p>
+           <small class="text-black-50 text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join our programmer community on this platform.</small>
+       </div>
+    <!-------------------- ------ Right Box ---------------------------->
+
+       <div class="col-md-6 right-box">
+          <div class="row align-items-center">
+                <div class="header-text mb-4">
+                     <h2 class="text-dark">It's nice to see you</h2>
+                     <p class="text-dark" >Please, sign up using the following form:</p>
+                </div>
+              {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form id="register-form" method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.username.html_name }}" required="required" id="username" type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username" onchange="validateUsername(this.value)">
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.email.html_name }}" required="required" id="email" type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address" onchange="validateEmail(this.value)">
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.password.html_name }}" required="required" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
+
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input name="{{ user_form.password2.html_name }}" required="required" type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Repeat Password">
+
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <button class="btn btn-lg btn-secondary w-100 fs-6" type="submit">Sign Up</button>
+                    </div>
+                    <div id="error-message"></div>
+                </form>
+
+
+                <div class="row">
+                    <small class="text-dark" >Have an account? <a href="{% url 'login' %}">Sign In</a></small>
+                </div>
+          </div>
+       </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block jscripts %}
+    <script src="{% static 'jQuery/jquery-3.7.0.min.js' %}"></script>
+    <script src="{% static 'account/js/register.js' %}"></script>
+{% endblock %}

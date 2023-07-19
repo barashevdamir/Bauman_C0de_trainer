@@ -10,7 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+# from dotenv import load_dotenv
+# import environ
+#
+# env = environ.Env()
+# environ.Env.read_env()
+#
+# load_dotenv()
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,12 +41,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home.apps.HomeConfig',
+    'tasks.apps.TasksConfig',
+    'tests.apps.TestsConfig',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +69,7 @@ ROOT_URLCONF = 'diplom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'social_django.context_processors.backends',
             ],
         },
     },
@@ -73,12 +89,31 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            'OPTIONS': {
+                'options': '-c search_path=diplom'
+            },
+            "NAME": "student_danilka_frolov21",
+            "USER": "student_danilka_frolov21",
+            "PASSWORD": "qwerty123",
+            "HOST": "dc-webdev.bmstu.ru",
+            "PORT": "8080",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "student_barashev_01",
+            "USER": "student_barashev_01",
+            "PASSWORD": "qwerty123",
+            "HOST": "dc-webdev.bmstu.ru",
+            "PORT": "8080",
+        }
+    }
 
 
 # Password validation
@@ -103,11 +138,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
+
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -115,9 +153,62 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'user_profile'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+    'account.authentication.EmailAuthBackend',
+    # 'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
+]
+
+TIME_ZONE = 'Europe/Moscow'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'telegram': {
+        'TOKEN': '6108393733:AAF-oaqDg3aCftMuQLQtan-IMlLGUdKahwA'
+    }
+}
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '51647965'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'VF5XxdKsDkyeGc5TfMvb'
+
+SOCIAL_AUTH_DISCORD_OAUTH2_KEY = '1108158742379368559'
+SOCIAL_AUTH_DISCORD_OAUTH2_SECRET = 'CC5TxKJgCA2ZT3-9MkWzgytJxArKl2GZ'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'telegram': {
+        'TOKEN': '6108393733:AAF-oaqDg3aCftMuQLQtan-IMlLGUdKahwA'
+    }
+}
+
+# when set to True, tag lookups will be case insensitive
+TAGGIT_CASE_INSENSITIVE = True

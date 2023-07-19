@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="added delete account button and delete account form, view">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/media/tasks_tests/cpp-task-1_id6/test5.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/media/tasks_tests/cpp-task-1_id6/test5.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diplom_prj/tasks/task_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/diplom_prj/tasks/task_check.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2SFCuer5qUtCyDz84mpFq0lLOeV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/damirbarashev/PycharmProjects/diplom/diplom_prj/account/static/account/js&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/diplom_prj/account/static/account/js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/diplom_prj/tasks" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="added go back button on training_page&#10;deleted training directory">
+      <created>1688572261098</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688572261098</updated>
+    </task>
+    <task id="LOCAL-00002" summary="upgraded account/edit page ande account/profile page">
+      <created>1688575745740</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688575745740</updated>
+    </task>
+    <task id="LOCAL-00003" summary="upgraded user_profile page">
+      <created>1688590419177</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688590419177</updated>
+    </task>
+    <task id="LOCAL-00004" summary="upgraded registration with ajax">
+      <created>1688593466193</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688593466193</updated>
+    </task>
+    <task id="LOCAL-00005" summary="upgraded tasks view, fix bugs">
+      <created>1688727976590</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688727976590</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f5e46aaf-c2ae-42c1-8e62-d4a154b13f6b" name="Changes" comment="upgraded tasks view, fix bugs" />
+      <created>1688733166218</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688733166218</updated>
+      <workItem from="1688733168599" duration="1806000" />
+      <workItem from="1688741577420" duration="16462000" />
+      <workItem from="1688819945612" duration="814000" />
+      <workItem from="1688827504193" duration="12679000" />
+      <workItem from="1688896090065" duration="3004000" />
+      <workItem from="1688979995773" duration="1325000" />
+      <workItem from="1688991244384" duration="1319000" />
+      <workItem from="1689022559119" duration="1730000" />
+      <workItem from="1689069658447" duration="1196000" />
+      <workItem from="1689079032463" duration="15373000" />
+      <workItem from="1689497657682" duration="8479000" />
+      <workItem from="1689705093010" duration="1904000" />
+    </task>
+    <task id="LOCAL-00006" summary="upgraded tasks view, fix bugs">
+      <created>1688753193715</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688753193715</updated>
+    </task>
+    <task id="LOCAL-00007" summary="updated training page sowing result and code, updated css, bug fixed">
+      <created>1688762751984</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1688762751984</updated>
+    </task>
+    <task id="LOCAL-00008" summary="updated training page css">
+      <created>1688763128752</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688763128752</updated>
+    </task>
+    <task id="LOCAL-00009" summary="changed home navbar color, change navbar user profile">
+      <created>1688763936004</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1688763936004</updated>
+    </task>
+    <task id="LOCAL-00010" summary="changed reset password templates">
+      <created>1688827356325</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1688827356325</updated>
+    </task>
+    <task id="LOCAL-00011" summary="updated models and views to count number of passed and total tasks, updated user_profile to show it">
+      <created>1688841010091</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1688841010091</updated>
+    </task>
+    <task id="LOCAL-00012" summary="merging Daniil to developed_home">
+      <created>1688841882713</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1688841882713</updated>
+    </task>
+    <task id="LOCAL-00013" summary="bug fixed at registration">
+      <created>1688842338692</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1688842338692</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added tests progress on user_profile_page">
+      <created>1688843787414</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1688843787414</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fixed bugs at profile edit">
+      <created>1688846222386</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688846222386</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fixed bugs at tasks.views and moved tasks Dockerfile to tasks directory">
+      <created>1688898404205</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1688898404205</updated>
+    </task>
+    <task id="LOCAL-00017" summary="upgraded trainingg page view for js, added js task description, test, solution files">
+      <created>1689023657374</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1689023657374</updated>
+    </task>
+    <task id="LOCAL-00018" summary="upgraded training page view for js, added js task description, test, solution files, training page views got the code where some parts are refactored into separate functions for better modularity and readability">
+      <created>1689087173346</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1689087173346</updated>
+    </task>
+    <task id="LOCAL-00019" summary="bug fix, need to docker pull node">
+      <created>1689087678528</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1689087678528</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fixed bug js not tested the task">
+      <created>1689096256184</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1689096256184</updated>
+    </task>
+    <task id="LOCAL-00021" summary="updated output window with ajax request">
+      <created>1689102275935</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1689102275935</updated>
+    </task>
+    <task id="LOCAL-00022" summary="upgraded executecode function to run dots while loading">
+      <created>1689104975994</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1689104975994</updated>
+    </task>
+    <task id="LOCAL-00023" summary="updated profile edit form, updated change password form">
+      <created>1689344152953</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1689344152953</updated>
+    </task>
+    <task id="LOCAL-00024" summary="updated login to redirect back to template, updated user profile">
+      <created>1689537218730</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1689537218731</updated>
+    </task>
+    <task id="LOCAL-00025" summary="added delete account button and delete account form, view">
+      <created>1689539494668</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1689539494668</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added go back button on training_page&#10;deleted training directory" />
+    <MESSAGE value="upgraded account/edit page ande account/profile page" />
+    <MESSAGE value="upgraded user_profile page" />
+    <MESSAGE value="upgraded registration with ajax" />
+    <MESSAGE value="upgraded tasks view, fix bugs" />
+    <MESSAGE value="updated training page sowing result and code, updated css, bug fixed" />
+    <MESSAGE value="updated training page css" />
+    <MESSAGE value="changed home navbar color, change navbar user profile" />
+    <MESSAGE value="changed reset password templates" />
+    <MESSAGE value="updated models and views to count number of passed and total tasks, updated user_profile to show it" />
+    <MESSAGE value="merging Daniil to developed_home" />
+    <MESSAGE value="bug fixed at registration" />
+    <MESSAGE value="added tests progress on user_profile_page" />
+    <MESSAGE value="fixed bugs at profile edit" />
+    <MESSAGE value="fixed bugs at tasks.views and moved tasks Dockerfile to tasks directory" />
+    <MESSAGE value="upgraded trainingg page view for js, added js task description, test, solution files" />
+    <MESSAGE value="upgraded training page view for js, added js task description, test, solution files, training page views got the code where some parts are refactored into separate functions for better modularity and readability" />
+    <MESSAGE value="bug fix, need to docker pull node" />
+    <MESSAGE value="fixed bug js not tested the task" />
+    <MESSAGE value="updated output window with ajax request" />
+    <MESSAGE value="upgraded executecode function to run dots while loading" />
+    <MESSAGE value="updated profile edit form, updated change password form" />
+    <MESSAGE value="updated login to redirect back to template, updated user profile" />
+    <MESSAGE value="added delete account button and delete account form, view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added delete account button and delete account form, view" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/diplom$views.coverage" NAME="views Coverage Results" MODIFIED="1688648670907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/diplom_prj/tasks" />
+    <SUITE FILE_PATH="coverage/diplom$main.coverage" NAME="main Coverage Results" MODIFIED="1687596820331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Bessel" />
+  </component>
+</project>
