@@ -18,6 +18,10 @@ _____
   * Либо командой `git clone http://bmstu.codes/diplom/diplom.git`
 
 * Скачайте необходимые пакеты командой `pip install -r requirements.txt`
+  
+* Скачайте необходимые пакеты командой
+ Перед работой скачайте и сохраните в папке static/ace_lib все файлы .js
+`https://github.com/ajaxorg/ace-builds/tree/master/src`
 
 * Перейдите в папку *"Project"* командой: `cd Project`
 
